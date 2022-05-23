@@ -44,4 +44,23 @@ public class Schedule implements Initializable {
             Platform.exit();
         }
     }
+
+    public void AddApptButtonAction(ActionEvent actionEvent) throws IOException {
+        // Load Schedule Page
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 539, 507);
+        stage.setTitle("Schedule");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void UpdateApptButtonAction(ActionEvent actionEvent) {
+    }
+
+    public void DeleteApptButtonAction(ActionEvent actionEvent) {
+    }
+
+    public void ReportsButtonAction(ActionEvent actionEvent) {
+    }
 }

@@ -18,7 +18,7 @@
                         </Label>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="716.0" spacing="25.0">
                             <children>
-                                <Button fx:id="SchedButton" mnemonicParsing="false" onAction="#SchedButtonAction" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Schedule" textFill="WHITE">
+                                <Button mnemonicParsing="false" onAction="#SchedButtonAction" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Schedule" textFill="WHITE">
                                     <font>
                                         <Font name="Arial Bold" size="13.0" />
                                     </font>
@@ -74,7 +74,7 @@
                         </Button>
                         <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="407.0" spacing="25.0">
                             <children>
-                                <Button fx:id="ExitButton" mnemonicParsing="false" onAction="#ExitButtonAction" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
+                                <Button mnemonicParsing="false" onAction="#ExitButtonAction" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
                                     <font>
                                         <Font name="Arial Bold" size="13.0" />
                                     </font>

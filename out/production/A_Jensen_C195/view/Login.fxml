@@ -39,7 +39,7 @@
             </TextField>
             <HBox alignment="CENTER" prefHeight="21.0" prefWidth="307.0">
                <children>
-                  <Button fx:id="SignInButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SIButtonAction" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #2a70c7#2a70c7;" text="Sign In" textFill="WHITE">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SIButtonAction" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #2a70c7#2a70c7;" text="Sign In" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
