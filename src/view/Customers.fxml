@@ -1,14 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.Customers"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Customers">
+    <children>
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" spacing="5.0">
+            <children>
+                <HBox prefHeight="20.0" prefWidth="840.0">
+                    <children>
+                        <Label prefHeight="32.0" prefWidth="171.0" text="Customers">
+                            <font>
+                                <Font name="Arial Bold" size="28.0" />
+                            </font>
+                        </Label>
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="716.0" spacing="25.0">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#SchedButtonAction" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Schedule" textFill="WHITE">
+                                    <font>
+                                        <Font name="Arial Bold" size="13.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </Button>
+                                <Button layoutX="640.0" layoutY="31.0" mnemonicParsing="false" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Reports" textFill="WHITE">
+                                    <font>
+                                        <Font name="Arial Bold" size="13.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                </HBox>
+                    <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="840.0" style="-fx-background-color: transparent; -fx-border-color: black;">
+                        <columns>
+                            <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
+                            <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
+                            <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
+                            <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
+                            <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
+                            <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
+                            <TableColumn maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
+                            <TableColumn maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
+                            <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
+                            <TableColumn prefWidth="118.0" text="Description" />
+                        </columns>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+                    </TableView>
+                <HBox prefHeight="26.0" prefWidth="840.0" spacing="25.0">
+                    <children>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Add Customer" textFill="WHITE">
+                            <font>
+                                <Font name="Arial Bold" size="13.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Update Customer" textFill="WHITE">
+                            <font>
+                                <Font name="Arial Bold" size="13.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Delete Customer" textFill="WHITE">
+                            <font>
+                                <Font name="Arial Bold" size="13.0" />
+                            </font>
+                        </Button>
+                        <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="407.0" spacing="25.0">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#ExitButtonAction" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
+                                    <font>
+                                        <Font name="Arial Bold" size="13.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </padding>
+        </VBox>
+    </children>
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
 </AnchorPane>

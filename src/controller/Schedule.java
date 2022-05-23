@@ -16,19 +16,19 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class Customers implements Initializable {
+public class Schedule implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
     }
 
-    public void SchedButtonAction(ActionEvent actionEvent) throws IOException {
-        // Load Schedule Page
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+    public void CustButtonAction(ActionEvent actionEvent) throws IOException {
+        // Load Customers Page
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 600);
-        stage.setTitle("Schedule");
+        stage.setTitle("Customers");
         stage.setScene(scene);
         stage.show();
     }
