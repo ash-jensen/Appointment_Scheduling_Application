@@ -23,7 +23,7 @@ public class Login implements Initializable {
         // Load Schedule Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 600);
+        Scene scene = new Scene(root, 900, 653);
         stage.setTitle("Schedule");
         stage.setScene(scene);
         stage.show();
