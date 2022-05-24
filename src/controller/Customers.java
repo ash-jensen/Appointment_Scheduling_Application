@@ -44,4 +44,17 @@ public class Customers implements Initializable {
             Platform.exit();
         }
     }
+
+    public void CancelButtonAction(ActionEvent actionEvent) {
+    }
+
+    public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
+        // Load Schedule Page
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 900, 653);
+        stage.setTitle("Reports");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

@@ -27,7 +27,7 @@ public class Schedule implements Initializable {
         // Load Customers Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 552);
+        Scene scene = new Scene(root, 900, 585);
         stage.setTitle("Customers");
         stage.setScene(scene);
         stage.show();
@@ -45,7 +45,7 @@ public class Schedule implements Initializable {
         }
     }
 
-    public void AddApptButtonAction(ActionEvent actionEvent) throws IOException {
+    public void AddApptButtonAction(ActionEvent actionEvent) {
 
     }
 
@@ -55,6 +55,13 @@ public class Schedule implements Initializable {
     public void DeleteApptButtonAction(ActionEvent actionEvent) {
     }
 
-    public void ReportsButtonAction(ActionEvent actionEvent) {
+    public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
+        // Load Schedule Page
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 900, 653);
+        stage.setTitle("Reports");
+        stage.setScene(scene);
+        stage.show();
     }
 }
