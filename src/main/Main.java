@@ -1,5 +1,6 @@
 package main;
 
+import DAO.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +9,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
-    public void start(Stage stage) throws Exception{
+    public void start(Stage stage) throws Exception {
+        // Set stage with Login scene and open
         Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         stage.setTitle("Login");
         stage.setScene(new Scene(root, 350, 370));
@@ -16,6 +18,13 @@ public class Main extends Application {
         System.out.println();
     }
     public static void main(String[] args) {
+        // Open DB connection
+        JDBC.openConnection();
+
+        // Launch application
         launch(args);
+
+        // Close DB connection
+        JDBC.closeConnection();
     }
 }
