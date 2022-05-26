@@ -18,13 +18,13 @@ public class Main extends Application {
         System.out.println();
     }
     public static void main(String[] args) {
-        // Open DB connection
+        // Open DB connection method called
         JDBC.openConnection();
 
         // Launch application
         launch(args);
 
-        // Close DB connection
+        // Close DB connection method called
         JDBC.closeConnection();
     }
 }

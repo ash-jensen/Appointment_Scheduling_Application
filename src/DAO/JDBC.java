@@ -15,7 +15,8 @@ public abstract class JDBC {
         private static final String password = "Passw0rd!"; // Password
         private static Connection connection; // Connection Interface
 
-        public static void openConnection() {
+    // Open connection to DB
+    public static void openConnection() {
             try {
                 Class.forName(driver); // Local Driver
                 connection = DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
@@ -26,12 +27,21 @@ public abstract class JDBC {
             }
         }
 
+
+        // Get Connection
+        public static Connection getConnection() {
+            return connection;
+        }
+
+
+        // Close connection to DB
         public static void closeConnection() {
             try {
                 connection.close();
                 System.out.println("Connection closed!");
             }
-            catch (Exception e){
+            catch (Exception e) {
+// This can possibly be set nothing "// do nothing" because we are closing the program, it no longer matters
                 System.out.println("Error: " + e.getMessage());
             }
         }

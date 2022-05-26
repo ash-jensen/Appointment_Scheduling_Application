@@ -1,15 +1,16 @@
 package controller;
 
+import DAO.CustomerDAO;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,10 +19,29 @@ import java.util.ResourceBundle;
 
 public class Customers implements Initializable {
 
+    public TableColumn CustTableId;
+    public TableColumn CustTableName;
+    public TableColumn CustTableAddress;
+    public TableColumn CustTablePostalCode;
+    public TableColumn CustTablePhoneNumber;
+    public TableColumn CustTableDivId;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
+        ObservableList<Customer> custList = CustomerDAO.getAllCustomers();
+        for(Customer C: custList) {
+            System.out.println("Customer ID: " + C.getID() + " Name: " + C.getName());
+        }
+        CustomerDAO.checkDateConversion();
     }
+
+    /*
+    private void setCustTable (){
+
+    }
+
+     */
 
     public void SchedButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page

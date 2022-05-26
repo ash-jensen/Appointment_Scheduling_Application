@@ -52,12 +52,12 @@
                <children>
                           <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="486.0" style="-fx-background-color: transparent; -fx-border-color: black;">
                               <columns>
-                                  <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
-                                  <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Name" />
-                                  <TableColumn maxWidth="96.0" minWidth="70.0" prefWidth="96.0" text="Address" />
-                                  <TableColumn maxWidth="91.0" minWidth="65.0" prefWidth="75.0" text="Postal Code" />
-                                  <TableColumn maxWidth="109.0" minWidth="70.0" prefWidth="90.0" text="Phone Number" />
-                                  <TableColumn maxWidth="134.0" minWidth="49.0" prefWidth="83.0" text="Division ID" />
+                                  <TableColumn fx:id="CustTableId" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
+                                  <TableColumn fx:id="CustTableName" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Name" />
+                                  <TableColumn fx:id="CustTableAddress" maxWidth="96.0" minWidth="70.0" prefWidth="96.0" text="Address" />
+                                  <TableColumn fx:id="CustTablePostalCode" maxWidth="91.0" minWidth="65.0" prefWidth="75.0" text="Postal Code" />
+                                  <TableColumn fx:id="CustTablePhoneNumber" maxWidth="109.0" minWidth="70.0" prefWidth="90.0" text="Phone Number" />
+                                  <TableColumn fx:id="CustTableDivId" maxWidth="134.0" minWidth="49.0" prefWidth="83.0" text="Division ID" />
                               </columns>
                           </TableView>
                   <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="419.0" prefWidth="317.0">
