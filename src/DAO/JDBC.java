@@ -5,15 +5,15 @@ import java.sql.DriverManager;
 
 public abstract class JDBC {
 
-        private static final String protocol = "jdbc";
-        private static final String vendor = ":mysql:";
-        private static final String location = "//localhost/";
-        private static final String databaseName = "client_schedule";
-        private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER"; // Local
-        private static final String driver = "com.mysql.cj.jdbc.Driver"; // Driver reference
-        private static final String userName = "sqlUser"; // Username
-        private static final String password = "Passw0rd!"; // Password
-        private static Connection connection; // Connection Interface
+    private static final String protocol = "jdbc";
+    private static final String vendor = ":mysql:";
+    private static final String location = "//localhost/";
+    private static final String databaseName = "client_schedule";
+    private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER"; // Local
+    private static final String driver = "com.mysql.cj.jdbc.Driver"; // Driver reference
+    private static final String userName = "sqlUser"; // Username
+    private static final String password = "Passw0rd!"; // Password
+    private static Connection connection; // Connection Interface
 
     // Open connection to DB
     public static void openConnection() {
@@ -27,23 +27,22 @@ public abstract class JDBC {
             }
         }
 
+    // Get Connection
+    public static Connection getConnection() {
+        return connection;
+    }
 
-        // Get Connection
-        public static Connection getConnection() {
-            return connection;
+
+    // Close connection to DB
+    public static void closeConnection() {
+        try {
+            connection.close();
+            System.out.println("Connection closed!");
         }
-
-
-        // Close connection to DB
-        public static void closeConnection() {
-            try {
-                connection.close();
-                System.out.println("Connection closed!");
-            }
-            catch (Exception e) {
+        catch (Exception e) {
 // This can possibly be set nothing "// do nothing" because we are closing the program, it no longer matters
-                System.out.println("Error: " + e.getMessage());
-            }
+            System.out.println("Error: " + e.getMessage());
         }
+    }
 
 }

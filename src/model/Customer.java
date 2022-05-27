@@ -17,7 +17,7 @@ public class Customer {
         this.divId = divId;
     }
 
-    public int getID() {
+    public int getId() {
         return id;
     }
 
@@ -32,6 +32,7 @@ public class Customer {
     public String getPostalCode() {
         return postalCode;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

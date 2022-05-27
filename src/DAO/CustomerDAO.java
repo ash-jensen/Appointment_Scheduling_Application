@@ -4,13 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
 
-import java.sql.*;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CustomerDAO {
 
     // Create customer objects using data from database, insert into observable list and return
-    public static ObservableList<Customer> getAllCustomers () {
+    public static ObservableList<Customer> getAllCustomerData() {
         ObservableList<Customer> custList = FXCollections.observableArrayList();
 
         try {
@@ -40,10 +41,12 @@ public class CustomerDAO {
             throwables.printStackTrace();
         }
 
+        // Return custList array
         return custList;
     }
 
-// check date conversion???
+    // check date conversion
+    /*
     public static void checkDateConversion() {
         System.out.println("CREATE DATE TEST");
         String sql = "select Create_Date from countries";
@@ -59,5 +62,9 @@ public class CustomerDAO {
             throwables.printStackTrace();
         }
     }
+    */
 
 }
+
+
+
