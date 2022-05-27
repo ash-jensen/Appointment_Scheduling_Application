@@ -10,11 +10,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static DAO.CustomerDAO.deleteCust;
+import static DAO.CustomerDAO.getAllCustomerData;
 
 public class Customers implements Initializable {
 
@@ -88,7 +92,7 @@ public class Customers implements Initializable {
         }
     }
 
-    public void CancelButtonAction(ActionEvent actionEvent) {
+    public void ClearButtonAction(ActionEvent actionEvent) {
     }
 
     public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
@@ -101,6 +105,35 @@ public class Customers implements Initializable {
         stage.show();
     }
 
+    public void DeleteButtonAction(ActionEvent actionEvent) {
+        Alert alert;
+
+        // Get selected customer from table
+        Customer selected = (Customer)CustTable.getSelectionModel().getSelectedItem();
+
+        // If nothing selected, alert user to select part
+        if (selected == null) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Delete Error");
+            alert.setContentText("Please select a part to delete.");
+            alert.showAndWait();
+            return;
+        }
+
+        System.out.println("selected: " + selected);
+
+        // Confirm user wants to delete part & delete
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            if (!deleteCust(selected)) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Delete Error");
+                alert.setContentText("Delete unsuccessful.");
+                alert.showAndWait();
+            }
+        }
+    }
     // Dynamic populating of table
     /*
     // Populate CustTable
