@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Customer;
+import model.CustomerList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,6 @@ import java.util.Optional;
 public abstract class CustomerDAO {
     private static ObservableList<Customer> customerList = observableArrayList();
 
-    // Create customer objects using data from database, insert into observable list and return
     public static ObservableList<Customer> getCustomerData() {
         try {
             // SQL statement to get all customers from customer table
@@ -41,6 +41,8 @@ public abstract class CustomerDAO {
         catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        // Return customerList from db
         return customerList;
     }
 
@@ -83,8 +85,7 @@ public abstract class CustomerDAO {
         return rowsAffected;
     }
 
-    // Delete Customer
-    public static int deleteCustomer(int custId) throws SQLException {
+    public static int deleteCustomerFromDB(int custId) throws SQLException {
         Alert alert;
         int rowsAffected = 0;
 
@@ -101,15 +102,23 @@ public abstract class CustomerDAO {
             // Call prepared statement setter method to assign bind variables value
             ps.setInt(1, custId);
 
+            System.out.println("Got to CustomerDAO.java deleteCustomerFromDB");
+            for (Customer c : customerList) {
+                System.out.println(c.getId());
+            }
+
+
             // Var of updated rows
             rowsAffected = ps.executeUpdate();
+
+            // Update customer list to match db
+            // getCustomerData();
             return rowsAffected;
         }
         else {
             return rowsAffected;
         }
     }
-
 
     // check date conversion
     /*

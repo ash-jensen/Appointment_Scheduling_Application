@@ -18,9 +18,9 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static DAO.CustomerDAO.deleteCustomer;
+import static model.CustomerList.*;
 
-public class Customers implements Initializable {
+public class CustomersForm implements Initializable {
 
     public TableView CustTable;
     public TableColumn CustTableId;
@@ -57,10 +57,10 @@ public class Customers implements Initializable {
          */
 
         // Insert customer test
-        /*
+
         int rowsAffected = 0;
         try {
-            rowsAffected = CustomerDAO.insertCustomer("Rory", "1234 Weblo Ave", "77445", "123-334-1234",29);
+            rowsAffected = CustomerDAO.insertCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -70,7 +70,7 @@ public class Customers implements Initializable {
         else {
             System.out.println("Insert failed");
         }
-         */
+
 
 
         // Fill customer table with customer data
@@ -99,7 +99,7 @@ public class Customers implements Initializable {
 
     private void populateCustTable() {
         // Populate Customer Table on Customers form
-        CustTable.setItems(CustomerDAO.getCustomerData());
+        CustTable.setItems(getCustomerList());
         CustTableId.setCellValueFactory(new PropertyValueFactory<>("id"));
         CustTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
         CustTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -158,20 +158,19 @@ public class Customers implements Initializable {
             return;
         }
         else {
-            // Get customer id to delete
-            int custId = selected.getId();
-
-            // Call delete and check if successful
-            if (CustomerDAO.deleteCustomer(custId) > 0) {
-                // Repopulate customer table
-                populateCustTable();
-            }
-            else {
+            // If delete is unsuccessful,notify user, else repopulate table
+            if (!deleteCustomer(selected)) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Delete Error");
                 alert.setContentText("Delete unsuccessful.");
                 alert.showAndWait();
             }
+            /*
+            else {
+                populateCustTable();
+            }
+
+             */
         }
     }
 

@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class Schedule implements Initializable {
+public class ScheduleForm implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
