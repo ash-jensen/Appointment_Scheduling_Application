@@ -29,9 +29,7 @@ public class CustomersForm implements Initializable {
     public TableColumn CustTablePostalCode;
     public TableColumn CustTablePhoneNumber;
     public TableColumn CustTableDivId;
-    /*
-    private ObservableList<ObservableList<String>> data;
-    */
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -159,67 +157,12 @@ public class CustomersForm implements Initializable {
         }
         else {
             // If delete is unsuccessful,notify user, else repopulate table
-            if (!deleteCustomer(selected)) {
+            if (deleteCustomer(selected)) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Delete Error");
                 alert.setContentText("Delete unsuccessful.");
                 alert.showAndWait();
             }
-            /*
-            else {
-                populateCustTable();
-            }
-
-             */
         }
     }
-
-    // Dynamic populating of table
-    /*
-    // Populate CustTable
-    public void setCustTable() {
-        data = FXCollections.observableArrayList();
-        try {
-            // SQL statement to run
-            String sql = "Select * from customers";
-            // Get a connection to DB and send over the SQL
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            // Get results of query
-            ResultSet rs = ps.executeQuery();
-
-            // Insert titles into columns: for each rs, set column name to rs.columnName and cellValueFactory determines what to show in cell
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                    final int j = i;
-                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
-                    col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
-                        public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
-                            return new SimpleStringProperty(param.getValue().get(j).toString());
-                        }
-                    });
-                    CustTable.getColumns().addAll(col);
-                    // Check
-                    System.out.println("Column " + i + " successful.");
-            }
-
-            // Insert data into rows: for each rs, add each column at row value to row, then add to data
-            while(rs.next()) {
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    row.add(rs.getString(i));
-                }
-                data.add(row);
-                // Check
-                System.out.println("Row added: " + row);
-            }
-
-            // Add to CustTable
-            CustTable.setItems(data);
-        }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.out.println("Error building data");
-        }
-    }
-     */
-
 }

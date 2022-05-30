@@ -26,6 +26,9 @@ public abstract class CustomerDAO {
             // Get results of query
             ResultSet rs = ps.executeQuery();
 
+            // Clear Array List
+            customerList.clear();
+
             // Set bind variables to create customer object, add customer to list
             while(rs.next()) {
                 int custId = rs.getInt("Customer_ID");
@@ -102,17 +105,8 @@ public abstract class CustomerDAO {
             // Call prepared statement setter method to assign bind variables value
             ps.setInt(1, custId);
 
-            System.out.println("Got to CustomerDAO.java deleteCustomerFromDB");
-            for (Customer c : customerList) {
-                System.out.println(c.getId());
-            }
-
-
-            // Var of updated rows
+            // Var of updated rows to return
             rowsAffected = ps.executeUpdate();
-
-            // Update customer list to match db
-            // getCustomerData();
             return rowsAffected;
         }
         else {
