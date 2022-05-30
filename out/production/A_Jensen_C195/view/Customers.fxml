@@ -172,12 +172,12 @@
                                                 <Font name="Arial Bold" size="13.0" />
                                             </font>
                                         </Button>
-                                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="65.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Delete" textFill="WHITE">
+                                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#DeleteButtonAction" prefWidth="65.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Delete" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Bold" size="13.0" />
                                             </font>
                                         </Button>
-                                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#CancelButtonAction" prefWidth="65.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Cancel" textFill="WHITE">
+                                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#ClearButtonAction" prefWidth="65.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Clear" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Bold" size="13.0" />
                                             </font>

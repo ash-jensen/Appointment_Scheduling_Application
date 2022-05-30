@@ -1,11 +1,15 @@
 package main;
 
+import DAO.CustomerDAO;
 import DAO.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Customer;
+
+import java.sql.SQLException;
 
 public class Main extends Application {
     @Override
@@ -17,6 +21,7 @@ public class Main extends Application {
         stage.show();
         System.out.println();
     }
+
     public static void main(String[] args) {
         // Open DB connection method called
         JDBC.openConnection();

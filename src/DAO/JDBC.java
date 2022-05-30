@@ -32,7 +32,6 @@ public abstract class JDBC {
         return connection;
     }
 
-
     // Close connection to DB
     public static void closeConnection() {
         try {

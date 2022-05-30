@@ -14,11 +14,11 @@ import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static DAO.CustomerDAO.deleteCust;
-import static DAO.CustomerDAO.getAllCustomerData;
+import static DAO.CustomerDAO.deleteCustomer;
 
 public class Customers implements Initializable {
 
@@ -36,6 +36,44 @@ public class Customers implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
+
+
+        // TESTS
+
+        // Update customer test
+         /*
+        int rowsAffected = 0;
+        try {
+            rowsAffected = CustomerDAO.updateCustomer(4, "Ashley", "5678 Init Road", "84041", "801-345-4567", 103);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (rowsAffected > 0) {
+            System.out.println("Update successful");
+        }
+        else {
+            System.out.println("Update failed");
+        }
+         */
+
+        // Insert customer test
+        /*
+        int rowsAffected = 0;
+        try {
+            rowsAffected = CustomerDAO.insertCustomer("Rory", "1234 Weblo Ave", "77445", "123-334-1234",29);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (rowsAffected > 0) {
+            System.out.println("Insert successful");
+        }
+        else {
+            System.out.println("Insert failed");
+        }
+         */
+
+
+        // Fill customer table with customer data
         populateCustTable();
 
         // Lambda function for selecting table object
@@ -61,7 +99,7 @@ public class Customers implements Initializable {
 
     private void populateCustTable() {
         // Populate Customer Table on Customers form
-        CustTable.setItems(CustomerDAO.getAllCustomerData());
+        CustTable.setItems(CustomerDAO.getCustomerData());
         CustTableId.setCellValueFactory(new PropertyValueFactory<>("id"));
         CustTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
         CustTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -105,28 +143,30 @@ public class Customers implements Initializable {
         stage.show();
     }
 
-    public void DeleteButtonAction(ActionEvent actionEvent) {
+    public void DeleteButtonAction(ActionEvent actionEvent) throws SQLException {
         Alert alert;
 
         // Get selected customer from table
         Customer selected = (Customer)CustTable.getSelectionModel().getSelectedItem();
 
-        // If nothing selected, alert user to select part
+        // If nothing selected, alert user to select customer
         if (selected == null) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Delete Error");
-            alert.setContentText("Please select a part to delete.");
+            alert.setContentText("Please select a customer to delete.");
             alert.showAndWait();
             return;
         }
+        else {
+            // Get customer id to delete
+            int custId = selected.getId();
 
-        System.out.println("selected: " + selected);
-
-        // Confirm user wants to delete part & delete
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-            if (!deleteCust(selected)) {
+            // Call delete and check if successful
+            if (CustomerDAO.deleteCustomer(custId) > 0) {
+                // Repopulate customer table
+                populateCustTable();
+            }
+            else {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Delete Error");
                 alert.setContentText("Delete unsuccessful.");
@@ -134,6 +174,7 @@ public class Customers implements Initializable {
             }
         }
     }
+
     // Dynamic populating of table
     /*
     // Populate CustTable
