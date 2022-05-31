@@ -19,7 +19,7 @@ public class CustomerList {
     }
 
     public static boolean addCustomer(String name, String address, String postalCode, String phoneNumber, int divId) {
-        return false;
+        return true;
     }
 
     public static boolean updateCustomer(int custId, String name, String address, String postalCode, String phoneNumber, int divId) throws SQLException {
