@@ -11,7 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Country;
 import model.Customer;
+import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +21,8 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static DAO.CountryDAO.getCountryData;
+import static DAO.DivisionDAO.getDivData;
 import static model.CustomerList.*;
 
 public class CustomersForm implements Initializable {
@@ -52,8 +56,46 @@ public class CustomersForm implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
 
+        // Fill customer table with customer data
+        populateCustTable();
+
+        // Lambda function for putting selected customer in Customer Details form
+        CustTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                customer = (Customer)newSelection;
+                id = customer.getId();
+                CustIdField.setText(Integer.toString(id));
+                name = customer.getName();
+                CustNameField.setText(name);
+                address = customer.getAddress();
+                CustAddressField.setText(address);
+                postalCode = customer.getPostalCode();
+                CustPostalCodeField.setText(postalCode);
+                phoneNumber = customer.getPhoneNumber();
+                CustPhoneNumberField.setText(phoneNumber);
+                divId = customer.getDivId();
+            }
+        });
 
         // TESTS
+        // Division list test
+        /*
+        ObservableList<Division> divList = getDivData();
+        for (Division d: divList) {
+            System.out.println("Division Name: " + d.getDivId());
+            System.out.println("Country Name: " + d.getDivName());
+        }
+
+         */
+
+        // Country list test
+        /*
+        ObservableList<Country> countryList = getCountryData();
+        for (Country c: countryList) {
+            System.out.println("Country name: " + c.getCountryName());
+        }
+
+         */
 
         // Update customer test
          /*
@@ -72,7 +114,6 @@ public class CustomersForm implements Initializable {
          */
 
         // Insert customer test
-
         int rowsAffected = 0;
         try {
             rowsAffected = CustomerDAO.insertCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
@@ -85,27 +126,6 @@ public class CustomersForm implements Initializable {
         else {
             System.out.println("Insert failed");
         }
-
-        // Fill customer table with customer data
-        populateCustTable();
-
-        // Lambda function for selecting table object
-        CustTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                customer = (Customer)newSelection;
-                id = customer.getId();
-                CustIdField.setText(Integer.toString(id));
-                name = customer.getName();
-                CustNameField.setText(name);
-                address = customer.getAddress();
-                CustAddressField.setText(address);
-                postalCode = customer.getPostalCode();
-                CustPostalCodeField.setText(postalCode);
-                phoneNumber = customer.getPhoneNumber();
-                CustPhoneNumberField.setText(phoneNumber);
-                divId = customer.getDivId();
-            }
-        });
 
         // System print table data
         /*ObservableList<Customer> custList = getCustomerList();
