@@ -2,6 +2,7 @@ package controller;
 
 import DAO.CustomerDAO;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +30,22 @@ public class CustomersForm implements Initializable {
     public TableColumn CustTablePostalCode;
     public TableColumn CustTablePhoneNumber;
     public TableColumn CustTableDivId;
+    public ComboBox CustCountryId;
+    public TextField CustAddressField;
+    public TextField CustPostalCodeField;
+    public ComboBox CustDivIdComboBox;
+    public TextField CustPhoneNumberField;
+    public TextField CustIdField;
+    public TextField CustNameField;
+    private Customer customer;
+    private int id;
+    private String name;
+    private String address;
+    private String postalCode;
+    private String phoneNumber;
+    private int countryId;
+    private int divId;
+
 
 
     @Override
@@ -69,28 +86,32 @@ public class CustomersForm implements Initializable {
             System.out.println("Insert failed");
         }
 
-
-
         // Fill customer table with customer data
         populateCustTable();
 
         // Lambda function for selecting table object
-        /*
         CustTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                System.out.println(newSelection);
+                customer = (Customer)newSelection;
+                id = customer.getId();
+                CustIdField.setText(Integer.toString(id));
+                name = customer.getName();
+                CustNameField.setText(name);
+                address = customer.getAddress();
+                CustAddressField.setText(address);
+                postalCode = customer.getPostalCode();
+                CustPostalCodeField.setText(postalCode);
+                phoneNumber = customer.getPhoneNumber();
+                CustPhoneNumberField.setText(phoneNumber);
+                divId = customer.getDivId();
             }
         });
-        */
 
         // System print table data
-        /*
-        ObservableList<Customer> custList = CustomerDAO.getAllCustomers();
+        /*ObservableList<Customer> custList = getCustomerList();
         for(Customer C: custList) {
             System.out.println("Customer ID: " + C.getId() + " Name: " + C.getName());
-        }
-
-         */
+        }*/
 
         // CustomerDAO.checkDateConversion();
     }
@@ -116,21 +137,6 @@ public class CustomersForm implements Initializable {
         stage.show();
     }
 
-    public void ExitButtonAction(ActionEvent actionEvent) {
-        Alert alert;
-
-        // Confirm user wants to exit program
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit the program?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-            // Close Program
-            Platform.exit();
-        }
-    }
-
-    public void ClearButtonAction(ActionEvent actionEvent) {
-    }
-
     public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
@@ -139,6 +145,47 @@ public class CustomersForm implements Initializable {
         stage.setTitle("Reports");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void AddButtonAction(ActionEvent actionEvent) {
+        Alert alert;
+
+        // Get new field values
+        name = CustNameField.getText();
+        address = CustAddressField.getText();
+        postalCode = CustPostalCodeField.getText();
+        phoneNumber = CustPhoneNumberField.getText();
+        divId = customer.getDivId();
+
+        if (addCustomer(name, address, postalCode, phoneNumber, divId)) {
+            // Confirm customer added
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Add Customer");
+            alert.setContentText("Customer has been added.");
+            alert.showAndWait();
+        }
+    }
+
+    public void UpdateButtonAction(ActionEvent actionEvent) throws SQLException {
+        Alert alert;
+
+        // Get new field values
+        name = CustNameField.getText();
+        address = CustAddressField.getText();
+        postalCode = CustPostalCodeField.getText();
+        phoneNumber = CustPhoneNumberField.getText();
+        divId = customer.getDivId();
+
+        if (updateCustomer(id, name, address, postalCode, phoneNumber, divId)) {
+            // Repopulate table
+            populateCustTable();
+
+            // Confirm customer updated
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Update Customer");
+            alert.setContentText("Customer " + id + " has been updated.");
+            alert.showAndWait();
+        }
     }
 
     public void DeleteButtonAction(ActionEvent actionEvent) throws SQLException {
@@ -163,6 +210,21 @@ public class CustomersForm implements Initializable {
                 alert.setContentText("Delete unsuccessful.");
                 alert.showAndWait();
             }
+        }
+    }
+
+    public void ClearButtonAction(ActionEvent actionEvent) {
+    }
+
+    public void ExitButtonAction(ActionEvent actionEvent) {
+        Alert alert;
+
+        // Confirm user wants to exit program
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit the program?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            // Close Program
+            Platform.exit();
         }
     }
 }

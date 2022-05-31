@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomersForm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomersForm">
     <children>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="900.0" spacing="5.0">
             <children>
@@ -52,7 +62,7 @@
                         </TableView>
                         <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="419.0" prefWidth="317.0">
                             <children>
-                                <Label text="Edit Customer">
+                                <Label text="Customer Details">
                                     <font>
                                         <Font name="Arial Bold" size="18.0" />
                                     </font>
@@ -104,12 +114,12 @@
                                                 <Insets left="10.0" />
                                             </padding>
                                         </Label>
-                                        <TextField fx:id="AProdFIdField" disable="true" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Auto Gen - Disabled" GridPane.columnIndex="1">
+                                        <TextField fx:id="CustIdField" disable="true" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Auto Gen - Disabled" GridPane.columnIndex="1">
                                             <font>
                                                 <Font name="Arial" size="13.0" />
                                             </font>
                                         </TextField>
-                                        <TextField fx:id="AProdFNameField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField fx:id="CustNameField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <Label layoutX="10.0" layoutY="122.0" GridPane.rowIndex="6">
                                             <padding>
                                                 <Insets left="10.0" />
@@ -150,11 +160,11 @@
                                                 <Font name="Arial" size="13.0" />
                                             </font>
                                         </Label>
-                                        <ComboBox prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                        <TextField fx:id="AProdFNameField2" layoutX="137.0" layoutY="45.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                        <TextField fx:id="AProdFNameField212" layoutX="137.0" layoutY="115.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                        <ComboBox prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <ComboBox fx:id="CustCountryId" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                        <TextField fx:id="CustAddressField" layoutX="137.0" layoutY="45.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                        <TextField fx:id="CustPostalCodeField" layoutX="137.0" layoutY="115.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                        <ComboBox fx:id="CustDivIdComboBox" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                        <TextField fx:id="CustPhoneNumberField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="45.0" left="11.0" top="15.0" />
@@ -162,12 +172,12 @@
                                 </GridPane>
                                 <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="317.0" spacing="20.0">
                                     <children>
-                                        <Button minWidth="-Infinity" mnemonicParsing="false" prefWidth="65.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Add" textFill="WHITE">
+                                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#AddButtonAction" prefWidth="65.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Add" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Bold" size="13.0" />
                                             </font>
                                         </Button>
-                                        <Button minWidth="-Infinity" mnemonicParsing="false" prefWidth="65.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Update" textFill="WHITE">
+                                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#UpdateButtonAction" prefWidth="65.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Update" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Bold" size="13.0" />
                                             </font>

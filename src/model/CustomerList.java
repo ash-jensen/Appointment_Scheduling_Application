@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import java.sql.SQLException;
 
 import static DAO.CustomerDAO.getCustomerData;
+import static DAO.CustomerDAO.updateCustomerInDB;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class CustomerList {
@@ -17,16 +18,19 @@ public class CustomerList {
         return customerList;
     }
 
-    public static boolean addCustomer(int custId, String name, String address, String postalCode, String phoneNumber, int divId) {
-
+    public static boolean addCustomer(String name, String address, String postalCode, String phoneNumber, int divId) {
+        return false;
     }
 
-    /*
-    public static boolean updateCustomer(Customer selectedCustomer) {
-
+    public static boolean updateCustomer(int custId, String name, String address, String postalCode, String phoneNumber, int divId) throws SQLException {
+        // Return true if update to DB is complete, else false;
+        if (updateCustomerInDB(custId, name, address, postalCode, phoneNumber, divId) > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
-
-     */
 
     public static boolean deleteCustomer(Customer selectedCustomer) throws SQLException {
         // Get customerID from selected customer
