@@ -18,11 +18,12 @@ import model.Division;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static DAO.CountryDAO.getCountryData;
-import static DAO.DivisionDAO.getDivData;
+import static DAO.DivisionDAO.getDivsByCountry;
 import static model.CustomerList.*;
 
 public class CustomersForm implements Initializable {
@@ -34,7 +35,7 @@ public class CustomersForm implements Initializable {
     public TableColumn CustTablePostalCode;
     public TableColumn CustTablePhoneNumber;
     public TableColumn CustTableDivId;
-    public ComboBox CustCountryId;
+    public ComboBox CustCountryIdComboBox;
     public TextField CustAddressField;
     public TextField CustPostalCodeField;
     public ComboBox CustDivIdComboBox;
@@ -49,12 +50,30 @@ public class CustomersForm implements Initializable {
     private String phoneNumber;
     private int countryId;
     private int divId;
+    private ObservableList<Country> countryList;
+    private ObservableList<Division> divisionList;
+    private Country selectedCountry;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
+
+
+        // Insert customer test
+        int rowsAffected = 0;
+        try {
+            rowsAffected = CustomerDAO.insertCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (rowsAffected > 0) {
+            System.out.println("Insert successful");
+        }
+        else {
+            System.out.println("Insert failed");
+        }
 
         // Fill customer table with customer data
         populateCustTable();
@@ -74,10 +93,46 @@ public class CustomersForm implements Initializable {
                 phoneNumber = customer.getPhoneNumber();
                 CustPhoneNumberField.setText(phoneNumber);
                 divId = customer.getDivId();
+                /*
+                countryId = Customer.findCountryByDiv(divId);
+                System.out.println("CountryID " + countryId);
+                CustDivIdComboBox.getSelectionModel().select(customer);
+
+                 */
             }
         });
 
+
         // TESTS
+        // Fill combo boxes
+        countryList = getCountryData();
+        CustCountryIdComboBox.setVisibleRowCount(5);
+        // CustCountryIdComboBox.setPromptText("Country...");
+        CustCountryIdComboBox.setItems(countryList);
+        // CustCountryIdComboBox.getSelectionModel().selectFirst();
+
+        // Time combo box
+        /*
+        LocalTime start = LocalTime.of(6, 0);
+        LocalTime end = LocalTime.NOON;
+
+        while(start.isBefore(end.plusSeconds(1))) {
+            CustCountryIdComboBox.getItems().add(start);
+            start = start.plusMinutes(10);
+        }
+        CustCountryIdComboBox.getSelectionModel().select(LocalTime.of(8, 0));
+         */
+
+        // Division by country test
+        /*
+        ObservableList<Division> divsByCountry = getDivsByCountry(3);
+        for (Division d: divsByCountry) {
+            System.out.println("Division Name: " + d.getDivName());
+            System.out.println("Country ID: " + d.getCountryId());
+        }
+
+         */
+
         // Division list test
         /*
         ObservableList<Division> divList = getDivData();
@@ -112,20 +167,6 @@ public class CustomersForm implements Initializable {
             System.out.println("Update failed");
         }
          */
-
-        // Insert customer test
-        int rowsAffected = 0;
-        try {
-            rowsAffected = CustomerDAO.insertCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rowsAffected > 0) {
-            System.out.println("Insert successful");
-        }
-        else {
-            System.out.println("Insert failed");
-        }
 
         // System print table data
         /*ObservableList<Customer> custList = getCustomerList();
@@ -234,6 +275,9 @@ public class CustomersForm implements Initializable {
     }
 
     public void ClearButtonAction(ActionEvent actionEvent) {
+        CustCountryIdComboBox.getSelectionModel().clearSelection();
+        CustDivIdComboBox.getSelectionModel().clearSelection();
+        CustDivIdComboBox.getItems().clear();
     }
 
     public void ExitButtonAction(ActionEvent actionEvent) {
@@ -246,5 +290,36 @@ public class CustomersForm implements Initializable {
             // Close Program
             Platform.exit();
         }
+    }
+
+    public void countrySelectedAction(ActionEvent actionEvent) {
+        selectedCountry = (Country) CustCountryIdComboBox.getSelectionModel().getSelectedItem();
+        if (selectedCountry == null) {
+            return;
+        }
+        int countryId = selectedCountry.getCountryId();
+        if (divisionList == null) {
+            /*
+            selectedCountry = (Country) CustCountryIdComboBox.getSelectionModel().getSelectedItem();
+            int countryId = selectedCountry.getCountryId();
+
+             */
+            divisionList = getDivsByCountry(countryId);
+            CustDivIdComboBox.setVisibleRowCount(5);
+            CustDivIdComboBox.setPromptText("First Level Division...");
+            CustDivIdComboBox.setItems(divisionList);
+        }
+        else {
+            divisionList.clear();
+            /*
+            selectedCountry = (Country) CustCountryIdComboBox.getSelectionModel().getSelectedItem();
+            int countryId = selectedCountry.getCountryId();
+             */
+            divisionList = getDivsByCountry(countryId);
+            CustDivIdComboBox.setVisibleRowCount(5);
+            CustDivIdComboBox.setPromptText("First Level Division...");
+            CustDivIdComboBox.setItems(divisionList);
+        }
+
     }
 }

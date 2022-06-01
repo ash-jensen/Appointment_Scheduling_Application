@@ -160,7 +160,7 @@
                                                 <Font name="Arial" size="13.0" />
                                             </font>
                                         </Label>
-                                        <ComboBox fx:id="CustCountryId" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                        <ComboBox fx:id="CustCountryIdComboBox" onAction="#countrySelectedAction" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                         <TextField fx:id="CustAddressField" layoutX="137.0" layoutY="45.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                         <TextField fx:id="CustPostalCodeField" layoutX="137.0" layoutY="115.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                         <ComboBox fx:id="CustDivIdComboBox" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />

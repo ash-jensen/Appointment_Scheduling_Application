@@ -1,5 +1,7 @@
 package model;
 
+import DAO.DivisionDAO;
+
 public class Customer {
     private int id;
     private String name;
@@ -40,5 +42,11 @@ public class Customer {
     public int getDivId() {
         return divId;
     }
+
+    /*
+    public static int findCountryByDiv(int divId) {
+        return DivisionDAO.getCountryByDivId(divId);
+    }
+     */
 
 }
