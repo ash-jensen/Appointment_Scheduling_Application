@@ -10,43 +10,13 @@ import java.sql.SQLException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class DivisionDAO {
+public abstract class DivisionDAO {
     private int divId;
     private String divName;
     private int countryId;
 
     private static ObservableList<Division> divList = observableArrayList();
     private static ObservableList<Division> divsByCountry = observableArrayList();
-
-    public DivisionDAO(int divId, String divName, int countryId) {
-        this.divId = divId;
-        this.divName = divName;
-        this.countryId = countryId;
-    }
-
-    public int getDivId() {
-        return divId;
-    }
-
-    public void setDivId(int divId) {
-        this.divId = divId;
-    }
-
-    public String getDivName() {
-        return divName;
-    }
-
-    public void setDivName(String divName) {
-        this.divName = divName;
-    }
-
-    public int getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
-    }
 
     public static ObservableList<Division> getDivData() {
         try {

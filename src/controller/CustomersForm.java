@@ -1,7 +1,6 @@
 package controller;
 
 import DAO.CountryDAO;
-import DAO.CustomerDAO;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +17,6 @@ import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;

@@ -26,7 +26,7 @@
                   <Font name="Arial Bold" size="13.0" />
                </font>
             </Label>
-            <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" promptText="User Name">
+            <TextField fx:id="UserNameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" promptText="User Name">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -36,7 +36,7 @@
                   <Font name="Arial Bold" size="13.0" />
                </font>
             </Label>
-            <TextField minHeight="-Infinity" prefHeight="36.0" promptText="Password">
+            <TextField fx:id="PasswordField" minHeight="-Infinity" prefHeight="36.0" promptText="Password">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin>
@@ -55,7 +55,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="22.0" prefWidth="307.0">
                <children>
-                  <Label text="Time Zone" />
+                  <Label fx:id="timeZone" text="Time Zone" />
                </children>
             </HBox>
          </children>

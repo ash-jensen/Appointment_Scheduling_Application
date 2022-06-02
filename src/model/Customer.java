@@ -43,6 +43,30 @@ public class Customer {
         return divId;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setDivId(int divId) {
+        this.divId = divId;
+    }
+
     /*
     public static int findCountryByDiv(int divId) {
         return DivisionDAO.getCountryByDivId(divId);

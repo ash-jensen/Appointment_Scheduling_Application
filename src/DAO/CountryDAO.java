@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class CountryDAO {
+public abstract class CountryDAO {
     private static ObservableList<Country> countryList = observableArrayList();
 
     public static ObservableList<Country> getCountryData() {
