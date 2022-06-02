@@ -23,8 +23,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static DAO.CountryDAO.getCountryData;
+import static DAO.CustomerDAO.*;
 import static DAO.DivisionDAO.getDivsByCountry;
-import static model.CustomerList.*;
+
 
 public class CustomersForm implements Initializable {
 
@@ -62,9 +63,10 @@ public class CustomersForm implements Initializable {
 
 
         // Insert customer test
+        /*
         int rowsAffected = 0;
         try {
-            rowsAffected = CustomerDAO.insertCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
+            rowsAffected = addCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -74,6 +76,8 @@ public class CustomersForm implements Initializable {
         else {
             System.out.println("Insert failed");
         }
+
+         */
 
         // Fill customer table with customer data
         populateCustTable();
@@ -175,11 +179,16 @@ public class CustomersForm implements Initializable {
         }*/
 
         // CustomerDAO.checkDateConversion();
+
+        // Combining two tables in query
+        /*
+        "SELECT companyID, companyName, countryName FROM company, location WHERE company.locationId = location.locationId";
+         */
     }
 
     private void populateCustTable() {
         // Populate Customer Table on Customers form
-        CustTable.setItems(getCustomerList());
+        CustTable.setItems(getCustomerData());
         CustTableId.setCellValueFactory(new PropertyValueFactory<>("id"));
         CustTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
         CustTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -216,13 +225,21 @@ public class CustomersForm implements Initializable {
         address = CustAddressField.getText();
         postalCode = CustPostalCodeField.getText();
         phoneNumber = CustPhoneNumberField.getText();
-        divId = customer.getDivId();
+        divId = ((Division)CustDivIdComboBox.getSelectionModel().getSelectedItem()).getDivId();
 
-        if (addCustomer(name, address, postalCode, phoneNumber, divId)) {
+        if (addCustomer(name, address, postalCode, phoneNumber, divId) > 0) {
+            populateCustTable();
             // Confirm customer added
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Add Customer");
-            alert.setContentText("Customer has been added.");
+            alert.setContentText("Customer " + name + " has been added.");
+            alert.showAndWait();
+        }
+        else {
+            // Alert user: customer has not been added
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Add Customer Error");
+            alert.setContentText("Error: Customer has NOT been added");
             alert.showAndWait();
         }
     }
@@ -237,7 +254,7 @@ public class CustomersForm implements Initializable {
         phoneNumber = CustPhoneNumberField.getText();
         divId = customer.getDivId();
 
-        if (updateCustomer(id, name, address, postalCode, phoneNumber, divId)) {
+        if (updateCustomer(id, name, address, postalCode, phoneNumber, divId) > 0) {
             // Repopulate table
             populateCustTable();
 
@@ -264,12 +281,18 @@ public class CustomersForm implements Initializable {
             return;
         }
         else {
-            // If delete is unsuccessful,notify user, else repopulate table
-            if (deleteCustomer(selected)) {
+            // Get customer id
+            int custId = selected.getId();
+
+            // If delete is unsuccessful,notify user
+            if (deleteCustomer(custId) <= 0) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Delete Error");
                 alert.setContentText("Delete unsuccessful.");
                 alert.showAndWait();
+            }
+            else {
+                populateCustTable();
             }
         }
     }
@@ -302,7 +325,6 @@ public class CustomersForm implements Initializable {
             /*
             selectedCountry = (Country) CustCountryIdComboBox.getSelectionModel().getSelectedItem();
             int countryId = selectedCountry.getCountryId();
-
              */
             divisionList = getDivsByCountry(countryId);
             CustDivIdComboBox.setVisibleRowCount(5);

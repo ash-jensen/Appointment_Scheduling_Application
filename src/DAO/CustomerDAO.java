@@ -5,11 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Customer;
-import model.CustomerList;
+
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 
 public abstract class CustomerDAO {
@@ -26,7 +27,7 @@ public abstract class CustomerDAO {
             // Get results of query
             ResultSet rs = ps.executeQuery();
 
-            // Clear Array List
+            // Clear customerList
             customerList.clear();
 
             // Set bind variables to create customer object, add customer to list
@@ -49,26 +50,46 @@ public abstract class CustomerDAO {
         return customerList;
     }
 
-    public static int insertCustomer(String name, String address, String postalCode, String phoneNumber, int divId) throws SQLException {
-        // SQL statement to insert customer in customers table
-        String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
+    public static int addCustomer(String name, String address, String postalCode, String phoneNumber, int divId) {
+        // int custId = 0;
+        int rowsAffected = 0;
 
-        // Get connection to DB and send over the SQL
-        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        try {
+            // SQL statement to insert customer in customers table
+            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
 
-        // Call prepared statement setter method to assign bind variables value
-        ps.setString(1, name);
-        ps.setString(2, address);
-        ps.setString(3, postalCode);
-        ps.setString(4, phoneNumber);
-        ps.setInt(5, divId);
+            // Get connection to DB and send over the SQL
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql, new String[] {"Customer_ID"});
+            // PreparedStatement ps = JDBC.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        // Execute the insert, assign num of rows affected to var to return
-        int rowsAffected = ps.executeUpdate();
+            // Call prepared statement setter method to assign bind variables value
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, postalCode);
+            ps.setString(4, phoneNumber);
+            ps.setInt(5, divId);
+
+            // Execute the insert, assign num of rows affected to var to return
+            rowsAffected = ps.executeUpdate();
+            return rowsAffected;
+
+            /*
+            ps.execute();
+
+            ResultSet rs = sql.getGeneratedKeys();
+            rs.next();
+            custId = rs.getInt(1);
+             */
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return rowsAffected;
+        // return custId;
     }
 
-    public static int updateCustomerInDB(int custId, String name, String address, String postalCode, String phoneNumber, int divId) throws SQLException {
+    public static int updateCustomer(int custId, String name, String address, String postalCode, String phoneNumber, int divId) throws SQLException {
         Alert alert;
         int rowsAffected = 0;
 
@@ -98,7 +119,7 @@ public abstract class CustomerDAO {
         }
     }
 
-    public static int deleteCustomerFromDB(int custId) throws SQLException {
+    public static int deleteCustomer(int custId) throws SQLException {
         Alert alert;
         int rowsAffected = 0;
 
