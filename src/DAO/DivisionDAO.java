@@ -50,6 +50,9 @@ public class DivisionDAO {
 
     public static ObservableList<Division> getDivData() {
         try {
+            // Clear divList
+            divList.clear();
+
             // SQL statement to get all customers from customer table
             String sql = "SELECT * FROM first_level_divisions";
 

@@ -89,60 +89,68 @@ public abstract class CustomerDAO {
         // return custId;
     }
 
-    public static int updateCustomer(int custId, String name, String address, String postalCode, String phoneNumber, int divId) throws SQLException {
+    public static int updateCustomer(int custId, String name, String address, String postalCode, String phoneNumber, int divId) {
         Alert alert;
         int rowsAffected = 0;
 
         alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to edit customer " + custId + "?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
-            // SQL statement to update customer with given customer id
-            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+            try {
+                // SQL statement to update customer with given customer id
+                String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
 
-            // Get connection to DB and send over the SQL
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+                // Get connection to DB and send over the SQL
+                PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
-            // Call prepared statement setter method to assign bind variable values
-            ps.setString(1, name);
-            ps.setString(2, address);
-            ps.setString(3, postalCode);
-            ps.setString(4, phoneNumber);
-            ps.setInt(5, divId);
-            ps.setInt(6, custId);
+                // Call prepared statement setter method to assign bind variable values
+                ps.setString(1, name);
+                ps.setString(2, address);
+                ps.setString(3, postalCode);
+                ps.setString(4, phoneNumber);
+                ps.setInt(5, divId);
+                ps.setInt(6, custId);
 
-            // Execute the update, assign num of rows affected to var to return
-            rowsAffected = ps.executeUpdate();
-            return rowsAffected;
+                // Execute the update, assign num of rows affected to var to return
+                rowsAffected = ps.executeUpdate();
+                return rowsAffected;
+            }
+            catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
-        else {
-            return rowsAffected;
-        }
+        return rowsAffected;
     }
 
-    public static int deleteCustomer(int custId) throws SQLException {
+    public static int deleteCustomer(Customer customerToDelete) {
         Alert alert;
         int rowsAffected = 0;
+        int custId = customerToDelete.getId();
+        String custName = customerToDelete.getName();
 
         // Confirm user wants to delete customer & delete
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + custName + "?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
-            // SQL statement to run
-            String sql = "DELETE FROM customers WHERE Customer_ID = ?";
+            try {
+                // SQL statement to run
+                String sql = "DELETE FROM customers WHERE Customer_ID = ?";
 
-            // Get a connection to DB and send over the SQL
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+                // Get a connection to DB and send over the SQL
+                PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
-            // Call prepared statement setter method to assign bind variables value
-            ps.setInt(1, custId);
+                // Call prepared statement setter method to assign bind variables value
+                ps.setInt(1, custId);
 
-            // Var of updated rows to return
-            rowsAffected = ps.executeUpdate();
-            return rowsAffected;
+                // Var of updated rows to return
+                rowsAffected = ps.executeUpdate();
+                return rowsAffected;
+            }
+            catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
-        else {
-            return rowsAffected;
-        }
+        return rowsAffected;
     }
 
     // check date conversion

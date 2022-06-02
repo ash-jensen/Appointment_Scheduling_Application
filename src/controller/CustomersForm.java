@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.CountryDAO;
 import DAO.CustomerDAO;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 
 import static DAO.CountryDAO.getCountryData;
 import static DAO.CustomerDAO.*;
+import static DAO.DivisionDAO.getDivData;
 import static DAO.DivisionDAO.getDivsByCountry;
 
 
@@ -61,26 +63,11 @@ public class CustomersForm implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
 
-
-        // Insert customer test
-        /*
-        int rowsAffected = 0;
-        try {
-            rowsAffected = addCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rowsAffected > 0) {
-            System.out.println("Insert successful");
-        }
-        else {
-            System.out.println("Insert failed");
-        }
-
-         */
-
         // Fill customer table with customer data
         populateCustTable();
+
+        // Initialize combo boxes
+        fillComboBoxes();
 
         // Lambda function for putting selected customer in Customer Details form
         CustTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -97,23 +84,46 @@ public class CustomersForm implements Initializable {
                 phoneNumber = customer.getPhoneNumber();
                 CustPhoneNumberField.setText(phoneNumber);
                 divId = customer.getDivId();
-                /*
-                countryId = Customer.findCountryByDiv(divId);
-                System.out.println("CountryID " + countryId);
-                CustDivIdComboBox.getSelectionModel().select(customer);
-
-                 */
+                // Find country that division belongs to and get it's id
+                Country matchingCountry = CountryDAO.getCountryByDiv(divId);
+                countryId = matchingCountry.getCountryId();
+                // Find country in country combo box and set to show
+                for (int i = 0; i < getCountryData().size(); i++) {
+                    Country countryCustomer = (Country)CustCountryIdComboBox.getItems().get(i);
+                    if(countryId == countryCustomer.getCountryId()) {
+                        CustCountryIdComboBox.setValue(countryCustomer);
+                        break;
+                    }
+                }
+                // Find division in division combo box and set to show
+                for (int i = 0; i < getDivData().size(); i++) {
+                    Division divCustomer = (Division)CustDivIdComboBox.getItems().get(i);
+                    if(divId == divCustomer.getDivId()) {
+                        CustDivIdComboBox.setValue(divCustomer);
+                        break;
+                    }
+                }
             }
         });
 
 
         // TESTS
-        // Fill combo boxes
-        countryList = getCountryData();
-        CustCountryIdComboBox.setVisibleRowCount(5);
-        // CustCountryIdComboBox.setPromptText("Country...");
-        CustCountryIdComboBox.setItems(countryList);
-        // CustCountryIdComboBox.getSelectionModel().selectFirst();
+        // Insert customer test
+        /*
+        int rowsAffected = 0;
+        try {
+            rowsAffected = addCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (rowsAffected > 0) {
+            System.out.println("Insert successful");
+        }
+        else {
+            System.out.println("Insert failed");
+        }
+
+         */
 
         // Time combo box
         /*
@@ -197,6 +207,16 @@ public class CustomersForm implements Initializable {
         CustTableDivId.setCellValueFactory(new PropertyValueFactory<>("divId"));
     }
 
+    private void fillComboBoxes() {
+        // Fill combo boxes
+        countryList = getCountryData();
+        CustCountryIdComboBox.setVisibleRowCount(5);
+        CustCountryIdComboBox.setItems(countryList);
+        divisionList = getDivData();
+        CustDivIdComboBox.setVisibleRowCount(5);
+        CustDivIdComboBox.setItems(divisionList);
+    }
+
     public void SchedButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
@@ -220,53 +240,74 @@ public class CustomersForm implements Initializable {
     public void AddButtonAction(ActionEvent actionEvent) {
         Alert alert;
 
-        // Get new field values
-        name = CustNameField.getText();
-        address = CustAddressField.getText();
-        postalCode = CustPostalCodeField.getText();
-        phoneNumber = CustPhoneNumberField.getText();
-        divId = ((Division)CustDivIdComboBox.getSelectionModel().getSelectedItem()).getDivId();
+        // Check that all fields/combo boxes have been filled out, add customer
+        if (emptyFieldCheck()) {
+            // Get new field values
+            name = CustNameField.getText();
+            address = CustAddressField.getText();
+            postalCode = CustPostalCodeField.getText();
+            phoneNumber = CustPhoneNumberField.getText();
+            divId = ((Division)CustDivIdComboBox.getSelectionModel().getSelectedItem()).getDivId();
 
-        if (addCustomer(name, address, postalCode, phoneNumber, divId) > 0) {
-            populateCustTable();
-            // Confirm customer added
-            alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Add Customer");
-            alert.setContentText("Customer " + name + " has been added.");
-            alert.showAndWait();
-        }
-        else {
+            // If customer added to database, repopulate table and inform user of success
+            if (addCustomer(name, address, postalCode, phoneNumber, divId) > 0) {
+                populateCustTable();
+                // Confirm customer added
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Add Customer");
+                alert.setContentText("Customer " + name + " has been added.");
+                alert.showAndWait();
+
+                // Clear form fields
+                ClearButtonAction(null);
+            }
             // Alert user: customer has not been added
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Add Customer Error");
-            alert.setContentText("Error: Customer has NOT been added");
-            alert.showAndWait();
+            else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Add Customer Error");
+                alert.setContentText("Error: Customer has NOT been added");
+                alert.showAndWait();
+            }
         }
     }
 
-    public void UpdateButtonAction(ActionEvent actionEvent) throws SQLException {
+    public void UpdateButtonAction(ActionEvent actionEvent)  {
         Alert alert;
 
-        // Get new field values
-        name = CustNameField.getText();
-        address = CustAddressField.getText();
-        postalCode = CustPostalCodeField.getText();
-        phoneNumber = CustPhoneNumberField.getText();
-        divId = customer.getDivId();
+        // Check that all fields/combo boxes have been filled out, update customer
+        if (emptyFieldCheck()) {
+            // Get new field values
+            name = CustNameField.getText();
+            address = CustAddressField.getText();
+            postalCode = CustPostalCodeField.getText();
+            phoneNumber = CustPhoneNumberField.getText();
+            divId = customer.getDivId();
 
-        if (updateCustomer(id, name, address, postalCode, phoneNumber, divId) > 0) {
-            // Repopulate table
-            populateCustTable();
+            // If customer updated in database, repopulate table and inform user of success
+            if (updateCustomer(id, name, address, postalCode, phoneNumber, divId) > 0) {
+                // Repopulate table
+                populateCustTable();
 
-            // Confirm customer updated
-            alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Update Customer");
-            alert.setContentText("Customer " + id + " has been updated.");
-            alert.showAndWait();
+                // Confirm customer updated
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Update Customer");
+                alert.setContentText("Customer " + id + " has been updated.");
+                alert.showAndWait();
+
+                // Clear form fields
+                ClearButtonAction(null);
+            }
+            // Alert user: customer has not been added
+            else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Add Customer Error");
+                alert.setContentText("Error: Customer has NOT been updated");
+                alert.showAndWait();
+            }
         }
     }
 
-    public void DeleteButtonAction(ActionEvent actionEvent) throws SQLException {
+    public void DeleteButtonAction(ActionEvent actionEvent)  {
         Alert alert;
 
         // Get selected customer from table
@@ -281,26 +322,35 @@ public class CustomersForm implements Initializable {
             return;
         }
         else {
-            // Get customer id
-            int custId = selected.getId();
+            // Get customer id and name
+            String customerName = selected.getName();
 
             // If delete is unsuccessful,notify user
-            if (deleteCustomer(custId) <= 0) {
+            if (deleteCustomer(selected) <= 0) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Delete Error");
                 alert.setContentText("Delete unsuccessful.");
                 alert.showAndWait();
             }
             else {
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Delete Successful");
+                alert.setContentText(customerName + "has been deleted.");
+                alert.showAndWait();
                 populateCustTable();
             }
         }
+        ClearButtonAction(null);
     }
 
     public void ClearButtonAction(ActionEvent actionEvent) {
+        CustIdField.clear();
+        CustNameField.clear();
+        CustPhoneNumberField.clear();
+        CustAddressField.clear();
         CustCountryIdComboBox.getSelectionModel().clearSelection();
-        CustDivIdComboBox.getSelectionModel().clearSelection();
         CustDivIdComboBox.getItems().clear();
+        CustPostalCodeField.clear();
     }
 
     public void ExitButtonAction(ActionEvent actionEvent) {
@@ -321,27 +371,33 @@ public class CustomersForm implements Initializable {
             return;
         }
         int countryId = selectedCountry.getCountryId();
+
         if (divisionList == null) {
-            /*
-            selectedCountry = (Country) CustCountryIdComboBox.getSelectionModel().getSelectedItem();
-            int countryId = selectedCountry.getCountryId();
-             */
             divisionList = getDivsByCountry(countryId);
             CustDivIdComboBox.setVisibleRowCount(5);
-            CustDivIdComboBox.setPromptText("First Level Division...");
             CustDivIdComboBox.setItems(divisionList);
         }
         else {
             divisionList.clear();
-            /*
-            selectedCountry = (Country) CustCountryIdComboBox.getSelectionModel().getSelectedItem();
-            int countryId = selectedCountry.getCountryId();
-             */
             divisionList = getDivsByCountry(countryId);
             CustDivIdComboBox.setVisibleRowCount(5);
-            CustDivIdComboBox.setPromptText("First Level Division...");
             CustDivIdComboBox.setItems(divisionList);
         }
+    }
 
+    public boolean emptyFieldCheck() {
+        boolean hasText = true;
+        if ((CustNameField.getText().isBlank()) || (CustPhoneNumberField.getText().isBlank())
+            || (CustAddressField.getText().isBlank()) || (CustCountryIdComboBox.getSelectionModel().isEmpty())
+            || (CustDivIdComboBox.getSelectionModel().isEmpty()) || (CustPostalCodeField.getText().isBlank())) {
+            Alert alert;
+
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Empty Fields");
+            alert.setContentText("Please make sure all fields are complete.");
+            alert.show();
+            hasText = false;
+        }
+        return hasText;
     }
 }
