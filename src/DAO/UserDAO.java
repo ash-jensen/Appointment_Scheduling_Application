@@ -1,7 +1,6 @@
 package DAO;
 
 import javafx.collections.ObservableList;
-import model.Country;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -13,7 +12,7 @@ import static javafx.collections.FXCollections.observableArrayList;
 public abstract class UserDAO {
     public static ObservableList<User> userList = observableArrayList();
 
-    public static ObservableList<User> getCountryData() {
+    public static ObservableList<User> getUserData() {
         try {
             // SQL statement to get all users from user table
             String sql = "SELECT * FROM users";
@@ -42,31 +41,35 @@ public abstract class UserDAO {
         return userList;
     }
 
-    public static void checkLoginInfo(String userName, String password) {
-        User user = null;
+    public static boolean checkLoginInfo(String loginUserName, String loginPassword) {
+        Boolean isMatch = false;
+
+        // Connect to db, get password associated with username, check if it matches input password
         try {
             // SQL statement to get country by division ID
-            String sql = "SELECT * FROM users WHERE Password = ?"
+            String sql = "SELECT * FROM users WHERE User_Name = ?";
 
             // Get a connection to DB and send over the SQL
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setString(1, userName);
-            ps.setString(2, password);
+            ps.setString(1, loginUserName);
 
             // Get results of query
             ResultSet rs = ps.executeQuery();
 
             // Set bind variables to create country object
             rs.next();
-            int countryId = rs.getInt("Country_ID");
-            String countryName = rs.getString("Country");
-            user = new user(countryId, countryName);
+            String password = rs.getString("Password");
+
+            // Check username and password match
+            if (loginPassword.equals(password)) {
+                isMatch = true;
+            }
         }
         catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        // Return customerList from db
-        return country;
+        // Return result of isMatch;
+        return isMatch;
     }
 }
