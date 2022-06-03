@@ -15,6 +15,9 @@ public abstract class CountryDAO {
     private static ObservableList<Country> countryList = observableArrayList();
 
     public static ObservableList<Country> getCountryData() {
+        if (!countryList.isEmpty()) {
+            return countryList;
+        }
         try {
             // SQL statement to get all customers from customer table
             String sql = "SELECT * FROM countries";
@@ -25,7 +28,7 @@ public abstract class CountryDAO {
             // Get results of query
             ResultSet rs = ps.executeQuery();
 
-            countryList.clear();
+            // countryList.clear();
 
             // Set bind variables to create customer object, add customer to list
             while (rs.next()) {

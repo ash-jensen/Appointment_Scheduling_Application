@@ -19,9 +19,12 @@ public abstract class DivisionDAO {
     private static ObservableList<Division> divsByCountry = observableArrayList();
 
     public static ObservableList<Division> getDivData() {
+        if (!divList.isEmpty()) {
+            return divList;
+        }
         try {
             // Clear divList
-            divList.clear();
+            // divList.clear();
 
             // SQL statement to get all customers from customer table
             String sql = "SELECT * FROM first_level_divisions";

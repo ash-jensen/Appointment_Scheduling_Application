@@ -1,6 +1,8 @@
 package controller;
 
 import DAO.CountryDAO;
+import DAO.CustomerDAO;
+import DAO.DivisionDAO;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,11 +22,6 @@ import java.net.URL;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import static DAO.CountryDAO.getCountryData;
-import static DAO.CustomerDAO.*;
-import static DAO.DivisionDAO.getDivData;
-import static DAO.DivisionDAO.getDivsByCountry;
 
 
 public class CustomersForm implements Initializable {
@@ -86,7 +83,7 @@ public class CustomersForm implements Initializable {
                 Country matchingCountry = CountryDAO.getCountryByDiv(divId);
                 countryId = matchingCountry.getCountryId();
                 // Find country in country combo box and set to show
-                for (int i = 0; i < getCountryData().size(); i++) {
+                for (int i = 0; i < CountryDAO.getCountryData().size(); i++) {
                     Country countryCustomer = (Country)CustCountryIdComboBox.getItems().get(i);
                     if(countryId == countryCustomer.getCountryId()) {
                         CustCountryIdComboBox.setValue(countryCustomer);
@@ -94,7 +91,7 @@ public class CustomersForm implements Initializable {
                     }
                 }
                 // Find division in division combo box and set to show
-                for (int i = 0; i < getDivData().size(); i++) {
+                for (int i = 0; i < DivisionDAO.getDivData().size(); i++) {
                     Division divCustomer = (Division)CustDivIdComboBox.getItems().get(i);
                     if(divId == divCustomer.getDivId()) {
                         CustDivIdComboBox.setValue(divCustomer);
@@ -196,7 +193,7 @@ public class CustomersForm implements Initializable {
 
     private void populateCustTable() {
         // Populate Customer Table on Customers form
-        CustTable.setItems(getCustomerData());
+        CustTable.setItems(CustomerDAO.getCustomerData());
         CustTableId.setCellValueFactory(new PropertyValueFactory<>("id"));
         CustTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
         CustTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -207,10 +204,10 @@ public class CustomersForm implements Initializable {
 
     private void fillComboBoxes() {
         // Fill combo boxes
-        countryList = getCountryData();
+        countryList = CountryDAO.getCountryData();
         CustCountryIdComboBox.setVisibleRowCount(5);
         CustCountryIdComboBox.setItems(countryList);
-        divisionList = getDivData();
+        divisionList = DivisionDAO.getDivData();
         CustDivIdComboBox.setVisibleRowCount(5);
         CustDivIdComboBox.setItems(divisionList);
     }
@@ -247,13 +244,16 @@ public class CustomersForm implements Initializable {
             phoneNumber = CustPhoneNumberField.getText();
             divId = ((Division)CustDivIdComboBox.getSelectionModel().getSelectedItem()).getDivId();
 
+
             // If customer added to database, repopulate table and inform user of success
-            if (addCustomer(name, address, postalCode, phoneNumber, divId) > 0) {
+            int custId = CustomerDAO.addCustomer(name, address, postalCode, phoneNumber, divId);
+            // if (addCustomer(name, address, postalCode, phoneNumber, divId) > 0) {
+            if (custId > 0) {
                 populateCustTable();
                 // Confirm customer added
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Add Customer");
-                alert.setContentText("Customer " + name + " has been added.");
+                alert.setContentText("Customer #" + custId + " has been added.");
                 alert.showAndWait();
 
                 // Clear form fields
@@ -282,14 +282,14 @@ public class CustomersForm implements Initializable {
             divId = customer.getDivId();
 
             // If customer updated in database, repopulate table and inform user of success
-            if (updateCustomer(id, name, address, postalCode, phoneNumber, divId) > 0) {
+            if (CustomerDAO.updateCustomer(id, name, address, postalCode, phoneNumber, divId) > 0) {
                 // Repopulate table
                 populateCustTable();
 
                 // Confirm customer updated
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Update Customer");
-                alert.setContentText("Customer " + id + " has been updated.");
+                alert.setContentText("Customer #" + id + " has been updated.");
                 alert.showAndWait();
 
                 // Clear form fields
@@ -321,24 +321,23 @@ public class CustomersForm implements Initializable {
         }
         else {
             // Get customer id and name
-            String customerName = selected.getName();
 
             // If delete is unsuccessful,notify user
-            if (deleteCustomer(selected) <= 0) {
+            if (CustomerDAO.deleteCustomer(selected) <= 0) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Delete Error");
                 alert.setContentText("Delete unsuccessful.");
                 alert.showAndWait();
             }
             else {
+                ClearButtonAction(null);
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Delete Successful");
-                alert.setContentText(customerName + "has been deleted.");
+                alert.setContentText("Customer #" + id + " has been deleted.");
                 alert.showAndWait();
                 populateCustTable();
             }
         }
-        ClearButtonAction(null);
     }
 
     public void ClearButtonAction(ActionEvent actionEvent) {
@@ -371,13 +370,13 @@ public class CustomersForm implements Initializable {
         int countryId = selectedCountry.getCountryId();
 
         if (divisionList == null) {
-            divisionList = getDivsByCountry(countryId);
+            divisionList = DivisionDAO.getDivsByCountry(countryId);
             CustDivIdComboBox.setVisibleRowCount(5);
             CustDivIdComboBox.setItems(divisionList);
         }
         else {
             divisionList.clear();
-            divisionList = getDivsByCountry(countryId);
+            divisionList = DivisionDAO.getDivsByCountry(countryId);
             CustDivIdComboBox.setVisibleRowCount(5);
             CustDivIdComboBox.setItems(divisionList);
         }

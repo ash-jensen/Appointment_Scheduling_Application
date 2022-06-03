@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import model.Customer;
 
 import java.sql.SQLException;
+import java.util.Locale;
 
 public class Main extends Application {
     @Override
@@ -23,6 +24,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Locale.setDefault(new Locale("fr"));
+
         // Open DB connection method called
         JDBC.openConnection();
 

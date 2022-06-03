@@ -51,16 +51,14 @@ public abstract class CustomerDAO {
     }
 
     public static int addCustomer(String name, String address, String postalCode, String phoneNumber, int divId) {
-        // int custId = 0;
-        int rowsAffected = 0;
+        int custId = 0;
 
         try {
             // SQL statement to insert customer in customers table
             String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
 
             // Get connection to DB and send over the SQL
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql, new String[] {"Customer_ID"});
-            // PreparedStatement ps = JDBC.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Call prepared statement setter method to assign bind variables value
             ps.setString(1, name);
@@ -69,31 +67,27 @@ public abstract class CustomerDAO {
             ps.setString(4, phoneNumber);
             ps.setInt(5, divId);
 
-            // Execute the insert, assign num of rows affected to var to return
-            rowsAffected = ps.executeUpdate();
-            return rowsAffected;
-
-            /*
+            // Execute the insert, get returned customer id
             ps.execute();
-
-            ResultSet rs = sql.getGeneratedKeys();
+            ResultSet rs = ps.getGeneratedKeys();
             rs.next();
             custId = rs.getInt(1);
-             */
+
         }
         catch (SQLException throwables) {
+            // Catch if errors with SQL
             throwables.printStackTrace();
         }
 
-        return rowsAffected;
-        // return custId;
+        // return rowsAffected;
+        return custId;
     }
 
     public static int updateCustomer(int custId, String name, String address, String postalCode, String phoneNumber, int divId) {
         Alert alert;
         int rowsAffected = 0;
 
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to edit customer " + custId + "?");
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to edit customer #" + custId + "?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             try {
@@ -126,13 +120,24 @@ public abstract class CustomerDAO {
         Alert alert;
         int rowsAffected = 0;
         int custId = customerToDelete.getId();
-        String custName = customerToDelete.getName();
 
         // Confirm user wants to delete customer & delete
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + custName + "?");
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete customer #" + custId + "?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             try {
+                // SQL statement to run
+                String sqla = "DELETE FROM appointments WHERE Customer_ID = ?";
+
+                // Get a connection to DB and send over the SQL
+                PreparedStatement psa = JDBC.getConnection().prepareStatement(sqla);
+
+                // Call prepared statement setter method to assign bind variables value
+                psa.setInt(1, custId);
+
+                // Var of updated rows to return
+                rowsAffected = psa.executeUpdate();
+
                 // SQL statement to run
                 String sql = "DELETE FROM customers WHERE Customer_ID = ?";
 
@@ -145,6 +150,7 @@ public abstract class CustomerDAO {
                 // Var of updated rows to return
                 rowsAffected = ps.executeUpdate();
                 return rowsAffected;
+
             }
             catch (SQLException throwables) {
                 throwables.printStackTrace();
