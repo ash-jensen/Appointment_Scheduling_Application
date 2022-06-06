@@ -51,231 +51,256 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="494.0" prefWidth="840.0" spacing="30.0">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="450.0" style="-fx-background-color: transparent; -fx-font: 13px &quot;Arial&quot;; -fx-border-color: black;" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="840.0" style="-fx-background-color: transparent; -fx-font: 13px &quot;Arial&quot;; -fx-border-color: black;" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab text="All Appointments">
+                      <Tab fx:id="AllApptsTab" text="All Appointments">
                            <content>
-                              <TableView prefHeight="397.0" prefWidth="761.0" style="-fx-background-color: transparent;">
+                              <TableView fx:id="AllApptsTable" prefHeight="397.0" prefWidth="761.0" style="-fx-background-color: transparent;">
                                 <columns>
-                                  <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
-                                  <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
-                                    <TableColumn maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
-                                    <TableColumn maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
-                                    <TableColumn prefWidth="118.0" text="Description" />
+                                  <TableColumn fx:id="AllApptIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
+                                  <TableColumn fx:id="AllCustIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
+                                    <TableColumn fx:id="AllUserIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
+                                    <TableColumn fx:id="AllContactIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
+                                    <TableColumn fx:id="AllTitleCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
+                                    <TableColumn fx:id="AllLocationCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
+                                    <TableColumn fx:id="AllStartDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
+                                    <TableColumn fx:id="AllEndDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
+                                    <TableColumn fx:id="AllTypeCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
+                                    <TableColumn fx:id="AllDescriptionCol" prefWidth="118.0" text="Description" />
                                 </columns>
                               </TableView>
                            </content>
                         </Tab>
-                        <Tab text="Current Month">
+                        <Tab fx:id="CurrMonthTab" text="Current Month">
                            <content>
-                              <TableView prefHeight="459.0" prefWidth="405.0" style="-fx-background-color: transparent;">
+                              <TableView fx:id="CurrMonthTable" prefHeight="459.0" prefWidth="405.0" style="-fx-background-color: transparent;">
                                  <columns>
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
-                                    <TableColumn maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
-                                    <TableColumn maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
-                                    <TableColumn prefWidth="118.0" text="Description" />
+                                    <TableColumn fx:id="CurrMonthApptIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
+                                    <TableColumn fx:id="CurrMonthCustIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
+                                    <TableColumn fx:id="CurrMonthUserIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
+                                    <TableColumn fx:id="CurrMonthContactIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
+                                    <TableColumn fx:id="CurrMonthTitleCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
+                                    <TableColumn fx:id="CurrMonthLocationCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
+                                    <TableColumn fx:id="CurrMonthStartDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
+                                    <TableColumn fx:id="CurrMonthEndDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
+                                    <TableColumn fx:id="CurrMonthTypeCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
+                                    <TableColumn fx:id="CurrMonthDescriptionCol" prefWidth="118.0" text="Description" />
                                  </columns>
                               </TableView>
                            </content>
                         </Tab>
-                        <Tab text="Current Week">
+                        <Tab fx:id="CurrWeek" text="Current Week">
                            <content>
-                              <TableView prefHeight="467.0" prefWidth="405.0" style="-fx-background-color: transparent;">
+                              <TableView fx:id="CurrWeekTable" prefHeight="467.0" prefWidth="405.0" style="-fx-background-color: transparent;">
                                  <columns>
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
-                                    <TableColumn maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
-                                    <TableColumn maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
-                                    <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
-                                    <TableColumn prefWidth="118.0" text="Description" />
+                                    <TableColumn fx:id="CurrWeekApptIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
+                                    <TableColumn fx:id="CurrWeekCustIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
+                                    <TableColumn fx:id="CurrWeekUserIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
+                                    <TableColumn fx:id="CurrWeekContactIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
+                                    <TableColumn fx:id="CurrWeekTitleCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
+                                    <TableColumn fx:id="CurrWeekLocationCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
+                                    <TableColumn fx:id="CurrWeekStartDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
+                                    <TableColumn fx:id="CurrWeekEndDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
+                                    <TableColumn fx:id="CurrWeekTypeCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
+                                    <TableColumn fx:id="CurrWeekDescriptionCol" prefWidth="118.0" text="Description" />
                                  </columns>
                               </TableView>
                            </content>
                         </Tab>
                     </tabs>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
                   </TabPane>
-                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="363.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label text="Edit Appointment">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
                         </Label>
-                        <GridPane alignment="TOP_RIGHT" hgap="5.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="382.0" vgap="5.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="280.0" prefWidth="280.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="494.0" prefWidth="840.0" spacing="30.0">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="379.0">
                            <children>
-                              <Label text="Appointment ID">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Appointment Title" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Customer ID" GridPane.rowIndex="3">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label GridPane.rowIndex="4">
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
-                              </Label>
-                              <TextField fx:id="AProdFIdField" disable="true" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Auto Gen - Disabled" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="AProdFNameField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label layoutX="10.0" layoutY="122.0" text="Description" GridPane.rowIndex="9">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="122.0" text="Location" GridPane.rowIndex="6">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="222.0" text="Date" GridPane.rowIndex="4">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="151.0" text="Start Time" GridPane.rowIndex="5">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="249.0" text="Contact" GridPane.rowIndex="7">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="119.0" text="Appointment Type" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="119.0" text="User ID" GridPane.rowIndex="8">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="256.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <GridPane alignment="TOP_RIGHT" hgap="5.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="382.0" vgap="5.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="280.0" prefWidth="280.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
                                  <children>
-                                    <ComboBox prefHeight="25.0" prefWidth="78.0" promptText="12:12" />
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="165.0">
+                                    <Label text="Appointment ID">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Appointment Title" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Customer ID" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="ApptIdField" disable="true" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Auto Gen - Disabled" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="ApptTitleField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label layoutX="10.0" layoutY="249.0" text="Contact" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="119.0" text="User ID" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="ContactComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <ComboBox fx:id="UserIdComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <ComboBox fx:id="CustIdComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="35.0" left="11.0" top="15.0" />
+                                 </VBox.margin>
+                              </GridPane>
+                              <HBox prefHeight="25.0" prefWidth="354.0" spacing="19.0">
+                                 <children>
+                                    <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AddApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Add" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                    <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#UpdateApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Update" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                    <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeleteApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Delete" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="167.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeleteApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Cancel" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox minWidth="-Infinity" prefHeight="300.0" prefWidth="434.0">
+                           <children>
+                              <GridPane alignment="TOP_RIGHT" hgap="5.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="382.0" vgap="5.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="280.0" prefWidth="280.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label GridPane.rowIndex="2">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="122.0" text="Location" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="222.0" text="Date" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="151.0" text="Start Time" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="256.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
-                                          <Label text="End Time">
-                                             <font>
-                                                <Font name="Arial" size="13.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets right="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <ComboBox prefHeight="25.0" prefWidth="79.0" promptText="10:10" />
+                                          <ComboBox fx:id="StartTimeComboBox" prefHeight="25.0" prefWidth="78.0" promptText="12:12" />
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="165.0">
+                                             <children>
+                                                <Label text="End Time">
+                                                   <font>
+                                                      <Font name="Arial" size="13.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <ComboBox fx:id="EndTimeComboBox" prefHeight="25.0" prefWidth="79.0" promptText="10:10" />
+                                             </children>
+                                          </HBox>
                                        </children>
                                     </HBox>
+                                    <TextField fx:id="LocationField" layoutX="137.0" layoutY="115.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <DatePicker fx:id="DatePicker" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Description" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="DescriptionField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="Appointment Type">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="ApptTypeField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="35.0" left="11.0" top="15.0" />
+                                 </VBox.margin>
+                              </GridPane>
+                              <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="426.0" spacing="25.0">
+                                 <children>
+                                    <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ExitButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                    </Button>
                                  </children>
                               </HBox>
-                              <TextField fx:id="AProdFNameField2" layoutX="137.0" layoutY="45.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField fx:id="AProdFNameField211" layoutX="137.0" layoutY="115.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <TextField fx:id="AProdFNameField212" layoutX="137.0" layoutY="115.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                              <DatePicker maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <ComboBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <ComboBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                              <ComboBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
-                           <VBox.margin>
-                              <Insets bottom="45.0" left="11.0" top="15.0" />
-                           </VBox.margin>
-                        </GridPane>
-                        <HBox prefHeight="25.0" prefWidth="354.0" spacing="19.0">
-                           <children>
-                              <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AddApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Add" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="13.0" />
-                                 </font>
-                              </Button>
-                              <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#UpdateApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Update" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="13.0" />
-                                 </font>
-                              </Button>
-                              <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeleteApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Delete" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="13.0" />
-                                 </font>
-                              </Button>
-                              <Button layoutX="167.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeleteApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Cancel" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="13.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="20.0" />
-                           </VBox.margin>
-                        </HBox>
+                        </VBox>
                      </children>
-                     <HBox.margin>
-                        <Insets top="8.0" />
-                     </HBox.margin>
-                  </VBox>
+                  </HBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="15.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="351.0" spacing="25.0">
-               <children>
-                  <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ExitButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

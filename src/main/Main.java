@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Locale;
 
 public class Main extends Application {
+
     @Override
     public void start(Stage stage) throws Exception {
         // Set stage with Login scene and open
@@ -24,7 +25,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        // DELETE ME: Sets the language to french right of the bat.
         Locale.setDefault(new Locale("fr"));
+        // System.out.println(Locale.getDefault());
 
         // Open DB connection method called
         JDBC.openConnection();

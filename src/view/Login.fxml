@@ -55,7 +55,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="22.0" prefWidth="307.0">
                <children>
-                  <Label fx:id="timeZone" text="Time Zone" />
+                  <Label fx:id="Location" text="Location" />
                </children>
             </HBox>
          </children>

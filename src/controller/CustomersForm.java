@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 
 public class CustomersForm implements Initializable {
-
+    // FXML Vars
     public TableView CustTable;
     public TableColumn CustTableId;
     public TableColumn CustTableName;
@@ -51,8 +51,6 @@ public class CustomersForm implements Initializable {
     private ObservableList<Country> countryList;
     private ObservableList<Division> divisionList;
     private Country selectedCountry;
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -2,8 +2,6 @@ package DAO;
 
 import javafx.collections.ObservableList;
 import model.Country;
-import model.Customer;
-import model.Division;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
