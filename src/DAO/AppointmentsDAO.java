@@ -6,10 +6,8 @@ import javafx.scene.control.ButtonType;
 import model.Appointment;
 import model.Customer;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static javafx.collections.FXCollections.observableArrayList;
@@ -40,10 +38,12 @@ public class AppointmentsDAO {
                 String title = rs.getString("Title");
                 String location = rs.getString("Location");
                 String description = rs.getString("Description");
-                String startDateTime = rs.getString("Start");
-                String endDateTime = rs.getString("End");
+                Timestamp startTimestamp = rs.getTimestamp("Start");
+                // LocalDateTime startDateTime = startTimestamp.toLocalDateTime();
+                Timestamp endTimestamp = rs.getTimestamp("End");
+                //LocalDateTime endDateTime = endTimestamp.toLocalDateTime();
                 String type = rs.getString("Type");
-                Appointment appt = new Appointment (apptId, custId, userId, contactId, title, description, location, type, startDateTime, endDateTime);
+                Appointment appt = new Appointment (apptId, custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
                 allApptsList.add(appt);
             }
         }
@@ -56,29 +56,33 @@ public class AppointmentsDAO {
     }
 
     // Add/Update/Delete Methods
-    /*
-    public static int addAppt(String name, String address, String postalCode, String phoneNumber, int divId) {
-        int custId = 0;
+    public static int addAppt(int custId, int userId, int contactId, String title, String description, String location,
+                              String type, Timestamp startTimestamp, Timestamp endTimestamp) {
+        int apptId = 0;
 
         try {
             // SQL statement to insert customer in customers table
-            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Get connection to DB and send over the SQL
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Call prepared statement setter method to assign bind variables value
-            ps.setString(1, name);
-            ps.setString(2, address);
-            ps.setString(3, postalCode);
-            ps.setString(4, phoneNumber);
-            ps.setInt(5, divId);
+            ps.setInt(1, custId);
+            ps.setInt(2, userId);
+            ps.setInt(3, contactId);
+            ps.setString(4, title);
+            ps.setString(5, description);
+            ps.setString(6, location);
+            ps.setString(7, type);
+            ps.setTimestamp(8, startTimestamp);
+            ps.setTimestamp(9, endTimestamp);
 
             // Execute the insert, get returned customer id
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            custId = rs.getInt(1);
+            apptId = rs.getInt(1);
 
         }
         catch (SQLException throwables) {
@@ -87,9 +91,10 @@ public class AppointmentsDAO {
         }
 
         // return rowsAffected;
-        return custId;
+        return apptId;
     }
 
+    /*
     public static int updateAppt(int custId, String name, String address, String postalCode, String phoneNumber, int divId) {
         Alert alert;
         int rowsAffected = 0;

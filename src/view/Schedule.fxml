@@ -167,7 +167,7 @@
                                        </font>
                                     </TextField>
                                     <TextField fx:id="ApptTitleField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label layoutX="10.0" layoutY="249.0" text="Contact" GridPane.rowIndex="3">
+                                    <Label layoutX="10.0" layoutY="249.0" text="Contact ID" GridPane.rowIndex="3">
                                        <font>
                                           <Font name="Arial" size="13.0" />
                                        </font>
@@ -177,7 +177,7 @@
                                           <Font name="Arial" size="13.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="ContactComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <ComboBox fx:id="ContactIdComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <ComboBox fx:id="UserIdComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <ComboBox fx:id="CustIdComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>

@@ -243,9 +243,8 @@ public class CustomersForm implements Initializable {
             divId = ((Division)CustDivIdComboBox.getSelectionModel().getSelectedItem()).getDivId();
 
 
-            // If customer added to database, repopulate table and inform user of success
+            // If custId > 0 returned, repopulate table and inform user of success
             int custId = CustomerDAO.addCustomer(name, address, postalCode, phoneNumber, divId);
-            // if (addCustomer(name, address, postalCode, phoneNumber, divId) > 0) {
             if (custId > 0) {
                 populateCustTable();
                 // Confirm customer added

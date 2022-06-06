@@ -1,5 +1,9 @@
 package model;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Appointment {
     private int apptId;
     private int custId;
@@ -9,11 +13,13 @@ public class Appointment {
     private String description;
     private String location;
     private String type;
-    private String startDateTime;
-    private String endDateTime;
+    private Timestamp startTimestamp;
+    private Timestamp endTimestamp;
+    private String startString;
+    private String endString;
 
     public Appointment(int apptId, int custId, int userId, int contactId, String title, String description, String location,
-                       String type, String startDateTime, String endDateTime) {
+                       String type, Timestamp startTimestamp, Timestamp endTimestamp) {
         this.apptId = apptId;
         this. custId = custId;
         this.userId = userId;
@@ -22,8 +28,8 @@ public class Appointment {
         this.description = description;
         this.location = location;
         this.type = type;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.startTimestamp = startTimestamp;
+        this.endTimestamp = endTimestamp;
     }
 
     public int getApptId() {
@@ -58,12 +64,19 @@ public class Appointment {
         this.description = description;
     }
 
-    public String getEndDateTime() {
-        return endDateTime;
+    public Timestamp getEndDateTime() {
+        return endTimestamp;
     }
 
-    public void setEndDateTime(String endDateTime) {
-        this.endDateTime = endDateTime;
+    public void setEndDateTime(Timestamp endTimestamp) {
+        this.endTimestamp = endTimestamp;
+    }
+
+    public String getEndString() {
+        LocalDateTime endDateTime = endTimestamp.toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
+        endString = endDateTime.format(formatter);
+        return endString;
     }
 
     public String getLocation() {
@@ -74,12 +87,19 @@ public class Appointment {
         this.location = location;
     }
 
-    public String getStartDateTime() {
-        return startDateTime;
+    public Timestamp getStartDateTime() {
+        return startTimestamp;
     }
 
-    public void setStartDateTime(String startDateTime) {
-        this.startDateTime = startDateTime;
+    public void setStartDateTime(Timestamp startTimestamp) {
+        this.startTimestamp = startTimestamp;
+    }
+
+    public String getStartString() {
+        LocalDateTime startDateTime = startTimestamp.toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
+        startString = startDateTime.format(formatter);
+        return startString;
     }
 
     public String getTitle() {

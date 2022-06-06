@@ -13,9 +13,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
+import model.Contact;
+import model.Division;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -61,7 +68,7 @@ public class ScheduleForm implements Initializable {
     public TableColumn CurrWeekDescriptionCol;
     public TextField ApptIdField;
     public TextField ApptTitleField;
-    public ComboBox ContactComboBox;
+    public ComboBox ContactIdComboBox;
     public ComboBox UserIdComboBox;
     public ComboBox CustIdComboBox;
     public ComboBox StartTimeComboBox;
@@ -70,22 +77,35 @@ public class ScheduleForm implements Initializable {
     public javafx.scene.control.DatePicker DatePicker;
     public TextField DescriptionField;
     public TextField ApptTypeField;
-
-
-
+    private int apptId;
+    private int custId;
+    private int userId;
+    private int contactId;
+    private String title;
+    private String description;
+    private String location;
+    private String type;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private Timestamp startTimestamp;
+    private Timestamp endTimestamp;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
 
-        ObservableList<Appointment> allApptList = getAllApptData();
-        for(Appointment a : allApptList) {
-            System.out.println("Appt ID: " + a.getApptId() + "EndDateTime: " + a.getEndDateTime());
-
-        }
-
         // Fill All Appointments tab table
         populateAllApptsTable();
+
+        // Print all appointment info
+        /*
+        ObservableList<Appointment> allApptList = getAllApptData();
+        for(Appointment a : allApptList) {
+            System.out.println("Appt ID: " + a.getApptId() + " EndDateTime: " + a.getEndDateTime());
+
+        }
+         */
 
     }
 
@@ -98,8 +118,8 @@ public class ScheduleForm implements Initializable {
         AllContactIdCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         AllTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         AllLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        AllStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
-        AllEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        AllStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startString"));
+        AllEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endString"));
         AllTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         AllDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
     }
@@ -127,7 +147,45 @@ public class ScheduleForm implements Initializable {
     }
 
     public void AddApptButtonAction(ActionEvent actionEvent) {
+        Alert alert;
 
+        // Check that all fields/combo boxes have been filled out, add customer
+        if (emptyFieldCheck()) {
+            // Get new field values
+            title = ApptTitleField.getText();
+            custId = ((Appointment)CustIdComboBox.getSelectionModel().getSelectedItem()).getCustId();
+            // contactId = ((Contact)ContactIdComboBox.getSelectionModel().getSelectedItem()).getContactId();
+            userId = ((User)UserIdComboBox.getSelectionModel().getSelectedItem()).getUserId();
+            type = ApptTypeField.getText();
+            description = DescriptionField.getText();
+            date = DatePicker.getValue();
+            startTime = (LocalTime) StartTimeComboBox.getSelectionModel().getSelectedItem();
+            endTime = (LocalTime) EndTimeComboBox.getSelectionModel().getSelectedItem();
+            startTimestamp = Timestamp.valueOf(LocalDateTime.of(date, startTime));
+            endTimestamp = Timestamp.valueOf(LocalDateTime.of(date, endTime));
+            location = LocationField.getText();
+
+            // If apptId > 0 returned, repopulate table and inform user of success
+            int apptId = AppointmentsDAO.addAppt(custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
+            if (custId > 0) {
+                populateCustTable();
+                // Confirm customer added
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Add Customer");
+                alert.setContentText("Customer #" + custId + " has been added.");
+                alert.showAndWait();
+
+                // Clear form fields
+                ClearButtonAction(null);
+            }
+            // Alert user: customer has not been added
+            else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Add Customer Error");
+                alert.setContentText("Error: Customer has NOT been added");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void UpdateApptButtonAction(ActionEvent actionEvent) {
@@ -144,5 +202,23 @@ public class ScheduleForm implements Initializable {
         stage.setTitle("Reports");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public boolean emptyFieldCheck() {
+        boolean hasText = true;
+        if ((ApptTitleField.getText().isBlank()) || (CustIdComboBox.getSelectionModel().isEmpty())
+                || (ContactIdComboBox.getSelectionModel().isEmpty()) || (UserIdComboBox.getSelectionModel().isEmpty())
+                || (ApptTypeField.getText().isBlank()) || (DescriptionField.getText().isBlank())
+                || (DatePicker.getValue() == null) || (StartTimeComboBox.getSelectionModel().isEmpty())
+                || (EndTimeComboBox.getSelectionModel().isEmpty()) || (LocationField.getText().isBlank())) {
+            Alert alert;
+
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Empty Fields");
+            alert.setContentText("Please make sure all fields are complete.");
+            alert.show();
+            hasText = false;
+        }
+        return hasText;
     }
 }
