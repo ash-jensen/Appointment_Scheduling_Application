@@ -62,7 +62,8 @@ public class AppointmentsDAO {
 
         try {
             // SQL statement to insert customer in customers table
-            String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO appointments (Customer_ID, User_ID, Contact_ID, Title, Description, Location, Type, Start, End) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID
 
             // Get connection to DB and send over the SQL
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

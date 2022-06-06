@@ -19,10 +19,12 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -109,6 +111,7 @@ public class ScheduleForm implements Initializable {
 
     }
 
+    //****ADD ALL TABLES IN HERE****//
     private void populateAllApptsTable() {
         // Populate Customer Table on Customers form
         AllApptsTable.setItems(AppointmentsDAO.getAllApptData());
@@ -147,15 +150,29 @@ public class ScheduleForm implements Initializable {
     }
 
     public void AddApptButtonAction(ActionEvent actionEvent) {
+        // Add test
+        /*
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
+        String st = "12-03-2022 12:30";
+        LocalDateTime ldt = LocalDateTime.parse(st, dtf);
+        Timestamp sts = Timestamp.valueOf(ldt);
+        String et = "12-03-2022 12:30";
+        ldt = LocalDateTime.parse(et, dtf);
+        Timestamp ets = Timestamp.valueOf(ldt);
+        AppointmentsDAO.addAppt(120, 2, 3, "Networking", "Coffee with coworker and friend", "Coffee Shop",
+                "Coffee Date", sts, ets);
+        populateAllApptsTable();
+         */
+
         Alert alert;
 
         // Check that all fields/combo boxes have been filled out, add customer
         if (emptyFieldCheck()) {
             // Get new field values
             title = ApptTitleField.getText();
-            custId = ((Appointment)CustIdComboBox.getSelectionModel().getSelectedItem()).getCustId();
+            custId = ((Appointment) CustIdComboBox.getSelectionModel().getSelectedItem()).getCustId();
             // contactId = ((Contact)ContactIdComboBox.getSelectionModel().getSelectedItem()).getContactId();
-            userId = ((User)UserIdComboBox.getSelectionModel().getSelectedItem()).getUserId();
+            userId = ((User) UserIdComboBox.getSelectionModel().getSelectedItem()).getUserId();
             type = ApptTypeField.getText();
             description = DescriptionField.getText();
             date = DatePicker.getValue();
@@ -167,12 +184,12 @@ public class ScheduleForm implements Initializable {
 
             // If apptId > 0 returned, repopulate table and inform user of success
             int apptId = AppointmentsDAO.addAppt(custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
-            if (custId > 0) {
-                populateCustTable();
+            if (apptId > 0) {
+                populateAllApptsTable();
                 // Confirm customer added
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Add Customer");
-                alert.setContentText("Customer #" + custId + " has been added.");
+                alert.setContentText("Appointment #" + apptId + " has been added.");
                 alert.showAndWait();
 
                 // Clear form fields
@@ -181,8 +198,8 @@ public class ScheduleForm implements Initializable {
             // Alert user: customer has not been added
             else {
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Add Customer Error");
-                alert.setContentText("Error: Customer has NOT been added");
+                alert.setTitle("Add Appointment Error");
+                alert.setContentText("Error: Appointment has NOT been added");
                 alert.showAndWait();
             }
         }
@@ -192,6 +209,22 @@ public class ScheduleForm implements Initializable {
     }
 
     public void DeleteApptButtonAction(ActionEvent actionEvent) {
+    }
+
+    public void ClearButtonAction(ActionEvent actionEvent) {
+        ApptIdField.clear();
+        ApptTitleField.clear();
+        CustIdComboBox.getSelectionModel().clearSelection();
+        ContactIdComboBox.getSelectionModel().clearSelection();
+        UserIdComboBox.getSelectionModel().clearSelection();
+        ApptTypeField.clear();
+        DescriptionField.clear();
+        DatePicker.getEditor().clear();
+        StartTimeComboBox.getSelectionModel().clearSelection();
+        EndTimeComboBox.getSelectionModel().clearSelection();
+        LocationField.clear();
+        // DELETE ME //
+        // CustDivIdComboBox.getItems().clear(); // If you need the combo box emptied
     }
 
     public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
@@ -221,4 +254,5 @@ public class ScheduleForm implements Initializable {
         }
         return hasText;
     }
+
 }

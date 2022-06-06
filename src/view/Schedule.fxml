@@ -202,7 +202,7 @@
                                           <Font name="Arial Bold" size="13.0" />
                                        </font>
                                     </Button>
-                                    <Button layoutX="167.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeleteApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Cancel" textFill="WHITE">
+                                    <Button layoutX="167.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ClearButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Clear" textFill="WHITE">
                                        <font>
                                           <Font name="Arial Bold" size="13.0" />
                                        </font>
