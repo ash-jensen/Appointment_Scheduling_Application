@@ -59,16 +59,16 @@
                            <content>
                               <TableView fx:id="AllApptsTable" prefHeight="397.0" prefWidth="761.0" style="-fx-background-color: transparent;">
                                 <columns>
-                                  <TableColumn fx:id="AllApptIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
-                                  <TableColumn fx:id="AllCustIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
-                                    <TableColumn fx:id="AllUserIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
-                                    <TableColumn fx:id="AllContactIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
-                                    <TableColumn fx:id="AllTitleCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
-                                    <TableColumn fx:id="AllLocationCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
+                                  <TableColumn fx:id="AllApptIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="ApptID" />
+                                  <TableColumn fx:id="AllCustIdCol" maxWidth="81.0" minWidth="69.0" prefWidth="69.0" text="Customer" />
+                                    <TableColumn fx:id="AllUserIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="User" />
+                                    <TableColumn fx:id="AllContactIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="Contact" />
+                                    <TableColumn fx:id="AllTitleCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Title" />
+                                    <TableColumn fx:id="AllLocationCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Location" />
                                     <TableColumn fx:id="AllStartDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
                                     <TableColumn fx:id="AllEndDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
-                                    <TableColumn fx:id="AllTypeCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
-                                    <TableColumn fx:id="AllDescriptionCol" prefWidth="118.0" text="Description" />
+                                    <TableColumn fx:id="AllTypeCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Type" />
+                                    <TableColumn fx:id="AllDescriptionCol" prefWidth="108.0" text="Description" />
                                 </columns>
                               </TableView>
                            </content>
@@ -77,10 +77,10 @@
                            <content>
                               <TableView fx:id="CurrMonthTable" prefHeight="459.0" prefWidth="405.0" style="-fx-background-color: transparent;">
                                  <columns>
-                                    <TableColumn fx:id="CurrMonthApptIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
-                                    <TableColumn fx:id="CurrMonthCustIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
-                                    <TableColumn fx:id="CurrMonthUserIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
-                                    <TableColumn fx:id="CurrMonthContactIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
+                                    <TableColumn fx:id="CurrMonthApptIdCol" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" text="ApptID" />
+                                    <TableColumn fx:id="CurrMonthCustIdCol" maxWidth="69.0" minWidth="69.0" prefWidth="69.0" text="Customer" />
+                                    <TableColumn fx:id="CurrMonthUserIdCol" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" text="User" />
+                                    <TableColumn fx:id="CurrMonthContactIdCol" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" text="Contact" />
                                     <TableColumn fx:id="CurrMonthTitleCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
                                     <TableColumn fx:id="CurrMonthLocationCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
                                     <TableColumn fx:id="CurrMonthStartDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
@@ -156,7 +156,7 @@
                                           <Font name="Arial" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Customer ID" GridPane.rowIndex="2">
+                                    <Label text="Customer" GridPane.rowIndex="2">
                                        <font>
                                           <Font name="Arial" size="13.0" />
                                        </font>
@@ -167,19 +167,19 @@
                                        </font>
                                     </TextField>
                                     <TextField fx:id="ApptTitleField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label layoutX="10.0" layoutY="249.0" text="Contact ID" GridPane.rowIndex="3">
+                                    <Label layoutX="10.0" layoutY="249.0" text="Contact" GridPane.rowIndex="3">
                                        <font>
                                           <Font name="Arial" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="10.0" layoutY="119.0" text="User ID" GridPane.rowIndex="4">
+                                    <Label layoutX="10.0" layoutY="119.0" text="User" GridPane.rowIndex="4">
                                        <font>
                                           <Font name="Arial" size="13.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="ContactIdComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <ComboBox fx:id="UserIdComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <ComboBox fx:id="CustIdComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <ComboBox fx:id="ContactComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <ComboBox fx:id="UserComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <ComboBox fx:id="CustomerComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="35.0" left="11.0" top="15.0" />

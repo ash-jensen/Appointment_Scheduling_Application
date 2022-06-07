@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Appointment {
-    private int apptId;
+    private int id;
     private int custId;
     private int userId;
     private int contactId;
@@ -18,9 +18,9 @@ public class Appointment {
     private String startString;
     private String endString;
 
-    public Appointment(int apptId, int custId, int userId, int contactId, String title, String description, String location,
+    public Appointment(int id, int custId, int userId, int contactId, String title, String description, String location,
                        String type, Timestamp startTimestamp, Timestamp endTimestamp) {
-        this.apptId = apptId;
+        this.id = id;
         this. custId = custId;
         this.userId = userId;
         this.contactId = contactId;
@@ -32,12 +32,12 @@ public class Appointment {
         this.endTimestamp = endTimestamp;
     }
 
-    public int getApptId() {
-        return apptId;
+    public int getId() {
+        return id;
     }
 
-    public void setApptId(int apptId) {
-        this.apptId = apptId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getContactId() {

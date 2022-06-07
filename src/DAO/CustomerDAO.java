@@ -15,6 +15,7 @@ import java.util.Optional;
 
 public abstract class CustomerDAO {
     private static ObservableList<Customer> customerList = observableArrayList();
+    private static Customer customer;
 
     public static ObservableList<Customer> getCustomerData() {
         try {
@@ -159,6 +160,35 @@ public abstract class CustomerDAO {
         return rowsAffected;
     }
 
+    public static Customer getCustomerById(int custIdToFind) {
+        try {
+            // SQL statement to get all customers from customer table
+            String sql = "SELECT * FROM customers WHERE Customer_ID = ?";
+
+            // Get a connection to DB and send over the SQL
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, custIdToFind);
+
+            // Get results of query
+            ResultSet rs = ps.executeQuery();
+
+            // Set bind variables to create customer object, add customer to list
+            rs.next();
+            // int custId = rs.getInt("Customer_ID");
+            String custName = rs.getString("Customer_Name");
+            String custAddress = rs.getString("Address");
+            String custPostalCode = rs.getString("Postal_Code");
+            String custPhoneNumber = rs.getString("Phone");
+            int custDivId = rs.getInt("Division_ID");
+            customer = new Customer(custIdToFind, custName, custAddress, custPostalCode, custPhoneNumber, custDivId);
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        // Return customer from db
+        return customer;
+    }
     // check date conversion
     /*
     public static void checkDateConversion() {

@@ -19,7 +19,6 @@ import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -79,11 +78,11 @@ public class CustomersForm implements Initializable {
                 divId = customer.getDivId();
                 // Find country that division belongs to and get it's id
                 Country matchingCountry = CountryDAO.getCountryByDiv(divId);
-                countryId = matchingCountry.getCountryId();
+                countryId = matchingCountry.getId();
                 // Find country in country combo box and set to show
                 for (int i = 0; i < CountryDAO.getCountryData().size(); i++) {
                     Country countryCustomer = (Country)CustCountryIdComboBox.getItems().get(i);
-                    if(countryId == countryCustomer.getCountryId()) {
+                    if(countryId == countryCustomer.getId()) {
                         CustCountryIdComboBox.setValue(countryCustomer);
                         break;
                     }
@@ -201,10 +200,12 @@ public class CustomersForm implements Initializable {
     }
 
     private void fillComboBoxes() {
-        // Fill combo boxes
+        // Fill country combo box
         countryList = CountryDAO.getCountryData();
         CustCountryIdComboBox.setVisibleRowCount(5);
         CustCountryIdComboBox.setItems(countryList);
+
+        // Fill division combo box
         divisionList = DivisionDAO.getDivData();
         CustDivIdComboBox.setVisibleRowCount(5);
         CustDivIdComboBox.setItems(divisionList);
@@ -364,7 +365,7 @@ public class CustomersForm implements Initializable {
         if (selectedCountry == null) {
             return;
         }
-        int countryId = selectedCountry.getCountryId();
+        int countryId = selectedCountry.getId();
 
         if (divisionList == null) {
             divisionList = DivisionDAO.getDivsByCountry(countryId);

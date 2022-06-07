@@ -67,10 +67,9 @@ public class Customer {
         this.divId = divId;
     }
 
-    /*
-    public static int findCountryByDiv(int divId) {
-        return DivisionDAO.getCountryByDivId(divId);
+    @Override
+    public String toString() {
+        return (id + " - " + name);
     }
-     */
 
 }

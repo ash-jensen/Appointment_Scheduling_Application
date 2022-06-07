@@ -1,22 +1,22 @@
 package model;
 
 public class User {
-    int userId;
-    String userName;
+    int id;
+    String name;
     String password;
 
-    public User(int userId, String userName, String password) {
-        this.userId = userId;
-        this.userName = userName;
+    public User(int id, String name, String password) {
+        this.id = id;
+        this.name = name;
         this.password = password;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
     public String getPassword() {
@@ -27,12 +27,17 @@ public class User {
         this.password = password;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return (id + " - " + name);
     }
 
 }

@@ -1,7 +1,7 @@
 package DAO;
 
 import javafx.collections.ObservableList;
-import model.Country;
+import model.Contact;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,16 +9,17 @@ import java.sql.SQLException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public abstract class CountryDAO {
-    private static ObservableList<Country> countryList = observableArrayList();
+public abstract class ContactDAO {
+    private static ObservableList<Contact> contactList = observableArrayList();
 
-    public static ObservableList<Country> getCountryData() {
-        if (!countryList.isEmpty()) {
-            return countryList;
+    public static ObservableList<Contact> getContactData() {
+        // If contact list already filled, return contactList
+        if (!contactList.isEmpty()) {
+            return contactList;
         }
         try {
-            // SQL statement to get all countries from ccountry table
-            String sql = "SELECT * FROM countries";
+            // SQL statement to get all contacts from contacts table
+            String sql = "SELECT * FROM contacts";
 
             // Get a connection to DB and send over the SQL
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -26,28 +27,30 @@ public abstract class CountryDAO {
             // Get results of query
             ResultSet rs = ps.executeQuery();
 
-            // Set bind variables to create country object, add country to list
+            // Set bind variables to create contact object, add contact to list
             while (rs.next()) {
-                int countryId = rs.getInt("Country_ID");
-                String countryName = rs.getString("Country");
-                Country country = new Country(countryId, countryName);
-                countryList.add(country);
+                int contactId = rs.getInt("Contact_ID");
+                String contactName = rs.getString("Contact_Name");
+                String email = rs.getString("Email");
+                Contact contact = new Contact(contactId, contactName, email);
+                contactList.add(contact);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        // Return countryList from db
-        return countryList;
+        // Return contactList from db
+        return contactList;
     }
 
-    public static Country getCountryByDiv(int divId) {
+    /*
+    public static Contact getCountryByDiv(int divId) {
         Country country = null;
         try {
             // SQL statement to get country by division ID
             String sql = "SELECT * FROM countries INNER JOIN first_level_divisions " +
-                            "ON countries.Country_ID = first_level_divisions.Country_ID " +
-                            "WHERE first_level_divisions.Division_ID = ?";
+                    "ON countries.Country_ID = first_level_divisions.Country_ID " +
+                    "WHERE first_level_divisions.Division_ID = ?";
 
             // Get a connection to DB and send over the SQL
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -69,4 +72,6 @@ public abstract class CountryDAO {
         // Return customerList from db
         return country;
     }
+
+     */
 }
