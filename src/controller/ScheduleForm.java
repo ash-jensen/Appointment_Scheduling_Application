@@ -16,9 +16,7 @@ import model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -26,7 +24,6 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class ScheduleForm implements Initializable {
     // FXML Vars
-
     public Tab AllApptsTab;
     public TableView AllApptsTable;
     public TableColumn AllApptIdCol;
@@ -102,29 +99,45 @@ public class ScheduleForm implements Initializable {
         // Fill combo boxes
         fillComboBoxes();
 
+
+
+
+
         // Lambda function for putting selected customer in Customer Details form
         AllApptsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 appointment = (Appointment)newSelection;
+
+                System.out.println("DB TIME: " + appointment.getStartDateTime() + "\n Updated time: " +
+                        appointment.updateDateTime(appointment.getStartDateTime()));
+                // System.out.println("")
+
                 apptId = appointment.getId();
                 ApptIdField.setText(Integer.toString(apptId));
                 title = appointment.getTitle();
                 ApptTitleField.setText(title);
                 custId = appointment.getCustId();
                 Customer customer = CustomerDAO.getCustomerById(custId);
-                System.out.println("customer: " + customer);
                 CustomerComboBox.setValue(customer);
                 contactId = appointment.getContactId();
-                ContactComboBox.setValue(Integer.toString(contactId));
+                Contact contact = ContactDAO.getContactById(contactId);
+                ContactComboBox.setValue(contact);
                 userId = appointment.getUserId();
-                UserComboBox.setValue(Integer.toString(userId));
+                User user = UserDAO.getUserById(userId);
+                UserComboBox.setValue(user);
                 type = appointment.getType();
                 ApptTypeField.setText(type);
                 description = appointment.getDescription();
                 DescriptionField.setText(description);
-                // date = null;
-                // startTime = null;
-                // endTime = null;
+                date = (appointment.getStartDateTime().toLocalDateTime()).toLocalDate();
+                DatePicker.setValue(date);
+                // update time
+                // LocalDateTime updatedTime = appointment.updateDateTime(appointment.getStartDateTime());
+                // startTime = updatedTime.toLocalTime();
+                startTime = (appointment.getStartDateTime().toLocalDateTime()).toLocalTime();
+                StartTimeComboBox.setValue(startTime);
+                endTime = (appointment.getEndDateTime().toLocalDateTime()).toLocalTime();
+                EndTimeComboBox.setValue(endTime);
                 location = appointment.getLocation();
                 LocationField.setText(location);
             }
@@ -138,8 +151,6 @@ public class ScheduleForm implements Initializable {
         }
 
          */
-
-
     }
 
     //****ADD ALL TABLES IN HERE****//
@@ -222,17 +233,18 @@ public class ScheduleForm implements Initializable {
         if (emptyFieldCheck()) {
             // Get new field values
             title = ApptTitleField.getText();
-            custId = ((Appointment) CustomerComboBox.getSelectionModel().getSelectedItem()).getCustId();
-            // contactId = ((Contact)ContactIdComboBox.getSelectionModel().getSelectedItem()).getContactId();
-            userId = ((User) UserComboBox.getSelectionModel().getSelectedItem()).getId();
+            custId = ((Customer)CustomerComboBox.getSelectionModel().getSelectedItem()).getId();
+            contactId = ((Contact)ContactComboBox.getSelectionModel().getSelectedItem()).getId();
+            userId = ((User)UserComboBox.getSelectionModel().getSelectedItem()).getId();
             type = ApptTypeField.getText();
             description = DescriptionField.getText();
             date = DatePicker.getValue();
-            startTime = (LocalTime) StartTimeComboBox.getSelectionModel().getSelectedItem();
-            endTime = (LocalTime) EndTimeComboBox.getSelectionModel().getSelectedItem();
+            startTime = (LocalTime)StartTimeComboBox.getSelectionModel().getSelectedItem();
+            endTime = (LocalTime)EndTimeComboBox.getSelectionModel().getSelectedItem();
             startTimestamp = Timestamp.valueOf(LocalDateTime.of(date, startTime));
             endTimestamp = Timestamp.valueOf(LocalDateTime.of(date, endTime));
             location = LocationField.getText();
+            System.out.println("startTime: " + startTime);
 
             // If apptId > 0 returned, repopulate table and inform user of success
             int apptId = AppointmentsDAO.addAppt(custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
@@ -295,7 +307,8 @@ public class ScheduleForm implements Initializable {
                 || (ContactComboBox.getSelectionModel().isEmpty()) || (UserComboBox.getSelectionModel().isEmpty())
                 || (ApptTypeField.getText().isBlank()) || (DescriptionField.getText().isBlank())
                 || (DatePicker.getValue() == null) || (StartTimeComboBox.getSelectionModel().isEmpty())
-                || (EndTimeComboBox.getSelectionModel().isEmpty()) || (LocationField.getText().isBlank())) {
+                || (EndTimeComboBox.getSelectionModel().isEmpty())
+                || (LocationField.getText().isBlank())) {
             Alert alert;
 
             alert = new Alert(Alert.AlertType.ERROR);

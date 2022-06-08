@@ -128,7 +128,7 @@
                   </HBox>
                   <HBox prefHeight="494.0" prefWidth="840.0" spacing="30.0">
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets />
                      </VBox.margin>
                      <children>
                         <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="379.0">
@@ -177,41 +177,14 @@
                                           <Font name="Arial" size="13.0" />
                                        </font>
                                     </Label>
+                                    <ComboBox fx:id="CustomerComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <ComboBox fx:id="ContactComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <ComboBox fx:id="UserComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <ComboBox fx:id="CustomerComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="35.0" left="11.0" top="15.0" />
                                  </VBox.margin>
                               </GridPane>
-                              <HBox prefHeight="25.0" prefWidth="354.0" spacing="19.0">
-                                 <children>
-                                    <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AddApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Add" textFill="WHITE">
-                                       <font>
-                                          <Font name="Arial Bold" size="13.0" />
-                                       </font>
-                                    </Button>
-                                    <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#UpdateApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Update" textFill="WHITE">
-                                       <font>
-                                          <Font name="Arial Bold" size="13.0" />
-                                       </font>
-                                    </Button>
-                                    <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeleteApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Delete" textFill="WHITE">
-                                       <font>
-                                          <Font name="Arial Bold" size="13.0" />
-                                       </font>
-                                    </Button>
-                                    <Button layoutX="167.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ClearButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Clear" textFill="WHITE">
-                                       <font>
-                                          <Font name="Arial Bold" size="13.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" />
-                                 </VBox.margin>
-                              </HBox>
                            </children>
                         </VBox>
                         <VBox minWidth="-Infinity" prefHeight="300.0" prefWidth="434.0">
@@ -249,6 +222,20 @@
                                           <Font name="Arial" size="13.0" />
                                        </font>
                                     </Label>
+                                    <Label text="Appointment Type">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="ApptTypeField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" />
+                                    <Label text="Description" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="DescriptionField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <DatePicker fx:id="DatePicker" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
                                     <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="256.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
                                           <ComboBox fx:id="StartTimeComboBox" prefHeight="25.0" prefWidth="78.0" promptText="12:12" />
@@ -268,39 +255,54 @@
                                        </children>
                                     </HBox>
                                     <TextField fx:id="LocationField" layoutX="137.0" layoutY="115.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <DatePicker fx:id="DatePicker" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label text="Description" GridPane.rowIndex="1">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="DescriptionField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label text="Appointment Type">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="ApptTypeField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" />
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="35.0" left="11.0" top="15.0" />
                                  </VBox.margin>
                               </GridPane>
-                              <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="426.0" spacing="25.0">
-                                 <children>
-                                    <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ExitButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
-                                       <font>
-                                          <Font name="Arial Bold" size="13.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
                            </children>
                         </VBox>
                      </children>
                   </HBox>
                </children>
             </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="25.0" prefWidth="354.0" spacing="19.0">
+                     <children>
+                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AddApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Add" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#UpdateApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeleteApptButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="167.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ClearButtonAction" prefWidth="75.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Clear" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="487.0" spacing="25.0">
+                     <children>
+                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ExitButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

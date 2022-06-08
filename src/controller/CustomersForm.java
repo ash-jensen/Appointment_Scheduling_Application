@@ -318,8 +318,6 @@ public class CustomersForm implements Initializable {
             return;
         }
         else {
-            // Get customer id and name
-
             // If delete is unsuccessful,notify user
             if (CustomerDAO.deleteCustomer(selected) <= 0) {
                 alert = new Alert(Alert.AlertType.ERROR);

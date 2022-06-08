@@ -2,6 +2,7 @@ package DAO;
 
 import javafx.collections.ObservableList;
 import model.Contact;
+import model.Customer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public abstract class ContactDAO {
     private static ObservableList<Contact> contactList = observableArrayList();
+    private static Contact contact;
 
     public static ObservableList<Contact> getContactData() {
         // If contact list already filled, return contactList
@@ -41,6 +43,32 @@ public abstract class ContactDAO {
 
         // Return contactList from db
         return contactList;
+    }
+
+    public static Contact getContactById(int contactIdToFind) {
+        try {
+            // SQL statement to get contact from contacts table
+            String sql = "SELECT * FROM contacts WHERE Contact_ID = ?";
+
+            // Get a connection to DB and send over the SQL
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, contactIdToFind);
+
+            // Get results of query
+            ResultSet rs = ps.executeQuery();
+
+            // Set bind variables to create contact object
+            rs.next();
+            String contactName = rs.getString("Contact_Name");
+            String email = rs.getString("Email");
+            contact = new Contact(contactIdToFind, contactName, email);
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        // Return contact from db
+        return contact;
     }
 
     /*

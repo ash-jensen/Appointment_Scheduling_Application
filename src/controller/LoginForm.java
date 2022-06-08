@@ -25,9 +25,9 @@ public class LoginForm implements Initializable {
     public TextField UserNameField;
     public TextField PasswordField;
     public Label Location;
-    String userName;
-    String password;
-    String zone = ZoneId.systemDefault().toString();
+    private String userName;
+    private String password;
+    private String zone = ZoneId.systemDefault().toString();
     ResourceBundle langBundle = ResourceBundle.getBundle("bundle/lang", Locale.getDefault());
 
     @Override
@@ -35,11 +35,12 @@ public class LoginForm implements Initializable {
         System.out.println("Initialized");
 
         // Language test with malcolm
-        /*
+
         // Show location
-        Location.setText(ZonedDateTime.toString());
+        Location.setText(zone);
+        // Location.setText(ZonedDateTime.toString());
 
-
+        /*
         Locale france = new Locale("fr");
         Locale english = new Locale("en", "EN");
 
@@ -82,7 +83,7 @@ public class LoginForm implements Initializable {
                 // Alert user that login information is invalid
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Login Error");
-                alert.setContentText("Invalid user name and password.");
+                alert.setContentText("Invalid user name and password combo.");
                 alert.showAndWait();
             }
         }

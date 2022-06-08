@@ -1,6 +1,7 @@
 package DAO;
 
 import javafx.collections.ObservableList;
+import model.Customer;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -10,7 +11,8 @@ import java.sql.SQLException;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public abstract class UserDAO {
-    public static ObservableList<User> userList = observableArrayList();
+    private static ObservableList<User> userList = observableArrayList();
+    private static User user;
 
     public static ObservableList<User> getUserData() {
         try {
@@ -39,6 +41,31 @@ public abstract class UserDAO {
 
         // Return userList from db
         return userList;
+    }
+
+    public static User getUserById(int userIdToFind) {
+        try {
+            // SQL statement to get user from users table
+            String sql = "SELECT * FROM users WHERE User_ID = ?";
+
+            // Get a connection to DB and send over the SQL
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, userIdToFind);
+
+            // Get results of query
+            ResultSet rs = ps.executeQuery();
+
+            // Set bind variables to create user object
+            rs.next();
+            String userName = rs.getString("User_Name");
+            user = new User(userIdToFind, userName);
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        // Return user from db
+        return user;
     }
 
     public static boolean checkLoginInfo(String loginUserName, String loginPassword) {
@@ -72,4 +99,5 @@ public abstract class UserDAO {
         // Return result of isMatch;
         return isMatch;
     }
+
 }

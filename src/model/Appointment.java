@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Appointment {
@@ -124,5 +126,13 @@ public class Appointment {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public LocalDateTime updateDateTime(Timestamp timeToChange) {
+        LocalDateTime utcLocalDateTime = timeToChange.toLocalDateTime();
+        ZonedDateTime utcZonedDateTime = utcLocalDateTime.atZone(ZoneId.systemDefault());
+        ZonedDateTime sysDefZonedDateTime = utcZonedDateTime.withZoneSameInstant(ZoneId.of("America/New_York")); // Phoenix
+        LocalDateTime updatedTime = sysDefZonedDateTime.toLocalDateTime();
+        return updatedTime;
     }
 }

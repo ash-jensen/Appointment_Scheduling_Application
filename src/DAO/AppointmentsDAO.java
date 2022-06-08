@@ -12,7 +12,7 @@ import java.util.Optional;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class AppointmentsDAO {
+public abstract class AppointmentsDAO {
     private static ObservableList<Appointment> allApptsList = observableArrayList();
 
     public static ObservableList<Appointment> getAllApptData() {
@@ -63,7 +63,6 @@ public class AppointmentsDAO {
         try {
             // SQL statement to insert customer in customers table
             String sql = "INSERT INTO appointments (Customer_ID, User_ID, Contact_ID, Title, Description, Location, Type, Start, End) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            // Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID
 
             // Get connection to DB and send over the SQL
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

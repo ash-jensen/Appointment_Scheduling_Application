@@ -123,7 +123,8 @@ public abstract class CustomerDAO {
         int custId = customerToDelete.getId();
 
         // Confirm user wants to delete customer & delete
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete customer #" + custId + "?");
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "If you delete this customer, any associated appointments will also be deleted." +
+                " Are you sure you want to delete customer #" + custId + "?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             try {
@@ -174,7 +175,6 @@ public abstract class CustomerDAO {
 
             // Set bind variables to create customer object, add customer to list
             rs.next();
-            // int custId = rs.getInt("Customer_ID");
             String custName = rs.getString("Customer_Name");
             String custAddress = rs.getString("Address");
             String custPostalCode = rs.getString("Postal_Code");
@@ -189,6 +189,7 @@ public abstract class CustomerDAO {
         // Return customer from db
         return customer;
     }
+
     // check date conversion
     /*
     public static void checkDateConversion() {
