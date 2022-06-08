@@ -107,11 +107,6 @@ public class ScheduleForm implements Initializable {
         AllApptsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 appointment = (Appointment)newSelection;
-
-                System.out.println("DB TIME: " + appointment.getStartDateTime() + "\n Updated time: " +
-                        appointment.updateDateTime(appointment.getStartDateTime()));
-                // System.out.println("")
-
                 apptId = appointment.getId();
                 ApptIdField.setText(Integer.toString(apptId));
                 title = appointment.getTitle();
@@ -131,9 +126,6 @@ public class ScheduleForm implements Initializable {
                 DescriptionField.setText(description);
                 date = (appointment.getStartDateTime().toLocalDateTime()).toLocalDate();
                 DatePicker.setValue(date);
-                // update time
-                // LocalDateTime updatedTime = appointment.updateDateTime(appointment.getStartDateTime());
-                // startTime = updatedTime.toLocalTime();
                 startTime = (appointment.getStartDateTime().toLocalDateTime()).toLocalTime();
                 StartTimeComboBox.setValue(startTime);
                 endTime = (appointment.getEndDateTime().toLocalDateTime()).toLocalTime();
@@ -185,9 +177,24 @@ public class ScheduleForm implements Initializable {
         UserComboBox.setVisibleRowCount(5);
         UserComboBox.setItems(userList);
 
-        // Fill start time combo box
+        LocalTime startLocal = Appointment.updateDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 0))).toLocalTime();
+        LocalTime endLocal = Appointment.updateDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(22, 0))).toLocalTime();
+        // Fill time combo boxes
+        LocalTime start = startLocal;
+        LocalTime end = endLocal.minusMinutes(15);
+        while(start.isBefore(end.plusSeconds(1))) {
+            StartTimeComboBox.getItems().add(start);
+            start = start.plusMinutes(15);
+        }
+        StartTimeComboBox.getSelectionModel().select(startLocal);
 
-        // Fill end time combo box
+        start = startLocal.plusMinutes(15);
+        end = endLocal;
+        while(start.isBefore(end.plusSeconds(1))) {
+            EndTimeComboBox.getItems().add(start);
+            start = start.plusMinutes(15);
+        }
+        EndTimeComboBox.getSelectionModel().select(startLocal.plusMinutes(15));
     }
 
     public void CustButtonAction(ActionEvent actionEvent) throws IOException {
@@ -244,7 +251,6 @@ public class ScheduleForm implements Initializable {
             startTimestamp = Timestamp.valueOf(LocalDateTime.of(date, startTime));
             endTimestamp = Timestamp.valueOf(LocalDateTime.of(date, endTime));
             location = LocationField.getText();
-            System.out.println("startTime: " + startTime);
 
             // If apptId > 0 returned, repopulate table and inform user of success
             int apptId = AppointmentsDAO.addAppt(custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);

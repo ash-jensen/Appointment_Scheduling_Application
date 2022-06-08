@@ -25,6 +25,10 @@ public class LoginForm implements Initializable {
     public TextField UserNameField;
     public TextField PasswordField;
     public Label Location;
+    public Button SignInButton;
+    public Label SignInLabel;
+    public Label UserNameLabel;
+    public Label PasswordLabel;
     private String userName;
     private String password;
     private String zone = ZoneId.systemDefault().toString();
@@ -34,34 +38,17 @@ public class LoginForm implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
 
-        // Language test with malcolm
-
-        // Show location
+        // Show default location
         Location.setText(zone);
-        // Location.setText(ZonedDateTime.toString());
 
-        /*
-        Locale france = new Locale("fr");
-        Locale english = new Locale("en", "EN");
-
-        if (Locale.getDefault().getLanguage().equals("fr") || Locale.getDefault().getLanguage().equals("en")) {
-            System.out.println(langBundle.getString("Login" ) + " " + langBundle.getString("UserName"));
+        if (Locale.getDefault().getLanguage().equals("fr") ) {
+            SignInLabel.setText(langBundle.getString("Login"));
+            UserNameLabel.setText(langBundle.getString("UserName"));
+            UserNameField.setText(langBundle.getString("UserName"));
+            PasswordLabel.setText(langBundle.getString("Password"));
+            PasswordField.setText(langBundle.getString("Password"));
+            SignInButton.setText(langBundle.getString("Login"));
         }
-
-        Locale locale = Locale.getDefault();
-        if (locale.equals(france)) {
-            Location.setText(zone);
-        }
-         */
-
-        // Print Login in french
-        System.out.println(langBundle.getString("Login"));
-
-    }
-
-
-    public static ZoneId systemDefault() {
-        return null;
     }
 
     public void SIButtonAction(ActionEvent actionEvent) throws IOException {
@@ -80,11 +67,20 @@ public class LoginForm implements Initializable {
             else {
                 Alert alert;
 
-                // Alert user that login information is invalid
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Login Error");
-                alert.setContentText("Invalid user name and password combo.");
-                alert.showAndWait();
+                if (Locale.getDefault().getLanguage().equals("fr") ) {
+                    // Alert user that login information is invalid
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Login Error");
+                    alert.setContentText("Invalid user name and password combo.");
+                    alert.showAndWait();
+                }
+                else {
+                    // Alert user that login information is invalid
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Login Error");
+                    alert.setContentText("Invalid user name and password combo.");
+                    alert.showAndWait();
+                }
             }
         }
         else {

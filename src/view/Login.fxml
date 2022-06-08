@@ -13,7 +13,7 @@
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="350.0" spacing="5.0">
          <children>
-            <Label alignment="CENTER" text="Sign In">
+            <Label fx:id="SignInLabel" alignment="CENTER" text="Sign In">
                <font>
                   <Font name="Arial Bold" size="28.0" />
                </font>
@@ -21,7 +21,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
-            <Label text="User Name">
+            <Label fx:id="UserNameLabel" text="User Name">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
@@ -31,7 +31,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </TextField>
-            <Label text="Password">
+            <Label fx:id="PasswordLabel" text="Password">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
@@ -43,7 +43,7 @@
             </TextField>
             <HBox alignment="CENTER" prefHeight="21.0" prefWidth="307.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SIButtonAction" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #2a70c7#2a70c7;" text="Sign In" textFill="WHITE">
+                  <Button fx:id="SignInButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SIButtonAction" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #2a70c7#2a70c7;" text="Sign In" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>

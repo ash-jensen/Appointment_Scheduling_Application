@@ -238,7 +238,7 @@
 
                                     <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="256.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
-                                          <ComboBox fx:id="StartTimeComboBox" prefHeight="25.0" prefWidth="78.0" promptText="12:12" />
+                                          <ComboBox fx:id="StartTimeComboBox" prefHeight="25.0" prefWidth="78.0" />
                                           <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="165.0">
                                              <children>
                                                 <Label text="End Time">
@@ -249,7 +249,7 @@
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <ComboBox fx:id="EndTimeComboBox" prefHeight="25.0" prefWidth="79.0" promptText="10:10" />
+                                                <ComboBox fx:id="EndTimeComboBox" prefHeight="25.0" prefWidth="79.0" />
                                              </children>
                                           </HBox>
                                        </children>

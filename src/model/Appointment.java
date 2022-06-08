@@ -128,11 +128,10 @@ public class Appointment {
         this.userId = userId;
     }
 
-    public LocalDateTime updateDateTime(Timestamp timeToChange) {
-        LocalDateTime utcLocalDateTime = timeToChange.toLocalDateTime();
-        ZonedDateTime utcZonedDateTime = utcLocalDateTime.atZone(ZoneId.systemDefault());
-        ZonedDateTime sysDefZonedDateTime = utcZonedDateTime.withZoneSameInstant(ZoneId.of("America/New_York")); // Phoenix
-        LocalDateTime updatedTime = sysDefZonedDateTime.toLocalDateTime();
+    public static LocalDateTime updateDateTime(LocalDateTime timeToChangeLDT) {
+        ZonedDateTime sysDefZDT = timeToChangeLDT.atZone(ZoneId.of("America/New_York"));
+        ZonedDateTime estZDT = sysDefZDT.withZoneSameInstant(ZoneId.systemDefault());
+        LocalDateTime updatedTime = estZDT.toLocalDateTime();
         return updatedTime;
     }
 }
