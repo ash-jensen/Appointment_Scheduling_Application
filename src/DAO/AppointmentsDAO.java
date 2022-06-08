@@ -55,7 +55,6 @@ public abstract class AppointmentsDAO {
         return allApptsList;
     }
 
-    // Add/Update/Delete Methods
     public static int addAppt(int custId, int userId, int contactId, String title, String description, String location,
                               String type, Timestamp startTimestamp, Timestamp endTimestamp) {
         int apptId = 0;
@@ -94,70 +93,64 @@ public abstract class AppointmentsDAO {
         return apptId;
     }
 
-    /*
-    public static int updateAppt(int custId, String name, String address, String postalCode, String phoneNumber, int divId) {
+    public static int updateAppt(int apptId, int custId, int userId, int contactId, String title, String description, String location,
+                                 String type, Timestamp startTimestamp, Timestamp endTimestamp ) {
         Alert alert;
         int rowsAffected = 0;
 
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to edit customer #" + custId + "?");
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to edit appointment #" + apptId + "?");
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
+        if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                // SQL statement to update customer with given customer id
-                String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+                // SQL statement to insert customer in customers table
+                String sql = "Update appointments SET Customer_ID = ?, User_ID =?, Contact_ID =?, Title =?, Description =?, Location =?, Type =?, Start =?, End =? WHERE Appointment_ID = ?";
 
                 // Get connection to DB and send over the SQL
                 PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
-                // Call prepared statement setter method to assign bind variable values
-                ps.setString(1, name);
-                ps.setString(2, address);
-                ps.setString(3, postalCode);
-                ps.setString(4, phoneNumber);
-                ps.setInt(5, divId);
-                ps.setInt(6, custId);
+                // Call prepared statement setter method to assign bind variables value
+                ps.setInt(1, custId);
+                ps.setInt(2, userId);
+                ps.setInt(3, contactId);
+                ps.setString(4, title);
+                ps.setString(5, description);
+                ps.setString(6, location);
+                ps.setString(7, type);
+                ps.setTimestamp(8, startTimestamp);
+                ps.setTimestamp(9, endTimestamp);
+                ps.setInt(10, apptId);
 
-                // Execute the update, assign num of rows affected to var to return
+                // Execute the update, assign number of rows affected and return
                 rowsAffected = ps.executeUpdate();
                 return rowsAffected;
-            }
-            catch (SQLException throwables) {
+            } catch (SQLException throwables) {
+                // Catch if errors with SQL
                 throwables.printStackTrace();
             }
         }
+        // return number of rows affected
         return rowsAffected;
     }
 
-    public static int deleteAppt(Customer customerToDelete) {
+
+    public static int deleteAppt(Appointment apptToDelete) {
         Alert alert;
         int rowsAffected = 0;
-        int custId = customerToDelete.getId();
+        int apptId = apptToDelete.getId();
 
         // Confirm user wants to delete customer & delete
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete customer #" + custId + "?");
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete appointment #" + apptId + "?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 // SQL statement to run
-                String sqla = "DELETE FROM appointments WHERE Customer_ID = ?";
-
-                // Get a connection to DB and send over the SQL
-                PreparedStatement psa = JDBC.getConnection().prepareStatement(sqla);
-
-                // Call prepared statement setter method to assign bind variables value
-                psa.setInt(1, custId);
-
-                // Var of updated rows to return
-                rowsAffected = psa.executeUpdate();
-
-                // SQL statement to run
-                String sql = "DELETE FROM customers WHERE Customer_ID = ?";
+                String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
 
                 // Get a connection to DB and send over the SQL
                 PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
                 // Call prepared statement setter method to assign bind variables value
-                ps.setInt(1, custId);
+                ps.setInt(1, apptId);
 
                 // Var of updated rows to return
                 rowsAffected = ps.executeUpdate();
@@ -170,7 +163,5 @@ public abstract class AppointmentsDAO {
         }
         return rowsAffected;
     }
-
-     */
 
 }

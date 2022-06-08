@@ -99,10 +99,6 @@ public class ScheduleForm implements Initializable {
         // Fill combo boxes
         fillComboBoxes();
 
-
-
-
-
         // Lambda function for putting selected customer in Customer Details form
         AllApptsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -159,6 +155,7 @@ public class ScheduleForm implements Initializable {
         AllEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endString"));
         AllTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         AllDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+
     }
 
     private void fillComboBoxes() {
@@ -177,9 +174,9 @@ public class ScheduleForm implements Initializable {
         UserComboBox.setVisibleRowCount(5);
         UserComboBox.setItems(userList);
 
+        // Fill start time combo box
         LocalTime startLocal = Appointment.updateDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 0))).toLocalTime();
         LocalTime endLocal = Appointment.updateDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(22, 0))).toLocalTime();
-        // Fill time combo boxes
         LocalTime start = startLocal;
         LocalTime end = endLocal.minusMinutes(15);
         while(start.isBefore(end.plusSeconds(1))) {
@@ -188,6 +185,7 @@ public class ScheduleForm implements Initializable {
         }
         StartTimeComboBox.getSelectionModel().select(startLocal);
 
+        // Fill end time combo box
         start = startLocal.plusMinutes(15);
         end = endLocal;
         while(start.isBefore(end.plusSeconds(1))) {
@@ -276,9 +274,78 @@ public class ScheduleForm implements Initializable {
     }
 
     public void UpdateApptButtonAction(ActionEvent actionEvent) {
+        Alert alert;
+
+        // Check that all fields/combo boxes have been filled out, update appointment
+        if (emptyFieldCheck()) {
+            title = ApptTitleField.getText();
+            custId = ((Customer)CustomerComboBox.getSelectionModel().getSelectedItem()).getId();
+            contactId = ((Contact)ContactComboBox.getSelectionModel().getSelectedItem()).getId();
+            userId = ((User)UserComboBox.getSelectionModel().getSelectedItem()).getId();
+            type = ApptTypeField.getText();
+            description = DescriptionField.getText();
+            date = DatePicker.getValue();
+            startTime = (LocalTime)StartTimeComboBox.getSelectionModel().getSelectedItem();
+            endTime = (LocalTime)EndTimeComboBox.getSelectionModel().getSelectedItem();
+            startTimestamp = Timestamp.valueOf(LocalDateTime.of(date, startTime));
+            endTimestamp = Timestamp.valueOf(LocalDateTime.of(date, endTime));
+            location = LocationField.getText();
+
+            // If appointment updated in database, repopulate table and inform user of success
+            if (AppointmentsDAO.updateAppt(apptId, custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp) > 0) {
+                // Repopulate table
+                populateAllApptsTable();
+
+                // Confirm customer updated
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Update Appointment");
+                alert.setContentText("Appointment #" + apptId + " has been updated.");
+                alert.showAndWait();
+
+                // Clear form fields
+                ClearButtonAction(null);
+            }
+            // Alert user: customer has not been added
+            else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Update Error");
+                alert.setContentText("Error: Appointment has NOT been updated");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void DeleteApptButtonAction(ActionEvent actionEvent) {
+        Alert alert;
+
+        // Get selected appointment from table
+        Appointment selected = (Appointment)AllApptsTable.getSelectionModel().getSelectedItem();
+
+        // If nothing selected, alert user to select appointment
+        if (selected == null) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Delete Error");
+            alert.setContentText("Please select an appointment to delete.");
+            alert.showAndWait();
+            return;
+        }
+        else {
+            // If delete is unsuccessful,notify user
+            if (AppointmentsDAO.deleteAppt(selected) <= 0) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Delete Error");
+                alert.setContentText("Delete unsuccessful.");
+                alert.showAndWait();
+            }
+            else {
+                ClearButtonAction(null);
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Delete Successful");
+                alert.setContentText("Appointment #" + apptId + " has been deleted.");
+                alert.showAndWait();
+                populateAllApptsTable();
+            }
+        }
     }
 
     public void ClearButtonAction(ActionEvent actionEvent) {

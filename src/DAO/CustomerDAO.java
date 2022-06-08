@@ -114,6 +114,7 @@ public abstract class CustomerDAO {
                 throwables.printStackTrace();
             }
         }
+        // Return number of rows affected
         return rowsAffected;
     }
 
