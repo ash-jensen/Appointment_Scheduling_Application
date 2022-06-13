@@ -4,16 +4,16 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Appointment;
-import model.Customer;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
 public abstract class AppointmentsDAO {
     private static ObservableList<Appointment> allApptsList = observableArrayList();
+    private static ObservableList<Appointment> currMonthList = observableArrayList();
+    private static ObservableList<Appointment> currWeekList = observableArrayList();
 
     public static ObservableList<Appointment> getAllApptData() {
         try {
@@ -55,8 +55,88 @@ public abstract class AppointmentsDAO {
         return allApptsList;
     }
 
-    public static int addAppt(int custId, int userId, int contactId, String title, String description, String location,
-                              String type, Timestamp startTimestamp, Timestamp endTimestamp) {
+    public static ObservableList<Appointment> getCurrMonthApptData() {
+        try {
+            // SQL statement to get all customers from customer table
+            String sql = "SELECT * FROM appointments WHERE MONTH(Start) = MONTH(NOW())";
+
+            // Get a connection to DB and send over the SQL
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            // Get results of query
+            ResultSet rs = ps.executeQuery();
+
+            // Clear apptList
+            currMonthList.clear();
+
+            // Set bind variables to create appt object, add appt to list
+            while(rs.next()) {
+                int apptId = rs.getInt("Appointment_ID");
+                int custId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                int contactId = rs.getInt("Contact_ID");
+                String title = rs.getString("Title");
+                String location = rs.getString("Location");
+                String description = rs.getString("Description");
+                Timestamp startTimestamp = rs.getTimestamp("Start");
+                // LocalDateTime startDateTime = startTimestamp.toLocalDateTime();
+                Timestamp endTimestamp = rs.getTimestamp("End");
+                //LocalDateTime endDateTime = endTimestamp.toLocalDateTime();
+                String type = rs.getString("Type");
+                Appointment appt = new Appointment (apptId, custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
+                currMonthList.add(appt);
+            }
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        // Return apptList from db
+        return currMonthList;
+    }
+
+    public static ObservableList<Appointment> getCurrWeekApptData() {
+        try {
+            // SQL statement to get all customers from customer table
+            String sql = "SELECT * FROM appointments WHERE WEEK(start) = WEEK(NOW())";
+
+            // Get a connection to DB and send over the SQL
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            // ps.setTimestamp(1, timestampNow);
+
+            // Get results of query
+            ResultSet rs = ps.executeQuery();
+
+            // Clear apptList
+            currWeekList.clear();
+
+            // Set bind variables to create appt object, add appt to list
+            while(rs.next()) {
+                int apptId = rs.getInt("Appointment_ID");
+                int custId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                int contactId = rs.getInt("Contact_ID");
+                String title = rs.getString("Title");
+                String location = rs.getString("Location");
+                String description = rs.getString("Description");
+                Timestamp startTimestamp = rs.getTimestamp("Start");
+                // LocalDateTime startDateTime = startTimestamp.toLocalDateTime();
+                Timestamp endTimestamp = rs.getTimestamp("End");
+                //LocalDateTime endDateTime = endTimestamp.toLocalDateTime();
+                String type = rs.getString("Type");
+                Appointment appt = new Appointment (apptId, custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
+                currWeekList.add(appt);
+            }
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        // Return apptList from db
+        return currWeekList;
+    }
+
+    public static int addAppt(int custId, int userId, int contactId, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp) {
         int apptId = 0;
 
         try {
@@ -93,8 +173,7 @@ public abstract class AppointmentsDAO {
         return apptId;
     }
 
-    public static int updateAppt(int apptId, int custId, int userId, int contactId, String title, String description, String location,
-                                 String type, Timestamp startTimestamp, Timestamp endTimestamp ) {
+    public static int updateAppt(int apptId, int custId, int userId, int contactId, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp ) {
         Alert alert;
         int rowsAffected = 0;
 
@@ -132,14 +211,14 @@ public abstract class AppointmentsDAO {
         return rowsAffected;
     }
 
-
     public static int deleteAppt(Appointment apptToDelete) {
         Alert alert;
         int rowsAffected = 0;
         int apptId = apptToDelete.getId();
+        String apptType = apptToDelete.getType();
 
         // Confirm user wants to delete customer & delete
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete appointment #" + apptId + "?");
+        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete appointment #" + apptId + " of type: " + apptType + "?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             try {
@@ -163,5 +242,4 @@ public abstract class AppointmentsDAO {
         }
         return rowsAffected;
     }
-
 }

@@ -277,7 +277,7 @@ public class CustomersForm implements Initializable {
             address = CustAddressField.getText();
             postalCode = CustPostalCodeField.getText();
             phoneNumber = CustPhoneNumberField.getText();
-            divId = customer.getDivId();
+            divId = ((Division)CustDivIdComboBox.getSelectionModel().getSelectedItem()).getDivId();
 
             // If customer updated in database, repopulate table and inform user of success
             if (CustomerDAO.updateCustomer(id, name, address, postalCode, phoneNumber, divId) > 0) {

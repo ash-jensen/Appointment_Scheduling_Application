@@ -15,11 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-
 
 public class LoginForm implements Initializable {
     public TextField UserNameField;
@@ -33,6 +30,8 @@ public class LoginForm implements Initializable {
     private String password;
     private String zone = ZoneId.systemDefault().toString();
     ResourceBundle langBundle = ResourceBundle.getBundle("bundle/lang", Locale.getDefault());
+    String alertTitle = langBundle.getString("LoginError");
+    String alertToDisplay = langBundle.getString("InvalidErrorMessage");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,15 +47,15 @@ public class LoginForm implements Initializable {
             PasswordLabel.setText(langBundle.getString("Password"));
             PasswordField.setText(langBundle.getString("Password"));
             SignInButton.setText(langBundle.getString("Login"));
+            alertTitle = langBundle.getString("LoginError");
+            alertToDisplay = langBundle.getString("InvalidErrorMessage");
         }
     }
 
     public void SIButtonAction(ActionEvent actionEvent) throws IOException {
         if ((!UserNameField.getText().isEmpty()) && (!PasswordField.getText().isEmpty())) {
             userName = UserNameField.getText();
-            System.out.println("username" + userName);
             password = PasswordField.getText();
-            System.out.println("password" + password);
             if (UserDAO.checkLoginInfo(userName, password)) {
                 // Load Schedule Page
                 Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
@@ -71,8 +70,8 @@ public class LoginForm implements Initializable {
 
                 // Alert user that login information is invalid
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Login Error");
-                alert.setContentText("Invalid user name and password combo.");
+                alert.setTitle(alertTitle);
+                alert.setContentText(alertToDisplay);
                 alert.showAndWait();
             }
         }
@@ -81,8 +80,8 @@ public class LoginForm implements Initializable {
 
             // Alert user that login information is invalid
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login Error");
-            alert.setContentText("Please enter a user name and password.");
+            alert.setTitle(alertTitle);
+            alert.setContentText(alertToDisplay);
             alert.showAndWait();
         }
     }

@@ -75,36 +75,36 @@
                         </Tab>
                         <Tab fx:id="CurrMonthTab" text="Current Month">
                            <content>
-                              <TableView fx:id="CurrMonthTable" prefHeight="459.0" prefWidth="405.0" style="-fx-background-color: transparent;">
+                              <TableView fx:id="CurrMonthTable" prefHeight="397.0" prefWidth="761.0" style="-fx-background-color: transparent;">
                                  <columns>
-                                    <TableColumn fx:id="CurrMonthApptIdCol" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" text="ApptID" />
-                                    <TableColumn fx:id="CurrMonthCustIdCol" maxWidth="69.0" minWidth="69.0" prefWidth="69.0" text="Customer" />
-                                    <TableColumn fx:id="CurrMonthUserIdCol" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" text="User" />
-                                    <TableColumn fx:id="CurrMonthContactIdCol" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" text="Contact" />
-                                    <TableColumn fx:id="CurrMonthTitleCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
-                                    <TableColumn fx:id="CurrMonthLocationCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
+                                    <TableColumn fx:id="CurrMonthApptIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="ApptID" />
+                                    <TableColumn fx:id="CurrMonthCustIdCol" maxWidth="81.0" minWidth="69.0" prefWidth="69.0" text="Customer" />
+                                    <TableColumn fx:id="CurrMonthUserIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="User" />
+                                    <TableColumn fx:id="CurrMonthContactIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="Contact" />
+                                    <TableColumn fx:id="CurrMonthTitleCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Title" />
+                                    <TableColumn fx:id="CurrMonthLocationCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Location" />
                                     <TableColumn fx:id="CurrMonthStartDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
                                     <TableColumn fx:id="CurrMonthEndDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
-                                    <TableColumn fx:id="CurrMonthTypeCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
-                                    <TableColumn fx:id="CurrMonthDescriptionCol" prefWidth="118.0" text="Description" />
+                                    <TableColumn fx:id="CurrMonthTypeCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Type" />
+                                    <TableColumn fx:id="CurrMonthDescriptionCol" prefWidth="108.0" text="Description" />
                                  </columns>
                               </TableView>
                            </content>
                         </Tab>
-                        <Tab fx:id="CurrWeek" text="Current Week">
+                        <Tab fx:id="CurrWeekTab" text="Current Week">
                            <content>
-                              <TableView fx:id="CurrWeekTable" prefHeight="467.0" prefWidth="405.0" style="-fx-background-color: transparent;">
+                              <TableView fx:id="CurrWeekTable" prefHeight="397.0" prefWidth="761.0" style="-fx-background-color: transparent;">
                                  <columns>
-                                    <TableColumn fx:id="CurrWeekApptIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Appt. ID" />
-                                    <TableColumn fx:id="CurrWeekCustIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cust. ID" />
-                                    <TableColumn fx:id="CurrWeekUserIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="User ID" />
-                                    <TableColumn fx:id="CurrWeekContactIdCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Cont. ID" />
-                                    <TableColumn fx:id="CurrWeekTitleCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Title" />
-                                    <TableColumn fx:id="CurrWeekLocationCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Location" />
+                                    <TableColumn fx:id="CurrWeekApptIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="ApptID" />
+                                    <TableColumn fx:id="CurrWeekCustIdCol" maxWidth="81.0" minWidth="69.0" prefWidth="69.0" text="Customer" />
+                                    <TableColumn fx:id="CurrWeekUserIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="User" />
+                                    <TableColumn fx:id="CurrWeekContactIdCol" maxWidth="58.0" minWidth="-Infinity" prefWidth="58.0" text="Contact" />
+                                    <TableColumn fx:id="CurrWeekTitleCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Title" />
+                                    <TableColumn fx:id="CurrWeekLocationCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Location" />
                                     <TableColumn fx:id="CurrWeekStartDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="Start Date/Time" />
                                     <TableColumn fx:id="CurrWeekEndDateTimeCol" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" text="End Date/Time" />
-                                    <TableColumn fx:id="CurrWeekTypeCol" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Type" />
-                                    <TableColumn fx:id="CurrWeekDescriptionCol" prefWidth="118.0" text="Description" />
+                                    <TableColumn fx:id="CurrWeekTypeCol" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Type" />
+                                    <TableColumn fx:id="CurrWeekDescriptionCol" prefWidth="108.0" text="Description" />
                                  </columns>
                               </TableView>
                            </content>
@@ -116,7 +116,7 @@
                   </TabPane>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Edit Appointment">
+                        <Label text="Appointment Details">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
