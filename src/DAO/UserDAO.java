@@ -73,7 +73,7 @@ public abstract class UserDAO {
 
         // Connect to db, get password associated with username, check if it matches input password
         try {
-            // SQL statement to get country by division ID
+            // SQL statement to select row by user name
             String sql = "SELECT * FROM users WHERE User_Name = ?";
 
             // Get a connection to DB and send over the SQL
@@ -83,13 +83,14 @@ public abstract class UserDAO {
             // Get results of query
             ResultSet rs = ps.executeQuery();
 
-            // Set bind variables to create country object
-            rs.next();
-            String password = rs.getString("Password");
+            // If there is a returned password, set bind variable of password, check for match with input
+            if (rs.next()) {
+                String password = rs.getString("Password");
 
-            // Check username and password match
-            if (loginPassword.equals(password)) {
-                isMatch = true;
+                // Check username and password match
+                if (loginPassword.equals(password)) {
+                    isMatch = true;
+                }
             }
         }
         catch (SQLException throwables) {

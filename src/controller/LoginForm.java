@@ -52,9 +52,11 @@ public class LoginForm implements Initializable {
     }
 
     public void SIButtonAction(ActionEvent actionEvent) throws IOException {
-        userName = UserNameField.getText();
-        password = PasswordField.getText();
-        if ((!userName.isEmpty()) && (!password.isEmpty())) {
+        if ((!UserNameField.getText().isEmpty()) && (!PasswordField.getText().isEmpty())) {
+            userName = UserNameField.getText();
+            System.out.println("username" + userName);
+            password = PasswordField.getText();
+            System.out.println("password" + password);
             if (UserDAO.checkLoginInfo(userName, password)) {
                 // Load Schedule Page
                 Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
@@ -67,20 +69,11 @@ public class LoginForm implements Initializable {
             else {
                 Alert alert;
 
-                if (Locale.getDefault().getLanguage().equals("fr") ) {
-                    // Alert user that login information is invalid
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Login Error");
-                    alert.setContentText("Invalid user name and password combo.");
-                    alert.showAndWait();
-                }
-                else {
-                    // Alert user that login information is invalid
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Login Error");
-                    alert.setContentText("Invalid user name and password combo.");
-                    alert.showAndWait();
-                }
+                // Alert user that login information is invalid
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Error");
+                alert.setContentText("Invalid user name and password combo.");
+                alert.showAndWait();
             }
         }
         else {
