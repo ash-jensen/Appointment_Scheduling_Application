@@ -90,11 +90,8 @@ public class ScheduleForm implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
 
-
         // Fill All Appointment tables
         populateApptsTables();
-        // populateCurrMonthTable();
-        // populateCurrWeekTable();
 
         // Fill combo boxes
         fillComboBoxes();

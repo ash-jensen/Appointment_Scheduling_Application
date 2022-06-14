@@ -4,8 +4,12 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Appointment;
+import model.User;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 
 import static javafx.collections.FXCollections.observableArrayList;
@@ -15,6 +19,7 @@ public abstract class AppointmentsDAO {
     private static ObservableList<Appointment> currMonthList = observableArrayList();
     private static ObservableList<Appointment> currWeekList = observableArrayList();
     private static ObservableList<Appointment> overlappingList = observableArrayList();
+    private static ObservableList<Appointment> loginApptList = observableArrayList();
 
     public static ObservableList<Appointment> getAllApptData() {
         try {
@@ -374,10 +379,78 @@ public abstract class AppointmentsDAO {
         return overlappingRows;
     }
 
-    /*
-    public static apptLoginCheck() {
+    public static void apptLoginCheck() {
+        Alert alert;
+        LocalDateTime ldtNow = LocalDateTime.now();
+        LocalDateTime ldtPlusMins = ldtNow.plusMinutes(15);
+        Timestamp timestampNow = Timestamp.valueOf(ldtNow);
+        Timestamp timestampPlusMins = Timestamp.valueOf(ldtPlusMins);
+        User currentUser = UserDAO.getCurrentUser();
+        int currentUserId = currentUser.getId();
+        String apptsToPrint = "";
 
+        try {
+            // SQL statement to insert customer in customers table
+            String sql = "SELECT * FROM Appointments WHERE User_ID = ? AND ((Start >= ?) AND (Start <= ?))";
+
+
+            // Get connection to DB and send over the SQL
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            // Call prepared statement setter method to assign bind variables value
+            ps.setInt(1, currentUserId);
+            ps.setTimestamp(2, timestampNow);
+            ps.setTimestamp(3, timestampPlusMins);
+
+            // Get results of query
+            ResultSet rs = ps.executeQuery();
+
+            // Clear apptList
+            // loginApptList.clear();
+
+            // Set bind variables to create appt object, add appt to overlapping appt list
+            while(rs.next()) {
+                int apptId = rs.getInt("Appointment_ID");
+                apptsToPrint = (apptsToPrint.concat(apptId + "                ") );
+                int custId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                int contactId = rs.getInt("Contact_ID");
+                String title = rs.getString("Title");
+                String location = rs.getString("Location");
+                String description = rs.getString("Description");
+                Timestamp startTimestamp = rs.getTimestamp("Start");
+                LocalDate startDate = (startTimestamp.toLocalDateTime()).toLocalDate();
+                apptsToPrint = (apptsToPrint + startDate + "      ");
+                LocalTime startTime = (startTimestamp.toLocalDateTime()).toLocalTime();
+                apptsToPrint = (apptsToPrint + startTime + " - ");
+                Timestamp endTimestamp = rs.getTimestamp("End");
+                LocalTime endDateTime = (endTimestamp.toLocalDateTime()).toLocalTime();
+                apptsToPrint = (apptsToPrint + endDateTime + "\n");
+                String type = rs.getString("Type");
+                Appointment appt = new Appointment (apptId, custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
+                loginApptList.add(appt);
+            }
+
+            // Check if there are appointments in login appointment list and alert user
+            if (loginApptList.isEmpty()) {
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Appointment Reminder");
+                alert.setContentText("You do not have any scheduled appointments in the next 15 minutes.");
+                alert.showAndWait();
+            }
+            else {
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Appointment Reminder");
+                alert.setContentText("You have the following appointment(s) in the next 15 minutes:\n" +
+                        "Appt Id:       Date:                Time:\n" + apptsToPrint);
+                alert.showAndWait();
+            }
+        }
+        catch (SQLException throwables) {
+            // Catch if errors with SQL
+            throwables.printStackTrace();
+        }
     }
 
-     */
+
 }

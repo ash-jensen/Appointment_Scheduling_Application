@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.AppointmentsDAO;
 import DAO.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -57,6 +59,9 @@ public class LoginForm implements Initializable {
             userName = UserNameField.getText();
             password = PasswordField.getText();
             if (UserDAO.checkLoginInfo(userName, password)) {
+                // Check for appointment within 15 minutes of login
+                AppointmentsDAO.apptLoginCheck();
+
                 // Load Schedule Page
                 Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
                 Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

@@ -13,6 +13,7 @@ import static javafx.collections.FXCollections.observableArrayList;
 public abstract class UserDAO {
     private static ObservableList<User> userList = observableArrayList();
     private static User user;
+    private static User currentUser;
 
     public static ObservableList<User> getUserData() {
         try {
@@ -85,12 +86,17 @@ public abstract class UserDAO {
 
             // If there is a returned password, set bind variable of password, check for match with input
             if (rs.next()) {
+                int userId = rs.getInt("User_ID");
+                String userName = rs.getString("User_Name");
                 String password = rs.getString("Password");
 
                 // Check username and password match
                 if (loginPassword.equals(password)) {
                     isMatch = true;
                 }
+
+                // Build currentUser object
+                currentUser = new User(userId, userName);
             }
         }
         catch (SQLException throwables) {
@@ -99,6 +105,10 @@ public abstract class UserDAO {
 
         // Return result of isMatch;
         return isMatch;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
     }
 
 }
