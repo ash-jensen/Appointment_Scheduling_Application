@@ -20,8 +20,7 @@ public class Appointment {
     private String startString;
     private String endString;
 
-    public Appointment(int id, int custId, int userId, int contactId, String title, String description, String location,
-                       String type, Timestamp startTimestamp, Timestamp endTimestamp) {
+    public Appointment(int id, int custId, int userId, int contactId, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp) {
         this.id = id;
         this. custId = custId;
         this.userId = userId;
