@@ -18,7 +18,6 @@ public abstract class AppointmentsDAO {
     private static ObservableList<Appointment> allApptsList = observableArrayList();
     private static ObservableList<Appointment> currMonthList = observableArrayList();
     private static ObservableList<Appointment> currWeekList = observableArrayList();
-    private static ObservableList<Appointment> overlappingList = observableArrayList();
     private static ObservableList<Appointment> loginApptList = observableArrayList();
 
     public static ObservableList<Appointment> getAllApptData() {
@@ -275,10 +274,9 @@ public abstract class AppointmentsDAO {
         int overlappingRows = 0;
 
         try {
-            // SQL statement to insert customer in customers table
-            String sql = "SELECT * FROM Appointments WHERE Customer_ID = ? AND ((? >= Start) AND (? < End)) " +
-                    "OR ((? > START) AND (? <= End)) OR ((? <= Start) AND (? >= End))";
-
+            // SQL statement to check for customer id with conflicting appointment times
+            String sql = "SELECT * FROM appointments WHERE Customer_ID = ? AND (((? >= Start) AND (? < End)) OR " +
+                    "((? > START) AND (? <= End)) OR ((? <= Start) AND (? >= End)))";
 
             // Get connection to DB and send over the SQL
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -295,32 +293,17 @@ public abstract class AppointmentsDAO {
             // Get results of query
             ResultSet rs = ps.executeQuery();
 
-            // Clear apptList
-            overlappingList.clear();
-
-            // Set bind variables to create appt object, add appt to overlapping appt list
+            // Get and return number of rows that overlap
             while(rs.next()) {
-                int apptId = rs.getInt("Appointment_ID");
-                int custId = rs.getInt("Customer_ID");
-                int userId = rs.getInt("User_ID");
-                int contactId = rs.getInt("Contact_ID");
-                String title = rs.getString("Title");
-                String location = rs.getString("Location");
-                String description = rs.getString("Description");
-                Timestamp startTimestamp = rs.getTimestamp("Start");
-                // LocalDateTime startDateTime = startTimestamp.toLocalDateTime();
-                Timestamp endTimestamp = rs.getTimestamp("End");
-                //LocalDateTime endDateTime = endTimestamp.toLocalDateTime();
-                String type = rs.getString("Type");
-                Appointment appt = new Appointment (apptId, custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
-                overlappingList.add(appt);
                 overlappingRows++;
             }
             return overlappingRows;
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables) {
             // Catch if errors with SQL
             throwables.printStackTrace();
         }
+
         // return number of rows overlapping
         return overlappingRows;
     }
@@ -330,8 +313,8 @@ public abstract class AppointmentsDAO {
 
         try {
             // SQL statement to check if overlapping appointments
-            String sql = "SELECT * FROM Appointments WHERE Appointment_ID != ? AND (Customer_ID = ? AND ((? >= Start) AND (? < End)) " +
-                    "OR ((? > START) AND (? <= End)) OR ((? <= Start) AND (? >= End)))";
+            String sql = "SELECT * FROM appointments WHERE Appointment_ID != ? AND (Customer_ID = ? AND (((? >= Start) AND (? < End)) " +
+                    "OR ((? > START) AND (? <= End)) OR ((? <= Start) AND (? >= End))))";
 
             // Get connection to DB and send over the SQL
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -349,32 +332,17 @@ public abstract class AppointmentsDAO {
             // Get results of query
             ResultSet rs = ps.executeQuery();
 
-            // Clear apptList
-            overlappingList.clear();
-
-            // Set bind variables to create appt object, add appt to overlapping appt list
+            // Get and return number of rows that overlap
             while(rs.next()) {
-                int apptId = rs.getInt("Appointment_ID");
-                int custId = rs.getInt("Customer_ID");
-                int userId = rs.getInt("User_ID");
-                int contactId = rs.getInt("Contact_ID");
-                String title = rs.getString("Title");
-                String location = rs.getString("Location");
-                String description = rs.getString("Description");
-                Timestamp startTimestamp = rs.getTimestamp("Start");
-                // LocalDateTime startDateTime = startTimestamp.toLocalDateTime();
-                Timestamp endTimestamp = rs.getTimestamp("End");
-                //LocalDateTime endDateTime = endTimestamp.toLocalDateTime();
-                String type = rs.getString("Type");
-                Appointment appt = new Appointment (apptId, custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
-                overlappingList.add(appt);
                 overlappingRows++;
             }
             return overlappingRows;
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables) {
             // Catch if errors with SQL
             throwables.printStackTrace();
         }
+
         // return number of rows overlapping
         return overlappingRows;
     }
@@ -451,6 +419,5 @@ public abstract class AppointmentsDAO {
             throwables.printStackTrace();
         }
     }
-
 
 }

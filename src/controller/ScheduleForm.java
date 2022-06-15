@@ -260,21 +260,21 @@ public class ScheduleForm implements Initializable {
         LocalTime startLocal = Appointment.updateDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 0))).toLocalTime();
         LocalTime endLocal = Appointment.updateDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(22, 0))).toLocalTime();
         LocalTime start = startLocal;
-        LocalTime end = endLocal.minusMinutes(15);
+        LocalTime end = endLocal.minusMinutes(10);
         while(start.isBefore(end.plusSeconds(1))) {
             StartTimeComboBox.getItems().add(start);
-            start = start.plusMinutes(15);
+            start = start.plusMinutes(10);
         }
         StartTimeComboBox.getSelectionModel().select(startLocal);
 
         // Fill end time combo box
-        start = startLocal.plusMinutes(15);
+        start = startLocal.plusMinutes(10);
         end = endLocal;
         while(start.isBefore(end.plusSeconds(1))) {
             EndTimeComboBox.getItems().add(start);
-            start = start.plusMinutes(15);
+            start = start.plusMinutes(10);
         }
-        EndTimeComboBox.getSelectionModel().select(startLocal.plusMinutes(15));
+        EndTimeComboBox.getSelectionModel().select(startLocal.plusMinutes(10));
     }
 
     public void CustButtonAction(ActionEvent actionEvent) throws IOException {
