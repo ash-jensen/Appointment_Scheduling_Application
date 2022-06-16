@@ -227,7 +227,7 @@
                                           <Font name="Arial" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="ApptTypeField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="ApptTypeComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" />
                                     <Label text="Description" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="Arial" size="13.0" />

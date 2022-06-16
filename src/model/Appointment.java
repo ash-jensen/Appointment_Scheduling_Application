@@ -1,10 +1,15 @@
 package model;
 
+import javafx.collections.ObservableList;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class Appointment {
     private int id;
@@ -19,6 +24,8 @@ public class Appointment {
     private Timestamp endTimestamp;
     private String startString;
     private String endString;
+    private static ObservableList<String> apptTypes = observableArrayList();
+    private static ObservableList<String> monthsOfYear = observableArrayList();
 
     public Appointment(int id, int custId, int userId, int contactId, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp) {
         this.id = id;
@@ -132,5 +139,33 @@ public class Appointment {
         ZonedDateTime estZDT = sysDefZDT.withZoneSameInstant(ZoneId.systemDefault());
         LocalDateTime updatedTime = estZDT.toLocalDateTime();
         return updatedTime;
+    }
+
+    public static ObservableList<String> getAllApptTypes() {
+        apptTypes.clear();
+        apptTypes.add("Planning Session");
+        apptTypes.add("De-Briefing");
+        apptTypes.add("Meeting");
+        apptTypes.add("Working Lunch");
+        apptTypes.add("Code Review");
+        apptTypes.add("Other");
+        return apptTypes;
+    }
+
+    public static ObservableList<String> getMonthsOfYear() {
+        monthsOfYear.clear();
+        monthsOfYear.add("January");
+        monthsOfYear.add("February");
+        monthsOfYear.add("March");
+        monthsOfYear.add("April");
+        monthsOfYear.add("May");
+        monthsOfYear.add("June");
+        monthsOfYear.add("July");
+        monthsOfYear.add("August");
+        monthsOfYear.add("September");
+        monthsOfYear.add("October");
+        monthsOfYear.add("November");
+        monthsOfYear.add("December");
+        return monthsOfYear;
     }
 }

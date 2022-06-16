@@ -374,7 +374,7 @@ public abstract class AppointmentsDAO {
             ResultSet rs = ps.executeQuery();
 
             // Clear apptList
-            // loginApptList.clear();
+            loginApptList.clear();
 
             // Set bind variables to create appt object, add appt to overlapping appt list
             while(rs.next()) {

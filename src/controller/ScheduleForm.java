@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -67,7 +68,7 @@ public class ScheduleForm implements Initializable {
     public TextField LocationField;
     public javafx.scene.control.DatePicker DatePicker;
     public TextField DescriptionField;
-    public TextField ApptTypeField;
+    public ComboBox ApptTypeComboBox;
     private Appointment appointment;
     private int apptId;
     private int custId;
@@ -85,6 +86,7 @@ public class ScheduleForm implements Initializable {
     ObservableList<Customer> customerList = observableArrayList();
     ObservableList<Contact> contactList = observableArrayList();
     ObservableList<User> userList = observableArrayList();
+    ObservableList<String> apptTypeList = observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -114,7 +116,7 @@ public class ScheduleForm implements Initializable {
                 User user = UserDAO.getUserById(userId);
                 UserComboBox.setValue(user);
                 type = appointment.getType();
-                ApptTypeField.setText(type);
+                ApptTypeComboBox.setValue(type);
                 description = appointment.getDescription();
                 DescriptionField.setText(description);
                 date = (appointment.getStartDateTime().toLocalDateTime()).toLocalDate();
@@ -144,7 +146,7 @@ public class ScheduleForm implements Initializable {
                 User user = UserDAO.getUserById(userId);
                 UserComboBox.setValue(user);
                 type = appointment.getType();
-                ApptTypeField.setText(type);
+                ApptTypeComboBox.setValue(type);
                 description = appointment.getDescription();
                 DescriptionField.setText(description);
                 date = (appointment.getStartDateTime().toLocalDateTime()).toLocalDate();
@@ -174,7 +176,7 @@ public class ScheduleForm implements Initializable {
                 User user = UserDAO.getUserById(userId);
                 UserComboBox.setValue(user);
                 type = appointment.getType();
-                ApptTypeField.setText(type);
+                ApptTypeComboBox.setValue(type);
                 description = appointment.getDescription();
                 DescriptionField.setText(description);
                 date = (appointment.getStartDateTime().toLocalDateTime()).toLocalDate();
@@ -275,6 +277,12 @@ public class ScheduleForm implements Initializable {
             start = start.plusMinutes(10);
         }
         EndTimeComboBox.getSelectionModel().select(startLocal.plusMinutes(10));
+
+        // Fill appointment type comob box
+        apptTypeList = Appointment.getAllApptTypes();
+        ApptTypeComboBox.setVisibleRowCount(5);
+        ApptTypeComboBox.setItems(apptTypeList);
+
     }
 
     public void CustButtonAction(ActionEvent actionEvent) throws IOException {
@@ -283,6 +291,16 @@ public class ScheduleForm implements Initializable {
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 585);
         stage.setTitle("Customers");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
+        // Load Schedule Page
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 900, 653);
+        stage.setTitle("Reports");
         stage.setScene(scene);
         stage.show();
     }
@@ -323,7 +341,7 @@ public class ScheduleForm implements Initializable {
             custId = ((Customer)CustomerComboBox.getSelectionModel().getSelectedItem()).getId();
             contactId = ((Contact)ContactComboBox.getSelectionModel().getSelectedItem()).getId();
             userId = ((User)UserComboBox.getSelectionModel().getSelectedItem()).getId();
-            type = ApptTypeField.getText();
+            type = (String)ApptTypeComboBox.getSelectionModel().getSelectedItem();
             description = DescriptionField.getText();
             date = DatePicker.getValue();
             startTime = (LocalTime)StartTimeComboBox.getSelectionModel().getSelectedItem();
@@ -364,7 +382,7 @@ public class ScheduleForm implements Initializable {
             custId = ((Customer)CustomerComboBox.getSelectionModel().getSelectedItem()).getId();
             contactId = ((Contact)ContactComboBox.getSelectionModel().getSelectedItem()).getId();
             userId = ((User)UserComboBox.getSelectionModel().getSelectedItem()).getId();
-            type = ApptTypeField.getText();
+            type = (String)ApptTypeComboBox.getSelectionModel().getSelectedItem();
             description = DescriptionField.getText();
             date = DatePicker.getValue();
             startTime = (LocalTime)StartTimeComboBox.getSelectionModel().getSelectedItem();
@@ -433,24 +451,12 @@ public class ScheduleForm implements Initializable {
         CustomerComboBox.getSelectionModel().clearSelection();
         ContactComboBox.getSelectionModel().clearSelection();
         UserComboBox.getSelectionModel().clearSelection();
-        ApptTypeField.clear();
+        ApptTypeComboBox.getSelectionModel().clearSelection();
         DescriptionField.clear();
         DatePicker.getEditor().clear();
         StartTimeComboBox.getSelectionModel().clearSelection();
         EndTimeComboBox.getSelectionModel().clearSelection();
         LocationField.clear();
-        // DELETE ME //
-        // CustDivIdComboBox.getItems().clear(); // If you need the combo box emptied
-    }
-
-    public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
-        // Load Schedule Page
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 653);
-        stage.setTitle("Reports");
-        stage.setScene(scene);
-        stage.show();
     }
 
     public boolean emptyFieldCheck() {
@@ -459,7 +465,7 @@ public class ScheduleForm implements Initializable {
 //                || (CustomerComboBox.getSelectionModel().isEmpty())
 //                || (ContactComboBox.getSelectionModel().isEmpty())
 //                || (UserComboBox.getSelectionModel().isEmpty())
-                || (ApptTypeField.getText().isBlank())
+                || (ApptTypeComboBox.getSelectionModel().isEmpty())
                 || (DescriptionField.getText().isBlank())
                 || (DatePicker.getValue() == null)
                 || (StartTimeComboBox.getSelectionModel().isEmpty())
