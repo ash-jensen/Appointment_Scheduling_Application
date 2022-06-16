@@ -266,24 +266,24 @@
                            </HBox>
                            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="838.0">
                               <children>
-                                 <GridPane alignment="TOP_RIGHT" hgap="5.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="279.0" vgap="5.0">
+                                 <GridPane alignment="CENTER" hgap="5.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="297.0" vgap="5.0">
                                     <columnConstraints>
-                                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
-                                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" />
+                                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
+                                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="75.0" prefWidth="75.0" />
                                     </columnConstraints>
                                     <rowConstraints>
                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                       <Label text="Total Customers">
+                                       <Label prefHeight="16.0" prefWidth="207.0" text="Total number of customers:">
                                           <font>
                                              <Font name="Arial Bold" size="14.0" />
                                           </font>
                                           <GridPane.margin>
-                                             <Insets left="25.0" />
+                                             <Insets left="40.0" />
                                           </GridPane.margin>
                                        </Label>
-                                       <Label fx:id="CustomerNumbers" text="Total Customers" GridPane.columnIndex="1">
+                                       <Label fx:id="CustomerNumbers" prefHeight="16.0" prefWidth="95.0" text="0" GridPane.columnIndex="1">
                                           <font>
                                              <Font name="Arial Bold" size="14.0" />
                                           </font>
@@ -302,19 +302,6 @@
                                  <Insets top="15.0" />
                               </VBox.margin>
                            </HBox>
-                           <TableView fx:id="CustomerTable" prefHeight="358.0" prefWidth="837.0" style="-fx-background-color: transparent;">
-                              <columns>
-                                 <TableColumn fx:id="IdCol" maxWidth="96.0" minWidth="96.0" prefWidth="96.0" text="Customer ID" />
-                                 <TableColumn fx:id="NameCol" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Customer Name" />
-                                 <TableColumn fx:id="AddressCol" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Address" />
-                                 <TableColumn fx:id="PostalCodeCol" maxWidth="100.0" minWidth="-Infinity" prefWidth="100.0" text="Postal Code" />
-                                 <TableColumn fx:id="PhoneCol" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Phone" />
-                                 <TableColumn fx:id="DivisionIdCol" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" text="Division ID" />
-                              </columns>
-                              <VBox.margin>
-                                 <Insets top="15.0" />
-                              </VBox.margin>
-                           </TableView>
                         </children>
                      </VBox>
                   </Tab>

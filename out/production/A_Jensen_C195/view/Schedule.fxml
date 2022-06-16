@@ -235,7 +235,6 @@
                                     </Label>
                                     <TextField fx:id="DescriptionField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <DatePicker fx:id="DatePicker" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
                                     <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="256.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
                                           <ComboBox fx:id="StartTimeComboBox" prefHeight="25.0" prefWidth="78.0" />

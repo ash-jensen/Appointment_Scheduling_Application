@@ -38,13 +38,13 @@ public class ReportsForm implements Initializable {
     public TableColumn TypeCol;
     public TableColumn DescriptionCol;
     public ComboBox ContactComboBox;
-    public TableView CustomerTable;
-    public TableColumn IdCol;
-    public TableColumn NameCol;
-    public TableColumn AddressCol;
-    public TableColumn PostalCodeCol;
-    public TableColumn PhoneCol;
-    public TableColumn DivisionIdCol;
+//    public TableView CustomerTable;
+//    public TableColumn IdCol;
+//    public TableColumn NameCol;
+//    public TableColumn AddressCol;
+//    public TableColumn PostalCodeCol;
+//    public TableColumn PhoneCol;
+//    public TableColumn DivisionIdCol;
     public Label CustomerNumbers;
 
     private ObservableList<String> monthsOfYear = observableArrayList();
@@ -60,7 +60,7 @@ public class ReportsForm implements Initializable {
         fillComboBoxes();
 
         // Fill customer table
-        populateCustomerTable();
+        getNumOfCustomers();
 
     }
 
@@ -154,20 +154,9 @@ public class ReportsForm implements Initializable {
         DescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
     }
 
-    public void populateCustomerTable() {
+    public void getNumOfCustomers() {
         customerList = CustomerDAO.getCustomerData();
         int numCustomers = customerList.size();
         CustomerNumbers.setText(String.valueOf(numCustomers));
-
-        // Populate All Appointments table on schedule form
-        CustomerTable.setItems(CustomerDAO.getCustomerData());
-        IdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        NameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        AddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
-        PostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        PhoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        DivisionIdCol.setCellValueFactory(new PropertyValueFactory<>("divId"));
-
-
     }
 }
