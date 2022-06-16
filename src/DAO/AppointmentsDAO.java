@@ -19,6 +19,7 @@ public abstract class AppointmentsDAO {
     private static ObservableList<Appointment> currMonthList = observableArrayList();
     private static ObservableList<Appointment> currWeekList = observableArrayList();
     private static ObservableList<Appointment> loginApptList = observableArrayList();
+    private static ObservableList<Appointment> contactApptList = observableArrayList();
 
     public static ObservableList<Appointment> getAllApptData() {
         try {
@@ -139,6 +140,47 @@ public abstract class AppointmentsDAO {
 
         // Return apptList from db
         return currWeekList;
+    }
+
+    public static ObservableList<Appointment> getContactApptData(int contactIdToFind) {
+        try {
+            // SQL statement to get all customers from customer table
+            String sql = "SELECT * FROM appointments WHERE Contact_ID = ?";
+
+            // Get a connection to DB and send over the SQL
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, contactIdToFind);
+
+            // Get results of query
+            ResultSet rs = ps.executeQuery();
+
+            // Clear apptList
+            contactApptList.clear();
+
+            // Set bind variables to create appt object, add appt to list
+            while(rs.next()) {
+                int apptId = rs.getInt("Appointment_ID");
+                int custId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                int contactId = rs.getInt("Contact_ID");
+                String title = rs.getString("Title");
+                String location = rs.getString("Location");
+                String description = rs.getString("Description");
+                Timestamp startTimestamp = rs.getTimestamp("Start");
+                // LocalDateTime startDateTime = startTimestamp.toLocalDateTime();
+                Timestamp endTimestamp = rs.getTimestamp("End");
+                //LocalDateTime endDateTime = endTimestamp.toLocalDateTime();
+                String type = rs.getString("Type");
+                Appointment appt = new Appointment (apptId, custId, userId, contactId, title, description, location, type, startTimestamp, endTimestamp);
+                contactApptList.add(appt);
+            }
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        // Return contactApptList from db
+        return contactApptList;
     }
 
     public static int addAppt(int custId, int userId, int contactId, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp) {
