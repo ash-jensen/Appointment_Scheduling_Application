@@ -146,7 +146,6 @@ public class Appointment {
         apptTypes.add("Planning Session");
         apptTypes.add("De-Briefing");
         apptTypes.add("Meeting");
-        apptTypes.add("Working Lunch");
         apptTypes.add("Code Review");
         apptTypes.add("Other");
         return apptTypes;

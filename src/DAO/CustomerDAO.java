@@ -190,26 +190,6 @@ public abstract class CustomerDAO {
         // Return customer from db
         return customer;
     }
-
-    // check date conversion
-    /*
-    public static void checkDateConversion() {
-        System.out.println("CREATE DATE TEST");
-        String sql = "select Create_Date from countries";
-        try {
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Timestamp ts = rs.getTimestamp("Create_Date");
-                System.out.println("CD: " + ts.toLocalDateTime().toString());
-            }
-        }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-    */
-
 }
 
 

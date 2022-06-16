@@ -26,10 +26,7 @@ public class ReportsForm implements Initializable {
     public ComboBox ApptTypeComboBox;
     public ComboBox MonthComboBox;
     public Label NumberOfAppointmentsLabel;
-    public static ObservableList<String> monthsOfYear = observableArrayList();
-    public static ObservableList<String> apptTypeList = observableArrayList();
     public TableView ApptsTable;
-
     public TableColumn ApptIdCol;
     public TableColumn CustIdCol;
     public TableColumn UserIdCol;
@@ -50,8 +47,10 @@ public class ReportsForm implements Initializable {
     public TableColumn DivisionIdCol;
     public Label CustomerNumbers;
 
-    ObservableList<Contact> contactList = observableArrayList();
-    ObservableList<Customer> customerList = observableArrayList();
+    private ObservableList<String> monthsOfYear = observableArrayList();
+    private ObservableList<String> apptTypeList = observableArrayList();
+    private ObservableList<Contact> contactList = observableArrayList();
+    private ObservableList<Customer> customerList = observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,7 +67,7 @@ public class ReportsForm implements Initializable {
     private void fillComboBoxes() {
         // Fill month combo box
         monthsOfYear = Appointment.getMonthsOfYear();
-        MonthComboBox.setVisibleRowCount(5);
+        MonthComboBox.setVisibleRowCount(12);
         MonthComboBox.setItems(monthsOfYear);
 
         // Fill appointment type comob box
@@ -125,7 +124,7 @@ public class ReportsForm implements Initializable {
 
 
         // If apptId > 0 returned, repopulate table and inform user of success
-        int apptNum = GeneralQueriesDAO.getNumAppts(month, apptType);
+        int apptNum = AppointmentsDAO.getNumAppts(month, apptType);
         if (apptNum > 0) {
             NumberOfAppointmentsLabel.setText(String.valueOf(apptNum));
         }

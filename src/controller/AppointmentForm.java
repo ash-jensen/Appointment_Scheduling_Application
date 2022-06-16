@@ -17,13 +17,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.*;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class ScheduleForm implements Initializable {
+public class AppointmentForm implements Initializable {
     // FXML Vars
     public TableView AllApptsTable;
     public TableColumn AllApptIdCol;
@@ -189,16 +188,6 @@ public class ScheduleForm implements Initializable {
                 LocationField.setText(location);
             }
         });
-
-
-        // Print all appointment info
-        /*
-        ObservableList<Appointment> allApptList = AppointmentsDAO.getAllApptData();
-        for(Appointment a : allApptList) {
-            System.out.println("Appt ID: " + a.getId() + " EndDateTime: " + a.getEndDateTime());
-        }
-
-         */
     }
 
     private void populateApptsTables() {
@@ -278,7 +267,7 @@ public class ScheduleForm implements Initializable {
         }
         EndTimeComboBox.getSelectionModel().select(startLocal.plusMinutes(10));
 
-        // Fill appointment type comob box
+        // Fill appointment type combo box
         apptTypeList = Appointment.getAllApptTypes();
         ApptTypeComboBox.setVisibleRowCount(5);
         ApptTypeComboBox.setItems(apptTypeList);
