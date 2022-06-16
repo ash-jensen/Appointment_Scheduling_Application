@@ -13,8 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -58,21 +59,47 @@ public class LoginForm implements Initializable {
             userName = UserNameField.getText();
             password = PasswordField.getText();
             if (UserDAO.checkLoginInfo(userName, password)) {
+                Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                stage.hide();
+
                 // Check for appointment within 15 minutes of login
                 AppointmentsDAO.apptLoginCheck();
 
+                // Record valid login info
+                try {
+                    PrintWriter pw = new PrintWriter(new FileOutputStream(
+                            new File("login_activity.txt"),
+                            true /* append = true */));
+                    pw.append("Valid Login: " + userName + " at time: " + LocalDateTime.now() + "\n");
+                    pw.flush();
+                    pw.close();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+
                 // Load Schedule Page
                 Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
-                Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+
                 Scene scene = new Scene(root, 900, 653);
                 stage.setTitle("Schedule");
                 stage.setScene(scene);
                 stage.show();
             }
             else {
-                Alert alert;
+                // Record invalid login info
+                try {
+                    PrintWriter pw = new PrintWriter(new FileOutputStream(
+                            new File("login_activity.txt"),
+                            true /* append = true */));
+                    pw.append("Invalid login by user: " + userName + " at time: " + LocalDateTime.now() + "\n");
+                    pw.flush();
+                    pw.close();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
 
                 // Alert user that login information is invalid
+                Alert alert;
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(alertTitle);
                 alert.setContentText(alertToDisplay);
@@ -80,9 +107,20 @@ public class LoginForm implements Initializable {
             }
         }
         else {
-            Alert alert;
+            // Record invalid login info
+            try {
+                PrintWriter pw = new PrintWriter(new FileOutputStream(
+                        new File("login_activity.txt"),
+                        true /* append = true */));
+                pw.append("Invalid login by user: " + userName + " at time: " + LocalDateTime.now() + "\n");
+                pw.flush();
+                pw.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
 
             // Alert user that login information is invalid
+            Alert alert;
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(alertTitle);
             alert.setContentText(alertToDisplay);

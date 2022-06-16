@@ -119,6 +119,7 @@ public class AppointmentForm implements Initializable {
                 description = appointment.getDescription();
                 DescriptionField.setText(description);
                 date = (appointment.getStartDateTime().toLocalDateTime()).toLocalDate();
+                DatePicker.setValue(null);
                 DatePicker.setValue(date);
                 startTime = (appointment.getStartDateTime().toLocalDateTime()).toLocalTime();
                 StartTimeComboBox.setValue(startTime);
@@ -451,14 +452,14 @@ public class AppointmentForm implements Initializable {
     public boolean emptyFieldCheck() {
         boolean hasText = true;
         if ((ApptTitleField.getText().isBlank())
-//                || (CustomerComboBox.getSelectionModel().isEmpty())
-//                || (ContactComboBox.getSelectionModel().isEmpty())
-//                || (UserComboBox.getSelectionModel().isEmpty())
-                || (ApptTypeComboBox.getSelectionModel().isEmpty())
+                || (CustomerComboBox.getValue() == null)
+                || (ContactComboBox.getValue() == null)
+                || (UserComboBox.getValue() == null)
+                || (ApptTypeComboBox.getValue() == null)
                 || (DescriptionField.getText().isBlank())
                 || (DatePicker.getValue() == null)
-                || (StartTimeComboBox.getSelectionModel().isEmpty())
-                || (EndTimeComboBox.getSelectionModel().isEmpty())
+                || (StartTimeComboBox.getValue() == null)
+                || (EndTimeComboBox.getValue() == null)
                 || (LocationField.getText().isBlank())
                 ) {
             Alert alert;
