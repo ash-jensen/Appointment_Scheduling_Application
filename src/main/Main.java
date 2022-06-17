@@ -1,5 +1,6 @@
 package main;
 
+
 import DAO.CustomerDAO;
 import DAO.JDBC;
 import javafx.application.Application;
@@ -12,6 +13,7 @@ import model.Customer;
 import java.sql.SQLException;
 import java.util.Locale;
 
+/** This class creates an appointment scheduling app.*/
 public class Main extends Application {
 
     @Override
