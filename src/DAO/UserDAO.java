@@ -1,7 +1,6 @@
 package DAO;
 
 import javafx.collections.ObservableList;
-import model.Customer;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -10,11 +9,30 @@ import java.sql.SQLException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
+/**
+ * This abstract class is a data access object that gets User data from the database.
+ * @author Ashley Jensen
+ */
 public abstract class UserDAO {
+    /**
+     * ObservableList of user objects, used to hold all users from the database.
+     */
     private static ObservableList<User> userList = observableArrayList();
+    /**
+     * Variabule used to hold a user object.
+     */
     private static User user;
+    /**
+     * Variable used to hold the user that is currently logged in.
+     */
     private static User currentUser;
 
+    /**
+     * This method makes an observablerList of users using data from the database. It takes in User_ID, User_Name, and
+     * Password and makes a User object with the information. The user is then put into observableList userList which
+     * is then returned.
+     * @return ObservableList of User objects
+     */
     public static ObservableList<User> getUserData() {
         try {
             // SQL statement to get all users from user table
@@ -44,6 +62,11 @@ public abstract class UserDAO {
         return userList;
     }
 
+    /**
+     * This method takes in an integer of userId and finds and returns the user it belongs to.
+     * @param userIdToFind integer of userId to find in the database
+     * @return User found that matches the userId
+     */
     public static User getUserById(int userIdToFind) {
         try {
             // SQL statement to get user from users table
@@ -69,6 +92,14 @@ public abstract class UserDAO {
         return user;
     }
 
+    /**
+     * This method checks the database for a userName and password match. It takes in two Strings, the logged-in user's
+     * username and password, and checks for the username is in the db and if it is, checks for a matching password. If
+     * there is a successfull match, returns true. otherwise false.
+     * @param loginUserName String variable that holds the user's username
+     * @param loginPassword String variable that holds the user's password
+     * @return boolean isMatch
+     */
     public static boolean checkLoginInfo(String loginUserName, String loginPassword) {
         Boolean isMatch = false;
 
@@ -107,6 +138,10 @@ public abstract class UserDAO {
         return isMatch;
     }
 
+    /**
+     * This method returns the User that is currently logged-in to the application.
+     * @return User object user
+     */
     public static User getCurrentUser() {
         return currentUser;
     }
