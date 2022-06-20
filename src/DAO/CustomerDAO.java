@@ -13,10 +13,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 
+/**
+ * This abstract class is a data access object that gets Customer data from the database.
+ *
+ * @author Ashley Jensen
+ */
 public abstract class CustomerDAO {
     private static ObservableList<Customer> customerList = observableArrayList();
     private static Customer customer;
 
+    /**
+     * This method makes an ObservableList of customers using data from the database. It gets Customer_ID, Customer_Name,
+     * Address, Postal_Code, Phone, and Division_ID and makes a Customer object with the information. The Appointment is
+     * then put into ObservableList customerList which is then returned.
+     * @return ObservableList customerList
+     */
     public static ObservableList<Customer> getCustomerData() {
         try {
             // SQL statement to get all customers from customer table
@@ -51,6 +62,16 @@ public abstract class CustomerDAO {
         return customerList;
     }
 
+    /**
+     * This method adds a customer to the database using information gotten from the User and returns the new customer's
+     * customer id.  It takes in name, address, postalCode, phoneNumber and divId.
+     * @param name String name to add to the customer in the database
+     * @param address String address to add to the customer in the database
+     * @param postalCode String postal code to add to the customer in the database
+     * @param phoneNumber String phone number to add to the customer in the database
+     * @param divId integer division id to add to the customer in the database
+     * @return integer custId
+     */
     public static int addCustomer(String name, String address, String postalCode, String phoneNumber, int divId) {
         int custId = 0;
 
@@ -84,6 +105,17 @@ public abstract class CustomerDAO {
         return custId;
     }
 
+    /**
+     * This method updates an existing customer in the database using information gotten from the user and returns the number of
+     * rows affected.  It takes in customer Id to find in the database and the name, address, postalCode, phoneNumber
+     * and divId input by the user.
+     * @param name String name to update the customer in the database
+     * @param address String address to update the customer in the database
+     * @param postalCode String postal code to update the customer in the database
+     * @param phoneNumber String phone number to update the customer in the database
+     * @param divId integer division id to update the customer in the database
+     * @return integer rowsAffected
+     */
     public static int updateCustomer(int custId, String name, String address, String postalCode, String phoneNumber, int divId) {
         Alert alert;
         int rowsAffected = 0;
@@ -118,6 +150,13 @@ public abstract class CustomerDAO {
         return rowsAffected;
     }
 
+    /**
+     * This method deletes a row in the database, after confirmation, using a found customer id and returns the number of
+     * rows affected. It takes in a customer customerToDelete and gets the id, then finds that customer in the database
+     * and deletes the row.
+     * @param customerToDelete customer to find and delete
+     * @return rowsAffected
+     */
     public static int deleteCustomer(Customer customerToDelete) {
         Alert alert;
         int rowsAffected = 0;
@@ -162,6 +201,12 @@ public abstract class CustomerDAO {
         return rowsAffected;
     }
 
+    /**
+     * This method finds a customer by their id in the database and returns the customer. It takes in an integer
+     * custIdToFind and searches the database, then makes Customer object and returns it.
+     * @param custIdToFind the integer custId to find in the database
+     * @return Customer customer
+     */
     public static Customer getCustomerById(int custIdToFind) {
         try {
             // SQL statement to get all customers from customer table

@@ -10,10 +10,21 @@ import java.sql.SQLException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
+/**
+ * This abstract class is a data access object that gets Contact data from the database.
+ *
+ * @author Ashley Jensen
+ */
 public abstract class ContactDAO {
     private static ObservableList<Contact> contactList = observableArrayList();
     private static Contact contact;
 
+    /**
+     * This method makes an ObservableList of Contacts using data from the database. It gets Contact_Id, Contact_Name,
+     * and Email, and makes a Contact object with the information. The Contact is then put into ObservableList contactList
+     * which is then returned.
+     * @return ObservableList contactList
+     */
     public static ObservableList<Contact> getContactData() {
         // If contact list already filled, return contactList
         if (!contactList.isEmpty()) {
@@ -45,6 +56,12 @@ public abstract class ContactDAO {
         return contactList;
     }
 
+    /**
+     * This method makes an ObservableList of Contacts by contactId using data from the database. It gets Contact_Id,
+     * Contact_Name, and Email, and makes a Contact object with the information. The Contact is then put into
+     * ObservableList contactList which is then returned.
+     * @return ObservableList contactList
+     */
     public static Contact getContactById(int contactIdToFind) {
         try {
             // SQL statement to get contact from contacts table

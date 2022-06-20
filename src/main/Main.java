@@ -15,11 +15,12 @@ import java.util.Locale;
 
 /**
  * This is the Main class for the Appointment Scheduler application
+ *
  * @author Ashley Jensen
  */
 public class Main extends Application {
     /**
-     * This method sets the stage with the Login form scene.
+     * This method overrides Start() to set the stage with the Login form scene.
      * @param stage the stage to set
      * @throws Exception
      */

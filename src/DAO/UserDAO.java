@@ -28,8 +28,8 @@ public abstract class UserDAO {
     private static User currentUser;
 
     /**
-     * This method makes an observablerList of users using data from the database. It takes in User_ID, User_Name, and
-     * Password and makes a User object with the information. The user is then put into observableList userList which
+     * This method makes an ObservableList of users using data from the database. It gets User_ID, User_Name, and
+     * Password and makes a User object with the information. The user is then put into ObservableList userList which
      * is then returned.
      * @return ObservableList of User objects
      */

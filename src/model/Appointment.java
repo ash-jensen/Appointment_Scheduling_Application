@@ -14,47 +14,48 @@ import static javafx.collections.FXCollections.observableArrayList;
 /**
  * This class makes Appointment objects and includes getters/setters for id, custId, userId, contactId, title, description, location, type,
  * startTimestamp, and endTimestamp.
+ *
  * @author Ashley Jensen
  */
 public class Appointment {
     /**
-     * Variable used to hold appointment id.
+     * Variable used to hold integer of appointment id.
      */
     private int id;
     /**
-     * Variable used to hold customer id.
+     * Variable used to hold integer of customer id.
      */
     private int custId;
     /**
-     * Variable used to hold user id.
+     * Variable used to hold integer of user id.
      */
     private int userId;
     /**
-     * Variable used to hold contact id.
+     * Variable used to hold integer of contact id.
      */
     private int contactId;
     /**
-     * Variable used to hold the title of an appointment.
+     * Variable used to hold the String title of an appointment.
      */
     private String title;
     /**
-     * Variable used to hold the description of an appointment.
+     * Variable used to hold the String of description of an appointment.
      */
     private String description;
     /**
-     * Variable used to hold the location of an appointment.
+     * Variable used to hold the String of location of an appointment.
      */
     private String location;
     /**
-     * Variable used to hold the type of appointment.
+     * Variable used to hold the String of type of appointment.
      */
     private String type;
     /**
-     * Variable used to hold the start timestamp of an appointment.
+     * Variable used to hold the Timestamp of start of an appointment.
      */
     private Timestamp startTimestamp;
     /**
-     * Variable used to hold the end timestamp of an appointment.
+     * Variable used to hold the Timestamp of end of an appointment.
      */
     private Timestamp endTimestamp;
     // *** DELETE ME ***

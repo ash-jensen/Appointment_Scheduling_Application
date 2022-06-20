@@ -3,6 +3,11 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * This abstract class is the class that establishes, provides, and closes the connection with the database.
+ *
+ * @author Ashley Jensen
+ */
 public abstract class JDBC {
 
     private static final String protocol = "jdbc";
@@ -15,31 +20,36 @@ public abstract class JDBC {
     private static final String password = "Passw0rd!"; // Password
     private static Connection connection; // Connection Interface
 
-    // Open connection to DB
+    /**
+     * This method opens the connection to the database else alerts error.
+     */
     public static void openConnection() {
             try {
                 Class.forName(driver); // Local Driver
                 connection = DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
-                System.out.println("Connection successful!");
             }
             catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
 
-    // Get Connection
+    /**
+     * This method returns a connection to the database when needed.
+     * @return Connection connection.
+     */
     public static Connection getConnection() {
         return connection;
     }
 
-    // Close connection to DB
+    /**
+     * This method closes the connection to the database, else alerts error.
+     */
     public static void closeConnection() {
         try {
             connection.close();
-            System.out.println("Connection closed!");
+
         }
         catch (Exception e) {
-// This can possibly be set nothing "// do nothing" because we are closing the program, it no longer matters
             System.out.println("Error: " + e.getMessage());
         }
     }

@@ -14,6 +14,11 @@ import java.util.Optional;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
+/**
+ * This abstract class is a data access object that gets User data from the database.
+ *
+ * @author Ashley Jensen
+ */
 public abstract class AppointmentsDAO {
     private static ObservableList<Appointment> allApptsList = observableArrayList();
     private static ObservableList<Appointment> currMonthList = observableArrayList();
@@ -21,6 +26,13 @@ public abstract class AppointmentsDAO {
     private static ObservableList<Appointment> loginApptList = observableArrayList();
     private static ObservableList<Appointment> contactApptList = observableArrayList();
 
+    /**
+     * This method makes an ObservableList of appointments using data from the database. It gets Appointment_ID,
+     * Customer_ID, User_ID, Contact_ID, Title, Location, Description, Start, End, and Type and makes an Appointment
+     * object with the information. The Appointment is then put into ObservableList allApptsList which
+     * is then returned.
+     * @return ObservableList allApptsList
+     */
     public static ObservableList<Appointment> getAllApptData() {
         try {
             // SQL statement to get all customers from customer table
@@ -61,6 +73,13 @@ public abstract class AppointmentsDAO {
         return allApptsList;
     }
 
+    /**
+     * This method makes an ObservableList of appointments based on the current month using data from the database.
+     * It takes in Appointment_ID,Customer_ID, User_ID, Contact_ID, Title, Location, Description, Start, End, and Type
+     * and makes an Appointment object with the information. The Appointment is then put into observableList allApptsList
+     * which is then returned.
+     * @return ObservableList currMonthList
+     */
     public static ObservableList<Appointment> getCurrMonthApptData() {
         try {
             // SQL statement to get all customers from customer table
@@ -101,6 +120,13 @@ public abstract class AppointmentsDAO {
         return currMonthList;
     }
 
+    /**
+     * This method makes an ObservableList of appointments based on the current week using data from the database.
+     * It takes in Appointment_ID,Customer_ID, User_ID, Contact_ID, Title, Location, Description, Start, End, and Type
+     * and makes an Appointment object with the information. The Appointment is then put into observableList allApptsList
+     * which is then returned.
+     * @return ObservableList currWeek
+     */
     public static ObservableList<Appointment> getCurrWeekApptData() {
         try {
             // SQL statement to get all customers from customer table
@@ -142,6 +168,14 @@ public abstract class AppointmentsDAO {
         return currWeekList;
     }
 
+    /**
+     * This method makes an ObservableList of appointments per passed in Contact_id using data from the database.
+     * It takes in Appointment_ID,Customer_ID, User_ID, Contact_ID, Title, Location, Description, Start, End, and Type
+     * and makes an Appointment object with the information. The Appointment is then put into observableList allApptsList
+     * which is then returned.
+     * @param contactIdToFind integer of contactId to find in database
+     * @return ObservableList currWeek
+     */
     public static ObservableList<Appointment> getContactApptData(int contactIdToFind) {
         try {
             // SQL statement to get all customers from customer table
@@ -183,6 +217,21 @@ public abstract class AppointmentsDAO {
         return contactApptList;
     }
 
+    /**
+     * This method adds an appointment to the database using information gotten from the User and returns the new
+     * appointments appointment id. It takes in custId, userId, contactId, title, description, location, type,
+     * startTimestamp, and endTimestamp.
+     * @param custId integer custId to add to the appointment in the database
+     * @param userId integer userId to add to the appointment in the database
+     * @param contactId integer contactId to add to the appointment in the database
+     * @param title String title to add to the appointment in the database
+     * @param description String description to add to the appointment in the database
+     * @param location String location to add to the appointment in the database
+     * @param type String type to add to the appointment in the database
+     * @param startTimestamp Timestamp startTimestamp to add to the appointment in the database
+     * @param endTimestamp Timestamp endTimestamp to add to the appointment in the database
+     * @return integer apptId
+     */
     public static int addAppt(int custId, int userId, int contactId, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp) {
         int apptId = 0;
         int overlappingAppts = overlapCheck(custId, startTimestamp, endTimestamp);
@@ -231,6 +280,22 @@ public abstract class AppointmentsDAO {
         return apptId;
     }
 
+    /**
+     * This method updates an appointment in the database using information gotten form the User and returns the number
+     * of rows affected in the database. It takes in apptId to find in the database, then updates custId, userId,
+     * contactId, title, description, location, type, startTimestamp, and endTimestamp.
+     * @param apptId intger apptId to find in the database
+     * @param custId integer custId to update the appointment in the database
+     * @param userId integer userId to update the appointment in the database
+     * @param contactId integer contactId to update the appointment in the database
+     * @param title String title to update the appointment in the database
+     * @param description String description to update the appointment in the database
+     * @param location String location to update the appointment in the database
+     * @param type String type to update the appointment in the database
+     * @param startTimestamp Timestamp startTimestamp to update the appointment in the database
+     * @param endTimestamp Timestamp endTimestamp to update the appointment in the database
+     * @return integer rowsAffected
+     */
     public static int updateAppt(int apptId, int custId, int userId, int contactId, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp ) {
         Alert alert;
         int rowsAffected = 0;
@@ -280,6 +345,13 @@ public abstract class AppointmentsDAO {
         return rowsAffected;
     }
 
+    /**
+     * This method deletes a row in the database, after confirmation, using a found appointment and returns the number of
+     * rows affected. It takes in an appointment apptToDelete and gets the id, then finds that appointment
+     * in the database and deletes the row.
+     * @param apptToDelete Appointment to find and delete
+     * @return integer rowsAffected
+     */
     public static int deleteAppt(Appointment apptToDelete) {
         Alert alert;
         int rowsAffected = 0;
@@ -312,6 +384,15 @@ public abstract class AppointmentsDAO {
         return rowsAffected;
     }
 
+    /**
+     * This method checks for overlapping appointments for a new appointment in the database and returns the number of
+     * overlapping rows. It takes in a customerId and start/end timestamps to check against other appointments the
+     * customer has scheduled.
+     * @param newCustId integer customerId to check appointments for
+     * @param start Timestamp of start time of new appointment
+     * @param end Timestamp of end time of new appointment
+     * @return integer overlapping Rows
+     */
     public static int overlapCheck(int newCustId, Timestamp start, Timestamp end) {
         int overlappingRows = 0;
 
@@ -350,6 +431,17 @@ public abstract class AppointmentsDAO {
         return overlappingRows;
     }
 
+    /**
+     * This method checks for overlapping appointments for a customer in the database while leaving out the appointment
+     * that is being modified so that it doesn't interfere with the check, and returns the number of overlapping
+     * rows. It takes in a customerId, the existing appointment id to leave out of the check, and start/end timestamps
+     * to check against other appointments the customer has scheduled.
+     * @param existingCustId integer customerId to check appointments for
+     * @param existingApptId integer apptId to leave out of the check
+     * @param start Timestamp of start time of appointment
+     * @param end Timestamp of end time of appointment
+     * @return integer overlapping Rows
+     */
     public static int modifyOverlapCheck(int existingCustId, int existingApptId, Timestamp start, Timestamp end) {
         int overlappingRows = 0;
 
@@ -389,6 +481,11 @@ public abstract class AppointmentsDAO {
         return overlappingRows;
     }
 
+    /**
+     * This method checks for appointments scheduled within 15 minutes of the current user's login time. It is called
+     * once at login, if there is an appointment scheduled it will list the appointment's id, date, and time, if there is
+     * not an appointment, it will also inform the user of this.
+     */
     public static void apptLoginCheck() {
         Alert alert;
         LocalDateTime ldtNow = LocalDateTime.now();
@@ -462,6 +559,13 @@ public abstract class AppointmentsDAO {
         }
     }
 
+    /**
+     * This method gets the number of appointments scheduled in the database based on the passed in month and appointment
+     * type. It takes in a user chosen month and apptType and returns an integer numAppts.
+     * @param month is the month the limit the search to
+     * @param apptType is the appointment type to limit the search to
+     * @return integer numAppts
+     */
     public static int getNumAppts(String month, String apptType) {
         int numAppts = 0;
         try {

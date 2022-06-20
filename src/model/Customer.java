@@ -1,15 +1,35 @@
 package model;
 
 /**
- * This class makes Customer objects and includes getters/setters for id, name, address, postalCode, phoneNumber, and divId.
+ * This class makes Customer objects and includes getters/setters for id, name, address, postalCode, phoneNumber,  and divId,
+ * and a toString() override.
+ *
  * @author Ashley Jensen
  */
 public class Customer {
+    /**
+     * Variable to hold integer of id.
+     */
     private int id;
+    /**
+     * Variable to hold String name.
+     */
     private String name;
+    /**
+     * Variable to hold String address.
+     */
     private String address;
+    /**
+     * Variable to hold String postal code.
+     */
     private String postalCode;
+    /**
+     * Variable to hold String phone number.
+     */
     private String phoneNumber;
+    /**
+     * Variable to hold integer of division id.
+     */
     private int divId;
 
     /**

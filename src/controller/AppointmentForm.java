@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
+
 public class AppointmentForm implements Initializable {
     // FXML Vars
     public TableView AllApptsTable;

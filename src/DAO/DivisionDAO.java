@@ -9,14 +9,24 @@ import java.sql.SQLException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
+/**
+ * This abstract class is a data access object that gets Division data from the database.
+ *
+ * @author Ashley Jensen
+ */
 public abstract class DivisionDAO {
     private int divId;
     private String divName;
     private int countryId;
-
     private static ObservableList<Division> divList = observableArrayList();
     private static ObservableList<Division> divsByCountry = observableArrayList();
 
+    /**
+     * This method makes an ObservableList of Divisions using data from the database. It gets Division_ID, Division,
+     * and Country_ID and makes a Division object with the information. The Division is then put into ObservableList
+     * divList which is then returned.
+     * @return ObservableList divList
+     */
     public static ObservableList<Division> getDivData() {
         if (!divList.isEmpty()) {
             return divList;
@@ -50,6 +60,12 @@ public abstract class DivisionDAO {
         return divList;
     }
 
+    /**
+     * This method makes an Observable list of Divisions found with a matching Country_ID using data from the database and
+     * then returns it.
+     * @param countryIdToFind integer countryId passed in to search for in database
+     * @return ObservableList divsByCountry
+     */
     public static ObservableList<Division> getDivsByCountry (int countryIdToFind) {
         try {
             // SQL statement to get all customers from customer table

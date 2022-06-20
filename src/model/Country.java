@@ -1,7 +1,8 @@
 package model;
 
 /**
- * This class makes Country objects and includes getters/setters for id and name.
+ * This class makes Country objects and includes getters/setters for id and name, and a toString() override.
+ *
  * @author Ashley Jensen
  */
 public class Country {

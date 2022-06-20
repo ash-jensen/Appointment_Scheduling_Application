@@ -1,7 +1,8 @@
 package model;
 
 /**
- * This class makes Contact objects and includes getters/setters for id, name, and email.
+ * This class makes Contact objects and includes getters/setters for id, name, and email, and a toString() override.
+ *
  * @author Ashley Jensen
  */
 public class Contact {

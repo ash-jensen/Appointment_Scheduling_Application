@@ -9,9 +9,20 @@ import java.sql.SQLException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
+/**
+ * This abstract class is a data access object that gets Country data from the database.
+ *
+ * @author Ashley Jensen
+ */
 public abstract class CountryDAO {
     private static ObservableList<Country> countryList = observableArrayList();
 
+    /**
+     * This method makes an ObservableList of Countries using data from the database. It gets Country_ID and Country_Name
+     * and makes a Country object with the information. The Country is then put into ObservableList countryList
+     * which is then returned.
+     * @return ObservableList countrytList
+     */
     public static ObservableList<Country> getCountryData() {
         if (!countryList.isEmpty()) {
             return countryList;
@@ -41,6 +52,10 @@ public abstract class CountryDAO {
         return countryList;
     }
 
+    /**
+     * This method makes a Country object found by a matching division id using data from the database and then returns it.
+     * @return Country country
+     */
     public static Country getCountryByDiv(int divId) {
         Country country = null;
         try {
