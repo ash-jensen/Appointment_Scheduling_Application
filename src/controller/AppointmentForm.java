@@ -205,12 +205,13 @@ public class AppointmentForm implements Initializable {
             }
         });
 
+        // Exit button action lambda expression
         ExitButton.setOnAction( event ->
         {
             Alert alert;
 
             // Confirm user wants to exit program
-            alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit the program?");
+            alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to exit the program?");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 // Close Program
@@ -343,25 +344,6 @@ public class AppointmentForm implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
-     /**
-     * This method exits the program, after confirmation, on Exit button click.
-     * @param actionEvent on Exit button click
-     */
-     /*
-    public void ExitButtonAction(ActionEvent actionEvent) {
-        Alert alert;
-
-        // Confirm user wants to exit program
-        alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit the program?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-            // Close Program
-            Platform.exit();
-        }
-    }
-    */
 
     /**
      * This method calls emptyFieldCheck, if none empty it gets info from user input, adds the appointment, then updates

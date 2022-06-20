@@ -58,7 +58,6 @@ public class Appointment {
      * Variable used to hold the Timestamp of end of an appointment.
      */
     private Timestamp endTimestamp;
-
     /**
      * Variable used to hold start as a string
      */
