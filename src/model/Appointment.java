@@ -58,9 +58,14 @@ public class Appointment {
      * Variable used to hold the Timestamp of end of an appointment.
      */
     private Timestamp endTimestamp;
-    // *** DELETE ME ***
-    // private String startString;
-    // private String endString;
+    /**
+     * Variable used to hold start as a string
+     */
+    private String startString;
+    /**
+     *    Variable used to hold end as a string
+     */
+    private String endString;
     /**
      * ObservableList of appointment types.
      */
@@ -177,15 +182,16 @@ public class Appointment {
         this.endTimestamp = endTimestamp;
     }
 
-    /* *** DELETE ME *****
+    /**
+     * This method turns end LocalDateTime into a string and returns it.
+     * @return String endString
+     */
     public String getEndString() {
         LocalDateTime endDateTime = endTimestamp.toLocalDateTime();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
         endString = endDateTime.format(formatter);
         return endString;
     }
-
-     */
 
     /**
      * This method returns location.
@@ -219,14 +225,16 @@ public class Appointment {
         this.startTimestamp = startTimestamp;
     }
 
-    /* *** DELETE??? ***
+    /**
+     * This method turns start LocalDateTime to string and returns it.
+     * @return string startString
+     */
     public String getStartString() {
         LocalDateTime startDateTime = startTimestamp.toLocalDateTime();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
         startString = startDateTime.format(formatter);
         return startString;
     }
-     */
 
     /**
      * This method returns title.
