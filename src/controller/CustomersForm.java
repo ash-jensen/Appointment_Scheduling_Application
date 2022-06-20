@@ -22,7 +22,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * This class creates CustomersForm. You use this to view, add, update, and delete customers.
+ *
+ * @author Ashley Jensen
+ */
 public class CustomersForm implements Initializable {
     // FXML Vars
     public TableView CustTable;
@@ -51,10 +55,15 @@ public class CustomersForm implements Initializable {
     private ObservableList<Division> divisionList;
     private Country selectedCountry;
 
+    /**
+     * CONTAINS LAMBDA EXPRESSION: This lambda expression gets a customer from a table that is selected by a user. It
+     * takes
+     * This method initializes CustomerForm.
+     * @param url is the location
+     * @param resourceBundle is resources used
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initialized");
-
         // Fill customer table with customer data
         populateCustTable();
 
@@ -188,6 +197,9 @@ public class CustomersForm implements Initializable {
          */
     }
 
+    /**
+     * This method populates CustTable with customer objects constructed from the database.
+     */
     private void populateCustTable() {
         // Populate Customer Table on Customers form
         CustTable.setItems(CustomerDAO.getCustomerData());
@@ -199,6 +211,10 @@ public class CustomersForm implements Initializable {
         CustTableDivId.setCellValueFactory(new PropertyValueFactory<>("divId"));
     }
 
+    /**
+     * This method fills the country and division combo boxes.  Country combo box uses country name and division combo box
+     * uses division name.
+     */
     private void fillComboBoxes() {
         // Fill country combo box
         countryList = CountryDAO.getCountryData();
@@ -211,6 +227,11 @@ public class CustomersForm implements Initializable {
         CustDivIdComboBox.setItems(divisionList);
     }
 
+    /**
+     * This method takes you to AppointmentForm on Appointment button click.
+     * @param actionEvent on Customer button click
+     * @throws IOException if the stage is unable to change scene
+     */
     public void SchedButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
@@ -221,6 +242,11 @@ public class CustomersForm implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method takes you to ReportsForm on Reports button click.
+     * @param actionEvent on Reports button click
+     * @throws IOException if the stage is unable to change scene
+     */
     public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
@@ -231,6 +257,11 @@ public class CustomersForm implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method calls emptyFieldCheck, if none empty it gets info from user input, adds the customer, then updates
+     * the customer table, otherwise informs user of error.
+     * @param actionEvent on Add button click
+     */
     public void AddButtonAction(ActionEvent actionEvent) {
         Alert alert;
 
@@ -267,6 +298,11 @@ public class CustomersForm implements Initializable {
         }
     }
 
+    /**
+     * This method calls emptyFieldCheck, if none empty, it gets info from user input, updates selected customer, then
+     * updates the customer table, otherwise informs user of error.
+     * @param actionEvent on Update button click
+     */
     public void UpdateButtonAction(ActionEvent actionEvent)  {
         Alert alert;
 
@@ -303,6 +339,11 @@ public class CustomersForm implements Initializable {
         }
     }
 
+    /**
+     * This method checks that a customer is selected, calls deleteCustomer from CustomerDAO, then informs user of
+     * successful delete or otherwise.
+     * @param actionEvent on Delete button click
+     */
     public void DeleteButtonAction(ActionEvent actionEvent)  {
         Alert alert;
 
@@ -336,6 +377,10 @@ public class CustomersForm implements Initializable {
         }
     }
 
+    /**
+     * This method clears all form fields
+     * @param actionEvent on Clear button click
+     */
     public void ClearButtonAction(ActionEvent actionEvent) {
         CustIdField.clear();
         CustNameField.clear();
@@ -346,6 +391,10 @@ public class CustomersForm implements Initializable {
         CustPostalCodeField.clear();
     }
 
+    /**
+     * This method exits the program, after confirmation, on Exit button click.
+     * @param actionEvent on Exit button click
+     */
     public void ExitButtonAction(ActionEvent actionEvent) {
         Alert alert;
 
@@ -358,6 +407,11 @@ public class CustomersForm implements Initializable {
         }
     }
 
+    /**
+     * This method checks that a country has been selected, then fills the division combo box with divisions in the
+     * selected country.
+     * @param actionEvent on country combo box selection
+     */
     public void countrySelectedAction(ActionEvent actionEvent) {
         selectedCountry = (Country) CustCountryIdComboBox.getSelectionModel().getSelectedItem();
         if (selectedCountry == null) {
@@ -378,6 +432,10 @@ public class CustomersForm implements Initializable {
         }
     }
 
+    /**
+     * This method checks all form fields to make sure they hold value, returns true if all full, false otherwise.
+     * @return boolean hasText
+     */
     public boolean emptyFieldCheck() {
         boolean hasText = true;
         if ((CustNameField.getText().isBlank()) || (CustPhoneNumberField.getText().isBlank())

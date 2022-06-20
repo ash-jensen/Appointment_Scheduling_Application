@@ -35,13 +35,17 @@ public class LoginForm implements Initializable {
     String alertTitle = langBundle.getString("LoginError");
     String alertToDisplay = langBundle.getString("InvalidErrorMessage");
 
+    /**
+     * This method initializes LoginForm and checks language for translation purposes.
+     * @param url is the location
+     * @param resourceBundle is resources used
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initialized");
-
         // Show default location
         Location.setText(zone);
 
+        // If locale language is French, translate page
         if (Locale.getDefault().getLanguage().equals("fr") ) {
             SignInLabel.setText(langBundle.getString("Login"));
             UserNameLabel.setText(langBundle.getString("UserName"));
@@ -54,6 +58,13 @@ public class LoginForm implements Initializable {
         }
     }
 
+    /**
+     * This method checks to make sure the username and password fields are not empty, then checks for valid login
+     * information and logs info to login_activity.txt. If the login is valid, it then makes a call to apptLoginCheck to check for appointments for the logged
+     * on user, and then loads AppointmentForm. If not valid login, it informs user to try again.
+     * @param actionEvent SignIn button click
+     * @throws IOException if the stage is unable to change scene
+     */
     public void SIButtonAction(ActionEvent actionEvent) throws IOException {
         if ((!UserNameField.getText().isEmpty()) && (!PasswordField.getText().isEmpty())) {
             userName = UserNameField.getText();
@@ -81,7 +92,7 @@ public class LoginForm implements Initializable {
                 Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
 
                 Scene scene = new Scene(root, 900, 653);
-                stage.setTitle("Schedule");
+                stage.setTitle("Appointment");
                 stage.setScene(scene);
                 stage.show();
             }

@@ -22,7 +22,11 @@ import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-
+/**
+ * This class creates AppointmentForm. You use this to view, add, update, and delete appointments.
+ *
+ * @author Ashley Jensen
+ */
 public class AppointmentForm implements Initializable {
     // FXML Vars
     public TableView AllApptsTable;
@@ -88,6 +92,11 @@ public class AppointmentForm implements Initializable {
     ObservableList<User> userList = observableArrayList();
     ObservableList<String> apptTypeList = observableArrayList();
 
+    /**
+     * This method initializes AppointmentForm.
+     * @param url is the location
+     * @param resourceBundle is resources used
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
@@ -192,6 +201,10 @@ public class AppointmentForm implements Initializable {
         });
     }
 
+    /**
+     * This method populates all appointments, current month appointments, and current week appointments tables on
+     * AppointmentForm under their respective tabs, with appointment objects constructed from the database.
+     */
     private void populateApptsTables() {
         // Populate All Appointments table on schedule form
         AllApptsTable.setItems(AppointmentsDAO.getAllApptData());
@@ -233,6 +246,11 @@ public class AppointmentForm implements Initializable {
         CurrWeekDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
     }
 
+    /**
+     * This method fills the customer, contact, user, and start/end time combo boxes.  Customer combo box uses customer
+     * id and name, contact combo box uses contact id and name, user combo box uses user id and name. The start and end
+     * time combo boxes show the eastern time business hours converted into local time.
+     */
     private void fillComboBoxes() {
         // Fill customer combo box
         customerList = CustomerDAO.getCustomerData();
@@ -276,6 +294,11 @@ public class AppointmentForm implements Initializable {
 
     }
 
+    /**
+     * This method takes you to CustomersForm on Customer button click.
+     * @param actionEvent on Customer button click
+     * @throws IOException if the stage is unable to change scene
+     */
     public void CustButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Customers Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
@@ -286,6 +309,11 @@ public class AppointmentForm implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method takes you to ReportsForm on Reports button click.
+     * @param actionEvent on Reports button click
+     * @throws IOException if the stage is unable to change scene
+     */
     public void ReportsButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
@@ -296,6 +324,10 @@ public class AppointmentForm implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method exits the program, after confirmation, on Exit button click.
+     * @param actionEvent on Exit button click
+     */
     public void ExitButtonAction(ActionEvent actionEvent) {
         Alert alert;
 
@@ -308,6 +340,11 @@ public class AppointmentForm implements Initializable {
         }
     }
 
+    /**
+     * This method calls emptyFieldCheck, if none empty it gets info from user input, adds the appointment, then updates
+     * the appointment tables, otherwise informs user of error.
+     * @param actionEvent on Add button click
+     */
     public void AddApptButtonAction(ActionEvent actionEvent) {
         // Add test
         /*
@@ -364,6 +401,11 @@ public class AppointmentForm implements Initializable {
         }
     }
 
+    /**
+     * This method calls emptyFieldCheck, if none empty, it gets info from user input, updates selected appointment, then
+     * updates the appointment tables, otherwise informs user of error.
+     * @param actionEvent on Update button click
+     */
     public void UpdateApptButtonAction(ActionEvent actionEvent) {
         Alert alert;
 
@@ -406,6 +448,11 @@ public class AppointmentForm implements Initializable {
         }
     }
 
+    /**
+     * This method checks that an appointment is selected, calls deleteAppt from AppointmentsDAO, then informs user of
+     * successful delete or otherwise.
+     * @param actionEvent on Delete button click
+     */
     public void DeleteApptButtonAction(ActionEvent actionEvent) {
         Alert alert;
 
@@ -436,7 +483,12 @@ public class AppointmentForm implements Initializable {
         }
     }
 
+    /**
+     * This method clears all form fields
+     * @param actionEvent on Clear button click
+     */
     public void ClearButtonAction(ActionEvent actionEvent) {
+        // Clear fields
         ApptIdField.clear();
         ApptTitleField.clear();
         CustomerComboBox.getSelectionModel().clearSelection();
@@ -450,6 +502,10 @@ public class AppointmentForm implements Initializable {
         LocationField.clear();
     }
 
+    /**
+     * This method checks all form fields to make sure they hold value, returns true if all full, false otherwise.
+     * @return boolean hasText
+     */
     public boolean emptyFieldCheck() {
         boolean hasText = true;
         if ((ApptTitleField.getText().isBlank())

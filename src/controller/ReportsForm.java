@@ -22,6 +22,12 @@ import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
+/**
+ * This class creates ReportsForm. You use this form to view reports about the number of appointments scheduled by contact
+ * and type, all appointments for one contact, and the number of total customers in the database.
+ *
+ * @author Ashley Jensen
+ */
 public class ReportsForm implements Initializable {
     public ComboBox ApptTypeComboBox;
     public ComboBox MonthComboBox;
@@ -46,16 +52,18 @@ public class ReportsForm implements Initializable {
 //    public TableColumn PhoneCol;
 //    public TableColumn DivisionIdCol;
     public Label CustomerNumbers;
-
     private ObservableList<String> monthsOfYear = observableArrayList();
     private ObservableList<String> apptTypeList = observableArrayList();
     private ObservableList<Contact> contactList = observableArrayList();
     private ObservableList<Customer> customerList = observableArrayList();
 
+    /**
+     * This method initializes ReportsForm.
+     * @param url is the location
+     * @param resourceBundle is resources used
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initialized");
-
         // Fill combo boxes
         fillComboBoxes();
 
@@ -64,6 +72,10 @@ public class ReportsForm implements Initializable {
 
     }
 
+    /**
+     * This method fills the months, appointment type, and contact combo boxes.  Month combo box uses months of year,
+     * appointment type combo box uses list of appointment type, contact combo box uses contact id and name.
+     */
     private void fillComboBoxes() {
         // Fill month combo box
         monthsOfYear = Appointment.getMonthsOfYear();
@@ -81,6 +93,11 @@ public class ReportsForm implements Initializable {
         ContactComboBox.setItems(contactList);
     }
 
+    /**
+     * This method takes you to AppointmentForm on Appointment button click.
+     * @param actionEvent on Customer button click
+     * @throws IOException if the stage is unable to change scene
+     */
     public void SchedButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
@@ -91,6 +108,11 @@ public class ReportsForm implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method takes you to CustomersForm on Customer button click.
+     * @param actionEvent on Customer button click
+     * @throws IOException if the stage is unable to change scene
+     */
     public void CustButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Customers Page
         Parent root = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
@@ -101,6 +123,10 @@ public class ReportsForm implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method exits the program, after confirmation, on Exit button click.
+     * @param actionEvent on Exit button click
+     */
     public void ExitButtonAction(ActionEvent actionEvent) {
         Alert alert;
 
@@ -113,6 +139,11 @@ public class ReportsForm implements Initializable {
         }
     }
 
+    /**
+     * This method gets input from month/appointment type combo boxes and calls getNumAppts from AppointmentsDAO to
+     * return number of appointments matching that month and appointment type, otherwise alerts nothing found.
+     * @param actionEvent on Ok button click
+     */
     public void NumApptsOkayButtonAction(ActionEvent actionEvent) {
         Alert alert;
         String month;
@@ -123,12 +154,12 @@ public class ReportsForm implements Initializable {
         apptType = (String)ApptTypeComboBox.getSelectionModel().getSelectedItem();
 
 
-        // If apptId > 0 returned, repopulate table and inform user of success
+        // If appointment found, show in number of appointments label
         int apptNum = AppointmentsDAO.getNumAppts(month, apptType);
         if (apptNum > 0) {
             NumberOfAppointmentsLabel.setText(String.valueOf(apptNum));
         }
-        // Alert user: customer has not been added
+        // Alert user: no appointments found
         else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Appointments Found Error");
@@ -137,6 +168,11 @@ public class ReportsForm implements Initializable {
         }
     }
 
+    /**
+     * This method gets the contactId of the chosen contact and gets the appointments scheduled for them, then fills
+     * the table with the information.
+     * @param actionEvent on OK button click
+     */
     public void ContactSchedOkayButtonAction(ActionEvent actionEvent) {
          int contactId = ((Contact)ContactComboBox.getSelectionModel().getSelectedItem()).getId();
 
@@ -154,6 +190,9 @@ public class ReportsForm implements Initializable {
         DescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
     }
 
+    /**
+     * This method shows the number of customers in the database in the CustomerNumbers label.
+     */
     public void getNumOfCustomers() {
         customerList = CustomerDAO.getCustomerData();
         int numCustomers = customerList.size();
