@@ -94,9 +94,11 @@ public class AppointmentForm implements Initializable {
     ObservableList<String> apptTypeList = observableArrayList();
 
     /**
-     * CONTAINS LAMBDA EXPRESSION: These lambda expressions gets a selected appointment from AllApptsTable, CurrMonthTable,
+     * CONTAINS MULTIPLE LAMBDA EXPRESSION: The first three lambda expressions gets a selected appointment from AllApptsTable, CurrMonthTable,
      * or CurrWeekTable and put it's information into the AppointmentForm fields. It takes parameters of object,
      * oldSelection, and newSelection and if there is a new selection, it fills in the appointment fields.
+     * The fourth lambda expression takes in an event of Exit button click and confirms the user would like to quit,
+     * then closes the program.
      *
      * This method initializes AppointmentForm.
      * @param url is the location
@@ -203,7 +205,7 @@ public class AppointmentForm implements Initializable {
             }
         });
 
-        ExitButton.setOnAction( e ->
+        ExitButton.setOnAction( event ->
         {
             Alert alert;
 
