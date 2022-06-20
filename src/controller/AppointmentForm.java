@@ -93,14 +93,16 @@ public class AppointmentForm implements Initializable {
     ObservableList<String> apptTypeList = observableArrayList();
 
     /**
+     * CONTAINS LAMBDA EXPRESSION: These lambda expressions gets a selected appointment from AllApptsTable, CurrMonthTable,
+     * or CurrWeekTable and put it's information into the AppointmentForm fields. It takes parameters of object,
+     * oldSelection, and newSelection and if there is a new selection, it fills in the appointment fields.
+     *
      * This method initializes AppointmentForm.
      * @param url is the location
      * @param resourceBundle is resources used
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initialized");
-
         // Fill All Appointment tables
         populateApptsTables();
 

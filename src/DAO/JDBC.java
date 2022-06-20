@@ -20,7 +20,7 @@ public abstract class JDBC {
     private static Connection connection; // Connection Interface
 
     /**
-     * This method opens the connection to the database else alerts error.
+     * This method opens the connection to the database, else alerts error.
      */
     public static void openConnection() {
             try {

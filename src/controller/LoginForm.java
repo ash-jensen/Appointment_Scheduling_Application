@@ -20,6 +20,11 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * This class creates LoginForm. You use this to log in to the Appointment Scheduling application.
+ *
+ * @author Ashley Jensen
+ */
 public class LoginForm implements Initializable {
     public TextField UserNameField;
     public TextField PasswordField;
@@ -89,7 +94,7 @@ public class LoginForm implements Initializable {
                 }
 
                 // Load Schedule Page
-                Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
 
                 Scene scene = new Scene(root, 900, 653);
                 stage.setTitle("Appointment");

@@ -95,15 +95,15 @@ public class ReportsForm implements Initializable {
 
     /**
      * This method takes you to AppointmentForm on Appointment button click.
-     * @param actionEvent on Customer button click
+     * @param actionEvent on Appointment button click
      * @throws IOException if the stage is unable to change scene
      */
-    public void SchedButtonAction(ActionEvent actionEvent) throws IOException {
+    public void AppointmentButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 653);
-        stage.setTitle("Schedule");
+        stage.setTitle("Appointments");
         stage.setScene(scene);
         stage.show();
     }
@@ -142,7 +142,7 @@ public class ReportsForm implements Initializable {
     /**
      * This method gets input from month/appointment type combo boxes and calls getNumAppts from AppointmentsDAO to
      * return number of appointments matching that month and appointment type, otherwise alerts nothing found.
-     * @param actionEvent on Ok button click
+     * @param actionEvent on OK button click
      */
     public void NumApptsOkayButtonAction(ActionEvent actionEvent) {
         Alert alert;

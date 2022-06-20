@@ -57,10 +57,9 @@ public abstract class ContactDAO {
     }
 
     /**
-     * This method makes an ObservableList of Contacts by contactId using data from the database. It gets Contact_Id,
-     * Contact_Name, and Email, and makes a Contact object with the information. The Contact is then put into
-     * ObservableList contactList which is then returned.
-     * @return ObservableList contactList
+     * This method makes and returns a Contact found by contactId using data from the database. It gets Contact_Name,
+     * and Email, and makes a Contact object with the information and is then returned.
+     * @return Contact contact
      */
     public static Contact getContactById(int contactIdToFind) {
         try {

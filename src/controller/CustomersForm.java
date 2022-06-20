@@ -56,8 +56,10 @@ public class CustomersForm implements Initializable {
     private Country selectedCountry;
 
     /**
-     * CONTAINS LAMBDA EXPRESSION: This lambda expression gets a customer from a table that is selected by a user. It
-     * takes
+     * CONTAINS LAMBDA EXPRESSION: This lambda expression gets a selected customer from CustTable and puts it's
+     * information into the CustomerForm fields. It takes parameters of object, oldSelection, and newSelection and if
+     * there is a new selection, it fills in the customer fields.
+     *
      * This method initializes CustomerForm.
      * @param url is the location
      * @param resourceBundle is resources used
@@ -229,15 +231,15 @@ public class CustomersForm implements Initializable {
 
     /**
      * This method takes you to AppointmentForm on Appointment button click.
-     * @param actionEvent on Customer button click
+     * @param actionEvent on Appointment button click
      * @throws IOException if the stage is unable to change scene
      */
-    public void SchedButtonAction(ActionEvent actionEvent) throws IOException {
+    public void AppointmentButtonAction(ActionEvent actionEvent) throws IOException {
         // Load Schedule Page
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 653);
-        stage.setTitle("Schedule");
+        stage.setTitle("Appointments");
         stage.setScene(scene);
         stage.show();
     }

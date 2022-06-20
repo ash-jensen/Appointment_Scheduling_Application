@@ -155,7 +155,7 @@ public abstract class CustomerDAO {
      * rows affected. It takes in a customer customerToDelete and gets the id, then finds that customer in the database
      * and deletes the row.
      * @param customerToDelete customer to find and delete
-     * @return rowsAffected
+     * @return integer rowsAffected
      */
     public static int deleteCustomer(Customer customerToDelete) {
         Alert alert;

@@ -28,7 +28,7 @@
                         </Label>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="716.0" spacing="20.0">
                             <children>
-                                <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SchedButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Schedule" textFill="WHITE">
+                                <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AppointmentButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Appointments" textFill="WHITE">
                                     <font>
                                         <Font name="Arial Bold" size="13.0" />
                                     </font>

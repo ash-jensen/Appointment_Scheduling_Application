@@ -15,7 +15,7 @@ import java.util.Optional;
 import static javafx.collections.FXCollections.observableArrayList;
 
 /**
- * This abstract class is a data access object that gets User data from the database.
+ * This abstract class is a data access object that gets Appointment data from the database.
  *
  * @author Ashley Jensen
  */
@@ -76,7 +76,7 @@ public abstract class AppointmentsDAO {
     /**
      * This method makes an ObservableList of appointments based on the current month using data from the database.
      * It takes in Appointment_ID,Customer_ID, User_ID, Contact_ID, Title, Location, Description, Start, End, and Type
-     * and makes an Appointment object with the information. The Appointment is then put into observableList allApptsList
+     * and makes an Appointment object with the information. The Appointment is then put into observableList currMonthList
      * which is then returned.
      * @return ObservableList currMonthList
      */
@@ -123,7 +123,7 @@ public abstract class AppointmentsDAO {
     /**
      * This method makes an ObservableList of appointments based on the current week using data from the database.
      * It takes in Appointment_ID,Customer_ID, User_ID, Contact_ID, Title, Location, Description, Start, End, and Type
-     * and makes an Appointment object with the information. The Appointment is then put into observableList allApptsList
+     * and makes an Appointment object with the information. The Appointment is then put into observableList currWeekList
      * which is then returned.
      * @return ObservableList currWeek
      */
@@ -169,12 +169,12 @@ public abstract class AppointmentsDAO {
     }
 
     /**
-     * This method makes an ObservableList of appointments per passed in Contact_id using data from the database.
+     * This method makes an ObservableList of appointments per Contact_id using data from the database.
      * It takes in Appointment_ID,Customer_ID, User_ID, Contact_ID, Title, Location, Description, Start, End, and Type
-     * and makes an Appointment object with the information. The Appointment is then put into observableList allApptsList
+     * and makes an Appointment object with the information. The Appointment is then put into observableList contactApptList
      * which is then returned.
      * @param contactIdToFind integer of contactId to find in database
-     * @return ObservableList currWeek
+     * @return ObservableList contactApptList
      */
     public static ObservableList<Appointment> getContactApptData(int contactIdToFind) {
         try {
@@ -391,7 +391,7 @@ public abstract class AppointmentsDAO {
      * @param newCustId integer customerId to check appointments for
      * @param start Timestamp of start time of new appointment
      * @param end Timestamp of end time of new appointment
-     * @return integer overlapping Rows
+     * @return integer overlappingRows
      */
     public static int overlapCheck(int newCustId, Timestamp start, Timestamp end) {
         int overlappingRows = 0;
@@ -440,7 +440,7 @@ public abstract class AppointmentsDAO {
      * @param existingApptId integer apptId to leave out of the check
      * @param start Timestamp of start time of appointment
      * @param end Timestamp of end time of appointment
-     * @return integer overlapping Rows
+     * @return integer overlappingRows
      */
     public static int modifyOverlapCheck(int existingCustId, int existingApptId, Timestamp start, Timestamp end) {
         int overlappingRows = 0;

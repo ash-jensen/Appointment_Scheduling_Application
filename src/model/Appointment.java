@@ -213,7 +213,7 @@ public class Appointment {
 
     /**
      * This method sets startTimestamp variable to startTimestamp parameter.
-     * @param startTimestamp sets Timestamp location
+     * @param startTimestamp sets Timestamp startTimestamp
      */
     public void setStartDateTime(Timestamp startTimestamp) {
         this.startTimestamp = startTimestamp;
@@ -279,7 +279,7 @@ public class Appointment {
     /**
      * This method takes in a LocalDateTime and changes it eastern time.
      * @param timeToChangeLDT is the LocalDateTime to change to eastern time
-     * @return updatedTime in eastern time
+     * @return LocalDateTime updatedTime in eastern time
      */
     public static LocalDateTime updateDateTime(LocalDateTime timeToChangeLDT) {
         ZonedDateTime sysDefZDT = timeToChangeLDT.atZone(ZoneId.of("America/New_York"));

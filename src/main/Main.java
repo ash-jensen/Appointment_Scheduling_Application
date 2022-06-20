@@ -22,7 +22,7 @@ public class Main extends Application {
     /**
      * This method overrides Start() to set the stage with the Login form scene.
      * @param stage the stage to set
-     * @throws Exception
+     * @throws Exception if the stage is unable to change scene
      */
     @Override
     public void start(Stage stage) throws Exception {

@@ -65,7 +65,7 @@ public abstract class UserDAO {
     /**
      * This method takes in an integer of userId and finds and returns the user it belongs to.
      * @param userIdToFind integer of userId to find in the database
-     * @return User found that matches the userId
+     * @return User user that matches the userId
      */
     public static User getUserById(int userIdToFind) {
         try {
@@ -140,7 +140,7 @@ public abstract class UserDAO {
 
     /**
      * This method returns the User that is currently logged-in to the application.
-     * @return User object user
+     * @return User user
      */
     public static User getCurrentUser() {
         return currentUser;
