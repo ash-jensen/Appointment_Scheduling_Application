@@ -73,6 +73,7 @@ public class AppointmentForm implements Initializable {
     public javafx.scene.control.DatePicker DatePicker;
     public TextField DescriptionField;
     public ComboBox ApptTypeComboBox;
+    public Button ExitButton;
     private Appointment appointment;
     private int apptId;
     private int custId;
@@ -201,6 +202,20 @@ public class AppointmentForm implements Initializable {
                 LocationField.setText(location);
             }
         });
+
+        ExitButton.setOnAction( e ->
+        {
+            Alert alert;
+
+            // Confirm user wants to exit program
+            alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit the program?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK) {
+                // Close Program
+                Platform.exit();
+            }
+
+        } );
     }
 
     /**
@@ -250,8 +265,9 @@ public class AppointmentForm implements Initializable {
 
     /**
      * This method fills the customer, contact, user, and start/end time combo boxes.  Customer combo box uses customer
-     * id and name, contact combo box uses contact id and name, user combo box uses user id and name. The start and end
-     * time combo boxes show the eastern time business hours converted into local time.
+     * id and name, contact combo box uses contact id and name, user combo box uses user id and name, and appoint type
+     * uses appointment type list. The start and end time combo boxes show the eastern time business hours converted
+     * into local time.
      */
     private void fillComboBoxes() {
         // Fill customer combo box
@@ -326,10 +342,12 @@ public class AppointmentForm implements Initializable {
         stage.show();
     }
 
-    /**
+
+     /**
      * This method exits the program, after confirmation, on Exit button click.
      * @param actionEvent on Exit button click
      */
+     /*
     public void ExitButtonAction(ActionEvent actionEvent) {
         Alert alert;
 
@@ -341,6 +359,7 @@ public class AppointmentForm implements Initializable {
             Platform.exit();
         }
     }
+    */
 
     /**
      * This method calls emptyFieldCheck, if none empty it gets info from user input, adds the appointment, then updates

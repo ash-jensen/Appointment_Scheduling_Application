@@ -293,7 +293,7 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="487.0" spacing="25.0">
                      <children>
-                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ExitButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
+                        <Button fx:id="ExitButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>

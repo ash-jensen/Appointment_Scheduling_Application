@@ -145,6 +145,7 @@ public class ReportsForm implements Initializable {
      * @param actionEvent on OK button click
      */
     public void NumApptsOkayButtonAction(ActionEvent actionEvent) {
+
         Alert alert;
         String month;
         String apptType;
