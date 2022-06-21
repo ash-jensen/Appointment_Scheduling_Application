@@ -18,13 +18,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentForm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentForm">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="900.0" spacing="5.0">
          <children>
             <HBox prefHeight="20.0" prefWidth="840.0">
                <children>
-                  <Label text="Schedule">
+                  <Label prefHeight="32.0" prefWidth="263.0" text="Appointments">
                      <font>
                         <Font name="Arial Bold" size="28.0" />
                      </font>
@@ -293,7 +293,7 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="487.0" spacing="25.0">
                      <children>
-                        <Button fx:id="ExitButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
+                        <Button fx:id="ExitButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Exit" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsForm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsForm">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="900.0" spacing="5.0">
          <children>
@@ -29,7 +29,7 @@
                   </Label>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="32.0" prefWidth="734.0" spacing="20.0">
                      <children>
-                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AppointmentButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Appointments" textFill="WHITE">
+                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AppointmentButtonAction" prefWidth="105.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Appointments" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -112,7 +112,7 @@
                                           <ComboBox fx:id="ApptTypeComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" />
                                        </children>
                                     </GridPane>
-                                    <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#NumApptsOkayButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Okay" textFill="WHITE">
+                                    <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#NumApptsOkayButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="OK" textFill="WHITE">
                                        <font>
                                           <Font name="Arial Bold" size="13.0" />
                                        </font>
@@ -212,7 +212,7 @@
                                           <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ContactSchedOkayButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="Okay" textFill="WHITE">
+                                          <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ContactSchedOkayButtonAction" prefWidth="100.0" style="-fx-background-color: #2a70c7#2a70c7 #2a70c7#2a70c7;" text="OK" textFill="WHITE">
                                              <font>
                                                 <Font name="Arial Bold" size="13.0" />
                                              </font>
