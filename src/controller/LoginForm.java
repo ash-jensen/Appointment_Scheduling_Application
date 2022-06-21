@@ -71,6 +71,7 @@ public class LoginForm implements Initializable {
      * @throws IOException if the stage is unable to change scene
      */
     public void SIButtonAction(ActionEvent actionEvent) throws IOException {
+        // Check for empty fields and check login info
         if ((!UserNameField.getText().isEmpty()) && (!PasswordField.getText().isEmpty())) {
             userName = UserNameField.getText();
             password = PasswordField.getText();

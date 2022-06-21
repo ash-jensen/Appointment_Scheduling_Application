@@ -351,20 +351,6 @@ public class AppointmentForm implements Initializable {
      * @param actionEvent on Add button click
      */
     public void AddApptButtonAction(ActionEvent actionEvent) {
-        // Add test
-        /*
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
-        String st = "12-03-2022 12:30";
-        LocalDateTime ldt = LocalDateTime.parse(st, dtf);
-        Timestamp sts = Timestamp.valueOf(ldt);
-        String et = "12-03-2022 12:30";
-        ldt = LocalDateTime.parse(et, dtf);
-        Timestamp ets = Timestamp.valueOf(ldt);
-        AppointmentsDAO.addAppt(120, 2, 3, "Networking", "Coffee with coworker and friend", "Coffee Shop",
-                "Coffee Date", sts, ets);
-        populateAllApptsTable();
-         */
-
         Alert alert;
 
         // Check that all fields/combo boxes have been filled out, add customer

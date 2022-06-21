@@ -15,9 +15,9 @@ Version: 1.1.3
 Date: June 21, 2022
 
 IDE/JDK/JavaFX and MySQL Connector Versions:
-IDE: IntelliJ Community ****
-JDK:
-JavaFX:
+IDE: IntelliJ Community 2021.1
+JDK: Java Version 17.0.1
+JavaFX: JavaFX-SDK-17.0.1
 MySQL Connector: mysql-connector-java-8.0.25
 
 Directions:

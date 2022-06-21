@@ -44,13 +44,6 @@ public class ReportsForm implements Initializable {
     public TableColumn TypeCol;
     public TableColumn DescriptionCol;
     public ComboBox ContactComboBox;
-//    public TableView CustomerTable;
-//    public TableColumn IdCol;
-//    public TableColumn NameCol;
-//    public TableColumn AddressCol;
-//    public TableColumn PostalCodeCol;
-//    public TableColumn PhoneCol;
-//    public TableColumn DivisionIdCol;
     public Label CustomerNumbers;
     private ObservableList<String> monthsOfYear = observableArrayList();
     private ObservableList<String> apptTypeList = observableArrayList();
@@ -218,6 +211,5 @@ public class ReportsForm implements Initializable {
 
         // Set label to show number of customers in database
         CustomerNumbers.setText(String.valueOf(numCustomers));
-
     }
 }

@@ -1,8 +1,6 @@
 package controller;
 
-import DAO.CountryDAO;
-import DAO.CustomerDAO;
-import DAO.DivisionDAO;
+import DAO.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,9 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Country;
-import model.Customer;
-import model.Division;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -108,95 +104,6 @@ public class CustomersForm implements Initializable {
                 }
             }
         });
-
-
-        // TESTS
-        // Insert customer test
-        /*
-        int rowsAffected = 0;
-        try {
-            rowsAffected = addCustomer("Ashley", "1234 Weblo Ave", "77445", "123-334-1234",29);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rowsAffected > 0) {
-            System.out.println("Insert successful");
-        }
-        else {
-            System.out.println("Insert failed");
-        }
-
-         */
-
-        // Time combo box
-        /*
-        LocalTime start = LocalTime.of(6, 0);
-        LocalTime end = LocalTime.NOON;
-
-        while(start.isBefore(end.plusSeconds(1))) {
-            CustCountryIdComboBox.getItems().add(start);
-            start = start.plusMinutes(10);
-        }
-        CustCountryIdComboBox.getSelectionModel().select(LocalTime.of(8, 0));
-         */
-
-        // Division by country test
-        /*
-        ObservableList<Division> divsByCountry = getDivsByCountry(3);
-        for (Division d: divsByCountry) {
-            System.out.println("Division Name: " + d.getDivName());
-            System.out.println("Country ID: " + d.getCountryId());
-        }
-
-         */
-
-        // Division list test
-        /*
-        ObservableList<Division> divList = getDivData();
-        for (Division d: divList) {
-            System.out.println("Division Name: " + d.getDivId());
-            System.out.println("Country Name: " + d.getDivName());
-        }
-
-         */
-
-        // Country list test
-        /*
-        ObservableList<Country> countryList = getCountryData();
-        for (Country c: countryList) {
-            System.out.println("Country name: " + c.getCountryName());
-        }
-
-         */
-
-        // Update customer test
-         /*
-        int rowsAffected = 0;
-        try {
-            rowsAffected = CustomerDAO.updateCustomer(4, "Ashley", "5678 Init Road", "84041", "801-345-4567", 103);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (rowsAffected > 0) {
-            System.out.println("Update successful");
-        }
-        else {
-            System.out.println("Update failed");
-        }
-         */
-
-        // System print table data
-        /*ObservableList<Customer> custList = getCustomerList();
-        for(Customer C: custList) {
-            System.out.println("Customer ID: " + C.getId() + " Name: " + C.getName());
-        }*/
-
-        // CustomerDAO.checkDateConversion();
-
-        // Combining two tables in query
-        /*
-        "SELECT companyID, companyName, countryName FROM company, location WHERE company.locationId = location.locationId";
-         */
     }
 
     /**
