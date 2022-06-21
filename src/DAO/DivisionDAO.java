@@ -15,9 +15,6 @@ import static javafx.collections.FXCollections.observableArrayList;
  * @author Ashley Jensen
  */
 public abstract class DivisionDAO {
-    private int divId;
-    private String divName;
-    private int countryId;
     private static ObservableList<Division> divList = observableArrayList();
     private static ObservableList<Division> divsByCountry = observableArrayList();
 
@@ -32,9 +29,6 @@ public abstract class DivisionDAO {
             return divList;
         }
         try {
-            // Clear divList
-            // divList.clear();
-
             // SQL statement to get all customers from customer table
             String sql = "SELECT * FROM first_level_divisions";
 
@@ -95,35 +89,4 @@ public abstract class DivisionDAO {
         // Return customerList from db
         return divsByCountry;
     }
-
-    /*
-    public static int getCountryByDivId(int divIdToFind) {
-        int foundCountryId = 0;
-        try {
-            // SQL statement to get all customers from customer table
-            String sql = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = ?";
-
-            // Get a connection to DB and send over the SQL
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-
-            // Call prepared statement setter method to assign bind variables value
-            ps.setInt(1, divIdToFind);
-
-            // Get results of query
-            ResultSet rs = ps.executeQuery();
-
-            // Var to hold country id
-            foundCountryId = rs.getInt("Country_ID");
-
-        }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        // Return customerList from db
-        System.out.println("found country id " + foundCountryId);
-        return foundCountryId;
-
-    }
-    */
 }

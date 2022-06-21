@@ -34,6 +34,9 @@ public abstract class UserDAO {
      * @return ObservableList of User objects
      */
     public static ObservableList<User> getUserData() {
+        if (!userList.isEmpty()) {
+            return userList;
+        }
         try {
             // SQL statement to get all users from user table
             String sql = "SELECT * FROM users";

@@ -144,5 +144,4 @@ public class LoginForm implements Initializable {
             alert.showAndWait();
         }
     }
-
 }

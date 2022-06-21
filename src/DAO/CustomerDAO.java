@@ -1,17 +1,17 @@
 package DAO;
 
-import static javafx.collections.FXCollections.observableArrayList;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Customer;
-
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 /**
  * This abstract class is a data access object that gets Customer data from the database.

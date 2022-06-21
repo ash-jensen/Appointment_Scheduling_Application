@@ -2,7 +2,6 @@ package DAO;
 
 import javafx.collections.ObservableList;
 import model.Contact;
-import model.Customer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,36 +85,4 @@ public abstract class ContactDAO {
         // Return contact from db
         return contact;
     }
-
-    /*
-    public static Contact getCountryByDiv(int divId) {
-        Country country = null;
-        try {
-            // SQL statement to get country by division ID
-            String sql = "SELECT * FROM countries INNER JOIN first_level_divisions " +
-                    "ON countries.Country_ID = first_level_divisions.Country_ID " +
-                    "WHERE first_level_divisions.Division_ID = ?";
-
-            // Get a connection to DB and send over the SQL
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setInt(1, divId);
-
-            // Get results of query
-            ResultSet rs = ps.executeQuery();
-
-            // Set bind variables to create country object
-            rs.next();
-            int countryId = rs.getInt("Country_ID");
-            String countryName = rs.getString("Country");
-            country = new Country(countryId, countryName);
-        }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        // Return customerList from db
-        return country;
-    }
-
-     */
 }

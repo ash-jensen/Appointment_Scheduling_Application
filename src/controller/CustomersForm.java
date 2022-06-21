@@ -1,6 +1,8 @@
 package controller;
 
-import DAO.*;
+import DAO.CountryDAO;
+import DAO.CustomerDAO;
+import DAO.DivisionDAO;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.*;
+import model.Country;
+import model.Customer;
+import model.Division;
 
 import java.io.IOException;
 import java.net.URL;

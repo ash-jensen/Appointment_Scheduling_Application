@@ -116,7 +116,7 @@ public abstract class AppointmentsDAO {
             throwables.printStackTrace();
         }
 
-        // Return apptList from db
+        // Return currMonthList from db
         return currMonthList;
     }
 
@@ -164,7 +164,7 @@ public abstract class AppointmentsDAO {
             throwables.printStackTrace();
         }
 
-        // Return apptList from db
+        // Return currWeekList from db
         return currWeekList;
     }
 
@@ -553,8 +553,8 @@ public abstract class AppointmentsDAO {
                 alert.showAndWait();
             }
         }
+        // Catch if errors with SQL
         catch (SQLException throwables) {
-            // Catch if errors with SQL
             throwables.printStackTrace();
         }
     }

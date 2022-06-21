@@ -44,7 +44,9 @@ public abstract class CountryDAO {
                 Country country = new Country(countryId, countryName);
                 countryList.add(country);
             }
-        } catch (SQLException throwables) {
+        }
+        // Catch SQL Exception
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
