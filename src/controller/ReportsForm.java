@@ -216,12 +216,8 @@ public class ReportsForm implements Initializable {
         customerList = CustomerDAO.getCustomerData();
         int numCustomers = customerList.size();
 
-        // If no customers found, show user.
-        if (numCustomers > 0) {
-            CustomerNumbers.setText(String.valueOf(numCustomers));
-        }
-        else {
-            CustomerNumbers.setText("No customers found.");
-        }
+        // Set label to show number of customers in database
+        CustomerNumbers.setText(String.valueOf(numCustomers));
+
     }
 }
