@@ -34,9 +34,6 @@ public class Main extends Application {
      * @param args the arguments passed to main
      */
     public static void main(String[] args) {
-        // DELETE ME: Sets the language to french right of the bat.
-        // Locale.setDefault(new Locale("fr"));
-
         // Open DB connection method called
         JDBC.openConnection();
 
