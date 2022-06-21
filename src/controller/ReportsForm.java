@@ -175,20 +175,37 @@ public class ReportsForm implements Initializable {
      * @param actionEvent on OK button click
      */
     public void ContactSchedOkayButtonAction(ActionEvent actionEvent) {
-         int contactId = ((Contact)ContactComboBox.getSelectionModel().getSelectedItem()).getId();
+        Alert alert;
+        ObservableList<Appointment> contactList = observableArrayList();
 
-        // Populate Appointments table on schedule form
-        ApptsTable.setItems(AppointmentsDAO.getContactApptData(contactId));
-        ApptIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        CustIdCol.setCellValueFactory(new PropertyValueFactory<>("custId"));
-        UserIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        ContactIdCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
-        TitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        LocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        StartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startString"));
-        EndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endString"));
-        TypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        DescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        // Get selection
+        int contactId = ((Contact)ContactComboBox.getSelectionModel().getSelectedItem()).getId();
+
+        // Get returned contact list by id
+        contactList = AppointmentsDAO.getContactApptData(contactId);
+
+        // If contacts returned, fill table, else warn user none found
+        if (contactList.size() > 0) {
+            // Populate Appointments table on schedule form
+            ApptsTable.setItems(contactList);
+            ApptIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            CustIdCol.setCellValueFactory(new PropertyValueFactory<>("custId"));
+            UserIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+            ContactIdCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+            TitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+            LocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+            StartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startString"));
+            EndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endString"));
+            TypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+            DescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        }
+        else {
+            // Alert user: no appointments found
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Appointments Found Error");
+            alert.setContentText("No appointments found");
+            alert.showAndWait();
+        }
     }
 
     /**
