@@ -1,17 +1,12 @@
 package main;
 
 
-import DAO.CustomerDAO;
 import DAO.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Customer;
-
-import java.sql.SQLException;
-import java.util.Locale;
 
 /**
  * This is the Main class for the Appointment Scheduler application

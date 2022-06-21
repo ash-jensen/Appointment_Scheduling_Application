@@ -46,7 +46,8 @@ public abstract class DivisionDAO {
                 Division division = new Division(divId, divName, countryId);
                 divList.add(division);
             }
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
@@ -82,7 +83,8 @@ public abstract class DivisionDAO {
                 Division division = new Division(divId, divName, countryId);
                 divsByCountry.add(division);
             }
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 

@@ -14,17 +14,8 @@ import static javafx.collections.FXCollections.observableArrayList;
  * @author Ashley Jensen
  */
 public abstract class UserDAO {
-    /**
-     * ObservableList of user objects, used to hold all users from the database.
-     */
     private static ObservableList<User> userList = observableArrayList();
-    /**
-     * Variabule used to hold a user object.
-     */
     private static User user;
-    /**
-     * Variable used to hold the user that is currently logged in.
-     */
     private static User currentUser;
 
     /**
@@ -57,7 +48,8 @@ public abstract class UserDAO {
                 User user = new User(userId, userName, password);
                 userList.add(user);
             }
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
