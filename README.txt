@@ -1,4 +1,4 @@
-Appointment Scheduler
+Appointment Scheduling Application
 
 The purpose of the appointment scheduler is to provide a GUI based appointment scheduling application for a global
 consulting organization.  The password protected application gives the user the ability to create/update/delete customers
@@ -10,7 +10,6 @@ and confirmations throughout, including if form fields are not fully filled out 
 
 Author Information:
 Author: Ashley Jensen
-Contact Information: ajen147@wgu.edu
 Version: 1.1.3
 Date: June 21, 2022
 
